@@ -1,5 +1,5 @@
-
-import SignIn from './component/sign-in.jsx'
+import SignIn from './component/login.jsx'
+import Register from './component/register.jsx'
 import App from './component/app.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -9,10 +9,11 @@ require('jquery');
 require("bootstrap-webpack");
 
 const router = <Router history={hashHistory}>
-  <Route path="/" component={App}>
-    <IndexRedirect to='/login'/>
-    <Route path='/login' component={SignIn}/>
-  </Route>
+    <Route path="/" component={App}>
+        <IndexRedirect to='/login'/>
+        <Route path='/login' component={SignIn}/>
+        <Route path='/register' component={Register}/>
+    </Route>
 </Router>;
 
 ReactDOM.render(
@@ -23,5 +24,5 @@ ReactDOM.render(
 console.log($('#content').text());
 
 if (module.hot) {
-  module.hot.accept();
+    module.hot.accept();
 }
