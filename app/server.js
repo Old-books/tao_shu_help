@@ -13,7 +13,6 @@ const compiler = webpack(webpackConfig);
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
 app.use(webpackDevMiddleware(compiler, {
     noInfo: true,
     lazy: false,
