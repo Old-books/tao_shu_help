@@ -1,11 +1,17 @@
+/*eslint no-console: "off"*/
 import webpack from 'webpack';
 import webpackConfig from '../webpack.config';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import express from 'express';
-
+import apiRouter from './api/api.js';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 const app = express();
 const compiler = webpack(webpackConfig);
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
@@ -23,10 +29,14 @@ app.use(webpackHotMiddleware(compiler, {
 
 app.use(express.static('./public'));
 
-app.get('/hello', function(req, res) {
-  res.send('Hello, world!');
-});
+app.use('/api', apiRouter);
+if (require.main === module) {
+  app.listen(3000, function () {
+   /* db.connect((err) => {
+      if (err) return console.error('db connection failed');
+    });*/
+    console.log('Listening on 3000');
+  });
+}
 
-app.listen(3000, function() {
-  console.log('Listening on 3000');
-});
+export default app;

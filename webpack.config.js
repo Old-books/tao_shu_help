@@ -1,3 +1,4 @@
+/*eslint node/no-unpublished-require: "off"*/
 const webpack = require('webpack');
 
 module.exports = {
@@ -11,14 +12,38 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    loaders: [{
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      loader: 'babel',
-      query: {
-        presets: ['es2015', 'react']
+    loaders: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015', 'react']
+        }
+      },
+      {
+        test: /\.css$/,
+        loader: 'style!css' // note style is before css
+      }, {
+        test: /\.(woff|woff2)$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+      }, {
+        test: /\.ttf$/,
+        loader: 'file-loader'
+      }, {
+        test: /\.eot$/,
+        loader: 'file-loader'
+      }, {
+        test: /\.svg$/,
+        loader: 'file-loader'
+      }, {
+        test: require.resolve('jquery'),
+        loader: 'expose?$!expose?jQuery'
+      }, {
+        test: /\.(png|jpg|jpeg)$/,
+        loader: 'url-loader?limit=8192'
       }
-    }]
+    ]
   },
   plugins: [
     // Webpack 1.0
@@ -28,4 +53,4 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ]
-}
+};
