@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import request from 'superagent';
-import {hashHistory,Link} from 'react-router';
+import {hashHistory, Link} from 'react-router';
 export default class Register extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +14,7 @@ export default class Register extends Component {
     }
 
     render() {
-        return<form onSubmit={this._onSubmit.bind(this)}>
+        return <form onSubmit={this._onSubmit.bind(this)}>
             <div className="register">
                 <div className="title"><h3>欢迎注册</h3></div>
                 <div className="form-group">
@@ -53,35 +53,41 @@ export default class Register extends Component {
                            onChange={this._onConfirmPasswordChange.bind(this)}/>
                 </div>
                 <input type="submit" value="注册" className="btn btn-primary"/>
-                <span>有账号?<a className="to-register" ><Link to = '/login'>登陆</Link></a></span>
+                <span>有账号?<a className="to-register"><Link to='/login'>登陆</Link></a></span>
             </div>
         </form>
     }
+
     _onNameChange(event) {
         this.setState({
             username: event.target.value
         });
     }
+
     _onEmailChange(event) {
         this.setState({
             email: event.target.value
         })
     }
+
     _onPhoneChange(event) {
         this.setState({
             phone: event.target.value
         })
     }
+
     _onPasswordChange(event) {
         this.setState({
             password: event.target.value
         })
     }
+
     _onConfirmPasswordChange(event) {
         this.setState({
             confirmPassword: event.target.value
         })
     }
+
     _onSubmit(event) {
         event.preventDefault();
         if (this.state.password !== this.state.confirmPassword) {

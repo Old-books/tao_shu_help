@@ -11,8 +11,8 @@ require("bootstrap-webpack");
 
 const router = <Router history={hashHistory}>
     <Route path="/" component={App}>
-        <IndexRedirect to='/register'/>
-        <Route path="/index" component={Home}/>
+        <IndexRedirect to='/index'/>
+        <Route path='/index' component={Home}/>
         <Route path='/register' component={Register}/>
         <Route path='/login' component={SignIn}/>
     </Route>
