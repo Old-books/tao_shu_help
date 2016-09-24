@@ -1,8 +1,7 @@
 Tao_Shu_Help
 =================
 
-CI status: ![Build Status](https://travis-ci.org/js-demos/es6-project-demo.png?branch=master)
-
+CI status: ![Build Status](https://travis-ci.org/Old-books/tao_shu_help.svg?branch=master)
 A basic es6 project, which includes:
 
 1. webpack
