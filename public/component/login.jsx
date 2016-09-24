@@ -1,5 +1,6 @@
 import React from 'react';
 import request from 'superagent';
+import {Link} from 'react-router';
 require('../css/login-page.css');
 class Login extends React.Component {
 
@@ -58,6 +59,7 @@ class Login extends React.Component {
                                onChange={this.onChangeUserId.bind(this)}/>
                     </div>
                 </div>
+
                 <div className="form-group">
                     <label htmlFor="password" className="col-md-2 control-label distance">密码</label>
                     <div className="col-md-10">
@@ -67,9 +69,11 @@ class Login extends React.Component {
                                onChange={this.onChangePassword.bind(this)}/>
                     </div>
                 </div>
+
                 <div className="form-group">
                     <div className="button-center">
                         <button type="submit" className="btn btn-primary">登录</button>
+                        无账号?<a className="to-register"><Link to='/register'>注册</Link></a>
                     </div>
                 </div>
             </form>

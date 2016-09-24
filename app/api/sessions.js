@@ -20,7 +20,7 @@ router.post('/', function (req, res, next) {
             return res.status(401).send("username or password wrong")
         }
         else {
-            res.cookie('Info', generateInfo(name, password), {maxAge: 10 * 1000});
+            res.cookie('Info', generateInfo(username, password), {maxAge: 20 * 1000});
             return res.status(201).send('login success');
         }
     });

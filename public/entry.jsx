@@ -10,9 +10,9 @@ require("bootstrap-webpack");
 
 const router = <Router history={hashHistory}>
     <Route path="/" component={App}>
-        <IndexRedirect to='/login'/>
-        <Route path='/login' component={SignIn}/>
+        <IndexRedirect to='/register'/>
         <Route path='/register' component={Register}/>
+        <Route path='/login' component={SignIn}/>
     </Route>
 </Router>;
 
