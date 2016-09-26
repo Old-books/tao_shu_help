@@ -3,5 +3,5 @@ import loginApi from './sessions';
 import usersApi from './users';
 const router = express.Router();
 router.use('/sessions', loginApi);
-router.use('/users',usersApi);
+router.use('/users', usersApi);
 export default router;
