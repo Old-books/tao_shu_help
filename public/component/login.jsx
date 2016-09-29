@@ -1,6 +1,6 @@
 import React from 'react';
 import request from 'superagent';
-import {Link} from 'react-router';
+import {Link,hashHistory} from 'react-router';
 require('../css/login-page.css');
 class Login extends React.Component {
 
@@ -23,14 +23,13 @@ class Login extends React.Component {
                 if (err) {
                     if (res.statusCode === 400 || res.statusCode === 401) {
                         alert(res.text);
-                        location.href = '/#/login';
+                        hashHistory.push('/login');
                     }
                     return console.error(err);
                 }
                 if (res.statusCode === 201) {
                     alert(res.text);
-                    console.log(res.body.message);
-                    location.href = '/#/register';
+                    hashHistory.push('/publish');
                 }
             })
     }

@@ -1,5 +1,4 @@
 'use strict';
-
 import request from 'supertest';
 import app from '../app/server';
 import finish from './finish';

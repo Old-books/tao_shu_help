@@ -1,0 +1,52 @@
+.publish-page{
+    margin: 100px auto;
+    width: 500px;
+
+}
+.upload-images{
+    display: block;
+    width: 400px;
+    height: 35px;
+    border: 1px solid #687280;
+    border-radius: 5px;
+}
+.upload-images:focus{
+    outline: none;
+}
+.upload-images-button{
+    margin: 10px;
+    background-color: #214c90;
+    border-radius: 5px;
+    color: #fff;
+    border: 1px solid #214c90;
+}
+.upload-images-button:focus{
+    outline: none;
+}
+.book-attribute{
+    height: 35px;
+    margin-bottom: 30px;
+    display: block;
+    width: 400px;
+    border: 1px solid #687280;
+    border-radius: 5px;
+}
+.book-attribute:focus{
+    outline: none;
+}
+.book-count{
+    margin: 0 5px;
+    color: #000;
+    font-size: 20px;
+}
+
+.publish-button{
+    background-color: #214c90;
+    border: 1px solid #214c90;
+    color: white;
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    display: block;
+    margin-left: 300px;
+}
