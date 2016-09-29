@@ -4,13 +4,16 @@ import webpackConfig from '../webpack.config';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import express from 'express';
+import fileUpload from 'express-fileupload';
 import db from './mongodb/db';
 import apiRouter from './api/api.js';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 const app = express();
 const compiler = webpack(webpackConfig);
+
 app.use(cookieParser());
+app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(webpackDevMiddleware(compiler, {

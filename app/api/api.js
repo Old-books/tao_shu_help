@@ -1,7 +1,11 @@
 import express from 'express';
 import loginApi from './sessions';
 import usersApi from './users';
+import uploadedImagesApi from './uploaded-images';
+import booksApi from './books';
 const router = express.Router();
 router.use('/sessions', loginApi);
 router.use('/users', usersApi);
+router.use('/uploaded-images', uploadedImagesApi);
+router.use('/books', booksApi);
 export default router;
