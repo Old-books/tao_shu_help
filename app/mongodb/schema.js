@@ -14,7 +14,8 @@ const publishBookModel = new Schema({
     press: String,
     images: [String],
     count: Number,
-    price: Number
+    price: Number,
+    tags:[String]
 });
 
 const User = mongoose.model('users', UserModel);

@@ -147,14 +147,17 @@ class Publish extends React.Component {
                 press: this.state.press,
                 images: this.state.uploadedImages,
                 count: this.state.count,
-                price: this.state.price
+                price: this.state.price,
+                tags:[this.state.name,this.state.author,this.state.press]
             })
             .end((err, res) => {
                 if (err) return alert(res.text);
                 if (res.statusCode === 400) {
                     return alert(res.text);
                 }
-                return alert('发布成功');
+                if (res.statusCode === 201) {
+                    return alert('发布成功');
+                }
             });
     }
 }
