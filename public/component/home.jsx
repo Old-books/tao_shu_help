@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 import {Link} from 'react-router';
+import Nav from './navigation.jsx';
 import 'jquery';
 import "bootstrap-webpack";
 
 class Home extends Component {
     render() {
         return <div>
+            <Nav/>
             <div>
                 <form>
                     <select>

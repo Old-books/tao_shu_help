@@ -125,7 +125,8 @@ describe('check books saved', () => {
                 press: '人民邮电出版社',
                 images: ['./public/uploaded-images/C语言.jpg'],
                 count: '1',
-                price: '10'
+                price: '10',
+                tags:['c语言','普拉塔','人民邮电出版社']
             }).expect(201, cb)
         ], finish(done));
     });
