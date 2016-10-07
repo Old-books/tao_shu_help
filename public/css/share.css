@@ -1,0 +1,36 @@
+.book-name {
+    color: #214c90;
+    margin-top: 100px;
+    margin-left: 630px;
+}
+
+.book-cover {
+    width: 347px;
+    height: 350px;
+    margin-left: 210px;
+}
+
+.book-details {
+    list-style: none;
+    font-size: 18px;
+    line-height: 2;
+    margin-left: 600px;
+    margin-top: -300px;
+}
+
+.add-cart {
+    margin-left: 630px;
+    margin-top: 25px;
+    background-color: #214c90;
+    color: #fff;
+    border: 1px solid #214c90;
+    border-radius: 5px;
+}
+
+.connect-owner {
+    margin-left: 50px;
+    background-color: #214c90;
+    color: #ffffff;
+    border: 1px solid #214c90;
+    border-radius: 5px;
+}

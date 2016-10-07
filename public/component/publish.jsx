@@ -148,7 +148,7 @@ class Publish extends React.Component {
                 images: this.state.uploadedImages,
                 count: this.state.count,
                 price: this.state.price,
-                tags:[this.state.name,this.state.author,this.state.press]
+                tags: [this.state.name, this.state.author, this.state.press]
             })
             .end((err, res) => {
                 if (err) return alert(res.text);
@@ -156,7 +156,8 @@ class Publish extends React.Component {
                     return alert(res.text);
                 }
                 if (res.statusCode === 201) {
-                    return alert('发布成功');
+                    alert('success');
+                    return hashHistory.push('/share/' + res.body._id);
                 }
             });
     }

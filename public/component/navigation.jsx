@@ -43,7 +43,8 @@ class Nav extends React.Component {
             .end((err, res) => {
                 if (err) return alert(res.text);
                 if (res.statusCode === 201) {
-                    return alert('找到相关书籍');
+                    alert('找到相关书籍');
+                    return hashHistory.push('#');
                 }
                 if (res.statusCode === 403) {
                     return alert(res.text);

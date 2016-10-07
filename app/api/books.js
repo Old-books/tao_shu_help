@@ -29,4 +29,12 @@ router.post('/search', function (req, res, next) {
     });
 });
 
+router.get('/:id', function (req, res, next) {
+    const bookId = req.params.id;
+    PublishBook.findOne({_id: bookId}, function (err, book) {
+        if (err) return next(err);
+        return res.status(200).json(book);
+    });
+});
+
 export default router;

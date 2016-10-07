@@ -3,6 +3,7 @@ import Register from './component/register.jsx'
 import App from './component/app.jsx';
 import Home from './component/home.jsx';
 import Publish from './component/publish.jsx';
+import Share from './component/share.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
@@ -17,6 +18,7 @@ const router = <Router history={hashHistory}>
         <Route path='/index' component={Home}/>
         <Route path='/register' component={Register}/>
         <Route path='/login' component={SignIn}/>
+        <Route path='/share/:id' component={Share}/>
     </Route>
 </Router>;
 
