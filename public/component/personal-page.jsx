@@ -12,6 +12,7 @@ class Personal extends React.Component {
             password: '******',
             phone: '',
             email: '',
+            _id: '',
         };
     }
 
@@ -28,16 +29,16 @@ class Personal extends React.Component {
                     }
                 }
                 console.log("statusCode:" + res.statusCode);
-                const {username, email, phone, password} = res.body;
-                this.setState({username, email, phone, password});
+                const {username, email, phone, password, _id} = res.body;
+                this.setState({username, email, phone, password, _id});
             })
     }
 
     _onClickModify() {
-            document.getElementById('username').disabled = false;
-            document.getElementById('password').disabled = false;
-            document.getElementById('email').disabled = false;
-            document.getElementById('phone').disabled = false;
+        document.getElementById('username').disabled = false;
+        document.getElementById('password').disabled = false;
+        document.getElementById('email').disabled = false;
+        document.getElementById('phone').disabled = false;
     }
 
     _onSubmit(event) {
@@ -52,25 +53,28 @@ class Personal extends React.Component {
                         return alert(err);
                     }
                 }
-                request.post('/api/personal/modify')
+                request.post(`/api/personal/${this.props.params._id}`)
                     .send({
+                        username: this.state.username,
+                        password: this.state.password,
                         email: this.state.email,
                         phone: this.state.phone
                     })
                     .end((err, res) => {
                         if (err) {
-                            if (res.statusCode === 400) {
-                                alert('电话或邮箱格式不正确，请给出正确输入！');
-                                hashHistory.push('/personal');
+                            if (res.statusCode === 400 && res.text === 'Please finish the form') {
+                                alert("Please finish the form!");
                             }
-                            if (res.statusCode === 401) {
-                                alert('密码输入最少六位');
+                            if (res.statusCode === 400 && res.text === 'The email is error') {
+                                alert("The email is error!");
+                            }
+                            if (res.statusCode === 400 && res.text === 'The phone number is error') {
+                                alert("The phone number is error!");
                             }
                             return console.error(err);
                         }
                         if (res.statusCode === 201) {
                             alert('修改成功！');
-                            hashHistory.push('/personal');
                         }
                     })
             });
@@ -103,7 +107,7 @@ class Personal extends React.Component {
 
     render() {
         return (<div className="container">
-                <form role="form" onClick={this._onSubmit.bind(this)}>
+                <form role="form">
                     <h2>个人信息</h2>
                     <div className="form-group">
                         <label htmlFor="inputName">姓名</label>
@@ -133,7 +137,9 @@ class Personal extends React.Component {
                     <button type="button" className="btn btn-primary modify" onClick={this._onClickModify.bind(this)}>
                         修改
                     </button>
-                    <button type="submit" className="btn btn-primary" id="submitId">提交</button>
+                    <button type="submit" className="btn btn-primary" id="submitId" onClick={this._onSubmit.bind(this)}>
+                        提交
+                    </button>
                 </form>
             </div>
         )
