@@ -31,8 +31,6 @@ router.post('/', function (req, res, next) {
                 res.status(409).send('the name is exist');
             }
         });
-
-
     }
     else {
         res.status(400).send(legal.message);

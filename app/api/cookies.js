@@ -16,7 +16,7 @@ function validateToken(token, callback) {
         if (err)  return callback(err);
         if (user) {
             const {username, password} = user;
-            callback(null, generateToken(username, password) === token);
+            callback(null, generateToken(username, password) === token, user);
         }
     });
 }

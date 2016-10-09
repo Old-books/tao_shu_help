@@ -1,0 +1,21 @@
+body {
+    font-family: sans-serif;
+    font-size: x-large;
+}
+
+h3 {
+    text-align: center;
+}
+
+span {
+    float: right;
+}
+
+.register {
+    position: absolute;
+    width: 50%;
+    padding-left: 8%;
+    margin-left: 20%;
+    margin-top: 5%;
+}
+

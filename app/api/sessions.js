@@ -21,7 +21,7 @@ router.post('/', function (req, res, next) {
             return res.status(401).send("username or password wrong")
         }
         else {
-            res.cookie('token', generateInfo(username, password), {maxAge: 20 * 1000});
+            res.cookie('token', generateToken(username, password));
             return res.status(201).send('login success');
         }
     });
@@ -43,8 +43,8 @@ router.delete('/current', function (req, res) {
     res.cookie('token', ':').sendStatus(200);
 });
 
-function generateInfo(username, password) {
-    return username + ":" + sha1(password);
+function generateToken(username, password) {
+    return username + ':' + sha1(password);
 }
 export default router;
-
+// {maxAge: 30*1000}

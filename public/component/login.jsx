@@ -30,6 +30,7 @@ class Login extends React.Component {
                 if (res.statusCode === 201) {
                     alert(res.text);
                     hashHistory.push('/publish');
+                    // hashHistory.push('/personal');
                 }
             })
     }
@@ -72,7 +73,7 @@ class Login extends React.Component {
                 <div className="form-group">
                     <div className="button-center">
                         <button type="submit" className="btn btn-primary">登录</button>
-                        无账号?<a className="to-register"><Link to='/register'>注册</Link></a>
+                        无账号?<Link to='/register'>注册</Link>
                     </div>
                 </div>
             </form>
