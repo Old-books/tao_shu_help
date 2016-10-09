@@ -9,10 +9,12 @@ class Personal extends React.Component {
         super(props);
         this.state = {
             username: 'unknown',
-            password: '******',
+            password: '*******',
+            confirmPassword: '',
             phone: '',
             email: '',
             _id: '',
+            status: false
         };
     }
 
@@ -35,6 +37,9 @@ class Personal extends React.Component {
     }
 
     _onClickModify() {
+        this.setState({
+            status: true
+        });
         document.getElementById('username').disabled = false;
         document.getElementById('password').disabled = false;
         document.getElementById('email').disabled = false;
@@ -43,17 +48,13 @@ class Personal extends React.Component {
 
     _onSubmit(event) {
         event.preventDefault();
-        request.get('/api/personal')
-            .end((err, res) => {
-                if (err) {
-                    if (res.statusCode === 401) {
-                        alert('Please Login!');
-                        hashHistory.push('/personal');
-                    } else {
-                        return alert(err);
-                    }
-                }
-                request.post(`/api/personal/${this.props.params._id}`)
+        if (this.state.status === false) {
+            alert('请您确认修改！');
+        } else {
+            if (this.state.password !== this.state.confirmPassword) {
+                alert('密码不一致,请重新输入密码!');
+            } else {
+                request.post(`/api/personal/${this.state._id}`)
                     .send({
                         username: this.state.username,
                         password: this.state.password,
@@ -73,35 +74,43 @@ class Personal extends React.Component {
                             }
                             return console.error(err);
                         }
-                        if (res.statusCode === 201) {
-                            alert('修改成功！');
+                        if (res.statusCode === 201 && res.text === '数据信息已存入数据库') {
+                            alert('修改成功!');
+                            hashHistory.push('/personal');
                         }
-                    })
-            });
-        console.log('aaaaaaaaaaaaa');
+                        console.log('aaaaaaaaaaaaa');
+                    });
+            }
+        }
     }
 
-    _onUsernameChange() {
+    _onUsernameChange(event) {
         this.setState({
-            username: this.target.username
+            username: event.target.value
         });
     }
 
-    _onPasswordChange() {
+    _onPasswordChange(event) {
         this.setState({
-            password: this.target.password
+            password: event.target.value
         });
     }
 
-    _onPhoneChange() {
+    _onConfirmPasswordChange(event) {
         this.setState({
-            phone: this.target.phone
+            confirmPassword: event.target.value
         });
     }
 
-    _onEmailChange() {
+    _onPhoneChange(event) {
         this.setState({
-            email: this.target.email
+            phone: event.target.value
+        });
+    }
+
+    _onEmailChange(event) {
+        this.setState({
+            email: event.target.value
         });
     }
 
@@ -118,9 +127,18 @@ class Personal extends React.Component {
                     <div className="form-group">
                         <label htmlFor="inputPassword">密码</label>
                         <input type="password" className="form-control" id="password" placeholder="密码" disabled={true}
-                               required="required"
+                               required="required" pattern="^.{6,18}$"
                                value={this.state.password} onChange={this._onPasswordChange.bind(this)}/>
                     </div>
+                    {this.state.status === false ? <div></div> :
+                        <div className="form-group">
+                            <label htmlFor="inputConfirmPassword">确认密码</label>
+                            <input type="confirmPassword" className="form-control" id="confirmPassword" placeholder="密码"
+                                   required="required" pattern="^.{6,18}$"
+                                   value={this.state.confirmPassword}
+                                   onChange={this._onConfirmPasswordChange.bind(this)}/>
+                        </div>
+                    }
                     <div className="form-group">
                         <label htmlFor="inputEmail">电子邮箱</label>
                         <input type="email" className="form-control" id="email" placeholder="邮箱" disabled={true}
@@ -129,9 +147,8 @@ class Personal extends React.Component {
                     </div>
                     <div className="form-group">
                         <label htmlFor="inputPhone">手机号码</label>
-
                         <input type="phone" className="form-control" id="phone" placeholder="手机" disabled={true}
-                               required="required"
+                               required="required" pattern="^(\+86)?(1[0-9]{10})$"
                                value={this.state.phone} onChange={this._onPhoneChange.bind(this)}/>
                     </div>
                     <button type="button" className="btn btn-primary modify" onClick={this._onClickModify.bind(this)}>
@@ -145,5 +162,4 @@ class Personal extends React.Component {
         )
     }
 }
-
 export default Personal;

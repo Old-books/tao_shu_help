@@ -18,11 +18,11 @@ router.post('/', function (req, res, next) {
         if (err) return next(err);
         if (user === null || user.password != password) {
             console.log("wrong " + user);
-            return res.status(401).send("username or password wrong")
+            res.status(401).send("username or password wrong");
         }
         else {
             res.cookie('token', generateToken(username, password));
-            return res.status(201).send('login success');
+            res.status(201).send('login success');
         }
     });
 });

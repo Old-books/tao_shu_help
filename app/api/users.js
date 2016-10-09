@@ -6,7 +6,7 @@ import {isUserInformationLegal, isExist} from '../shared/user-field-information'
 router.post('/', function (req, res, next) {
     const userData = req.body;
     const legal = isUserInformationLegal(userData);
-    if (legal.type === true) {
+    if (legal.type === true && legal.message === 'type is true') {
 
         isExist(userData, next, function (err, doc) {
             if (err) return next(err);
@@ -33,6 +33,7 @@ router.post('/', function (req, res, next) {
         });
     }
     else {
+        // console.log(legal.message);
         res.status(400).send(legal.message);
     }
 });

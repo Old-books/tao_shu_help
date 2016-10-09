@@ -29,21 +29,25 @@ router.post('/:_id', function (req, res, next) {
     const id = req.params._id;
     console.log(id);
     const userData = req.body;
+    // console.log(userData);
     const legal = isUserInformationLegal(userData);
-    if (legal.type === true) {
+    if (legal.type === true && legal.message === 'type is true') {
         User.update({_id: id}, {
-                $set: {
-                    username: userData.username,
-                    password: userData.password,
-                    phone: userData.phone,
-                    email: userData.email
-                }
-            },function (err){
-                if (err)  return next(err);
-                res.status(201).send('数据信息已存入数据库');
-            });
+            $set: {
+                username: userData.username,
+                password: userData.password,
+                phone: userData.phone,
+                email: userData.email
+            }
+        }, function (err) {
+            if (err)  return next(err);
+            res.status(201).send('数据信息已存入数据库');
+        });
     }
-    return res.status(401);
+    else {
+        console.log(legal.message);
+        return res.status(400).send(legal.message);
+    }
 });
 
 export default router;

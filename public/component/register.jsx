@@ -21,35 +21,35 @@ export default class Register extends Component {
                 <div className="form-group">
                     <label>用户名</label>
                     <input type="name" className="form-control" id="name"
-                           placeholder="请设置用户名" required
+                           placeholder="请设置用户名" required="required"
                            value={this.state.username}
                            onChange={this._onNameChange.bind(this)}/>
                 </div>
                 <div className="form-group">
                     <label>邮箱</label>
                     <input type="email" className="form-control" id="email"
-                           placeholder="请输入邮箱" required
+                           placeholder="请输入邮箱" required="required"
                            value={this.state.email}
                            onChange={this._onEmailChange.bind(this)}/>
                 </div>
                 <div className="form-group">
                     <label>手机号码</label>
                     <input type="tel" className="form-control" id="phone"
-                           placeholder="请输入手机号码" required pattern="^(\+86)?(1[0-9]{10})$"
+                           placeholder="请输入手机号码" required="required" pattern="^(\+86)?(1[0-9]{10})$"
                            value={this.state.phone}
                            onChange={this._onPhoneChange.bind(this)}/>
                 </div>
                 < div className="form-group">
                     <label>设置密码</label>
                     <input type="password" className="form-control" id="password"
-                           placeholder="请输入密码(至少六位)" required pattern="^.{6,18}$"
+                           placeholder="请输入密码(至少六位)" required="required" pattern="^.{6,18}$"
                            value={this.state.password}
                            onChange={this._onPasswordChange.bind(this)}/>
                 </div>
                 <div className="form-group">
                     <label>确认密码</label>
                     <input type="password" className="form-control" id="confirm-password"
-                           placeholder="请确认密码(至少六位)" required pattern="^.{6,18}$"
+                           placeholder="请确认密码(至少六位)" required="required" pattern="^.{6,18}$"
                            value={this.state.confirmPassword}
                            onChange={this._onConfirmPasswordChange.bind(this)}/>
                 </div>
