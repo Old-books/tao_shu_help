@@ -1,9 +1,20 @@
 .body {
-    margin: 100px 100px;
-    font-size: 30px;
+    font-family: sans-serif;
+    font-size: x-large;;
+}
+
+h3 {
+    text-align: center;
+}
+
+span {
+    float: right;
 }
 
 .personal {
     position: absolute;
-    width: 50%;
+    width: 40%;
+    padding-left: 8%;
+    margin-left: 20%;
+    margin-top: 5%;
 }
