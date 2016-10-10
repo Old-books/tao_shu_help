@@ -1,3 +1,4 @@
+"use strict";
 import express from 'express';
 import _ from 'lodash';
 import {User} from '../mongodb/schema';
@@ -27,21 +28,30 @@ router.get('/', function (req, res, next) {
 
 router.post('/:_id', function (req, res, next) {
     const id = req.params._id;
-    console.log(id);
     const userData = req.body;
-    // console.log(userData);
     const legal = isUserInformationLegal(userData);
     if (legal.type === true && legal.message === 'type is true') {
-        User.update({_id: id}, {
-            $set: {
-                username: userData.username,
-                password: userData.password,
-                phone: userData.phone,
-                email: userData.email
+        isExist(userData, next, function (err, doc) {
+            if (err) return next(err);
+            if (doc !== null) {
+                if (id == doc._id) {
+                    User.update({_id: id}, {
+                        $set: {
+                            username: userData.username,
+                            password: userData.password,
+                            phone: userData.phone,
+                            email: userData.email
+                        }
+                    }, function (err) {
+                        if (err)  return next(err);
+                        res.status(201).send('数据信息已存入数据库');
+                    });
+                } else if (id != doc._id) {
+                    res.status(409).send('the name is exist');
+                }
+            }else if(doc === null) {
+                res.status(400).send('wrong');
             }
-        }, function (err) {
-            if (err)  return next(err);
-            res.status(201).send('数据信息已存入数据库');
         });
     }
     else {
