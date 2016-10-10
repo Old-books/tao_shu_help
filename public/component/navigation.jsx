@@ -23,7 +23,7 @@ class Nav extends React.Component {
             <img src="../../pictures/cart.png" className="cart-picture"/>
             <Link to="#" className="cart-button">购物车</Link>
             <img src="../../pictures/own-center.png" className="own-center-picture"/>
-            <Link to="#" className="own-center-button">个人中心</Link>
+            <Link to="/personal" className="own-center-button">个人中心</Link>
         </div>
     }
 
