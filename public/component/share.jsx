@@ -56,21 +56,6 @@ class Share extends React.Component {
             </div>
         </div>;
     }
-
-    // _onClick(event) {
-    //     request
-    //         .get('/api/users/' + this.state.publisher)
-    //         .end((err, res) => {
-    //             if (err) return alert(err);
-    //             if (res.statusCode === 201) {
-    //                 alert('success');
-    //                 console.log('share页面：' + res.body.username);
-    //                 hashHistory.push('/connect/'+res.body.username);
-    //             } else {
-    //                 alert(res.text);
-    //             }
-    //         });
-    // }
 }
 
 export default Share;
