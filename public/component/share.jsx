@@ -47,18 +47,30 @@ class Share extends React.Component {
                     <li>发布者：{this.state.publisher}</li>
                     <li>作者：{this.state.author}</li>
                     <li>出版社：{this.state.press}</li>
-                    <li>价格：{this.state.price}</li>
                     <li>数量：{this.state.count}</li>
                 </ul>
-                <Link to="#">
-                    <button className="add-cart">加入购物车</button>
-                </Link>
-                <Link to="#">
+                <button className="add-cart">加入购物车</button>
+                <Link to={'/connect/' + this.state.publisher}>
                     <button className="connect-owner">联系卖家</button>
                 </Link>
             </div>
         </div>;
     }
+
+    // _onClick(event) {
+    //     request
+    //         .get('/api/users/' + this.state.publisher)
+    //         .end((err, res) => {
+    //             if (err) return alert(err);
+    //             if (res.statusCode === 201) {
+    //                 alert('success');
+    //                 console.log('share页面：' + res.body.username);
+    //                 hashHistory.push('/connect/'+res.body.username);
+    //             } else {
+    //                 alert(res.text);
+    //             }
+    //         });
+    // }
 }
 
 export default Share;

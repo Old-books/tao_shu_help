@@ -64,7 +64,7 @@ class Publish extends React.Component {
                            value={this.state.price} onChange={this._priceOnchange.bind(this)}/>
                     <label>数目:</label>
                     <img src="../pictures/add.png" onClick={this._addCount.bind(this)}/>
-                    <span className="book-count">{this.state.count}</span>
+                    <label className="book-count">{this.state.count}</label>
                     <img src="../pictures/reduce.png" onClick={this._reduceCount.bind(this)}/>
                     <button className="publish-button" type="submit">
                         发布
