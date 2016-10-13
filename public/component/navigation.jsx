@@ -11,6 +11,21 @@ class Nav extends React.Component {
         };
     }
 
+    componentWillMount(){
+        request
+            .get('/api/sessions/current')
+            .end((err, res) => {
+                if (err) {
+                    if (res.statusCode === 403) {
+
+                    }
+                }
+                return this.setState({
+                    publisher: res.text
+                });
+            });
+    }
+
     render() {
         return <div className="container">
             <h1 className="logo">淘书帮</h1>
@@ -26,7 +41,6 @@ class Nav extends React.Component {
             <Link to="/personal" className="own-center-button">个人中心</Link>
         </div>
     }
-
     _searchContent(event) {
         this.setState({
             searchContent: event.target.value

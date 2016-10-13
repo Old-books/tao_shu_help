@@ -38,4 +38,14 @@ router.post('/', function (req, res, next) {
     }
 });
 
+router.get('/:publisher', (req, res, next) => {
+    const publisher = req.params.publisher;
+    console.log('publisher:'+publisher);
+    User.findOne({username: publisher}, function (err, docs) {
+        if (err) return next(err);
+        if(docs.length <=0) return res.status(401).send('未找到卖家');
+        return res.status(201).send(docs);
+    });
+});
+
 export default router;

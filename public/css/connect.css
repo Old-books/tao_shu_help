@@ -1,0 +1,22 @@
+.message{
+    color: #214c90;
+    margin-top: 50px;
+}
+.nike-name{
+
+    margin-left: 350px;
+    margin-top: 50px;
+}
+.publisher-phone{
+    margin-left: 350px;
+    margin-top: 70px;
+}
+.publisher-email{
+    margin-left: 350px;
+    margin-top: 90px;
+}
+.message.form-control{
+    width: 600px;
+    margin: auto;
+    color: #214c90;
+}
