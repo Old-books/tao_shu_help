@@ -40,7 +40,7 @@ class Personal extends React.Component {
         this.setState({
             status: true
         });
-        document.getElementById('username').disabled = false;
+        // document.getElementById('username').disabled = false;
         document.getElementById('password').disabled = false;
         document.getElementById('email').disabled = false;
         document.getElementById('phone').disabled = false;
