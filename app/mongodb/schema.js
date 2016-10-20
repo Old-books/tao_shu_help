@@ -8,16 +8,23 @@ const UserModel = new Schema({
 });
 
 const publishBookModel = new Schema({
-    publisher: String,
     author: String,
     name: String,
     press: String,
     images: [String],
     count: Number,
     price: Number,
-    tags:[String]
+    tags: [String],
+    state: Boolean//是否出售
+});
+
+const userBookModel = new Schema({
+    id_user: String,
+    id_book: String,
+    publishTime: String
 });
 
 const User = mongoose.model('users', UserModel);
-const PublishBook = mongoose.model('books', publishBookModel);
-module.exports = {User, PublishBook};
+const Book = mongoose.model('books', publishBookModel);
+const user_book = mongoose.model('userBooks', userBookModel);
+module.exports = {User, Book, user_book};
