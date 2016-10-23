@@ -17,7 +17,7 @@ class Connect extends React.Component {
 
     componentWillMount() {
         request
-            .get(`/api/users/${this.props.params.publisher}`)
+            .get(`/api/userBook/${this.props.params.id}`)
             .end((err, res) => {
                 if (err) return alert('页面错误');
                 return this.setState({
@@ -33,11 +33,11 @@ class Connect extends React.Component {
             <Nav/>
             <h3 className="message">卖家信息</h3>
             <label className="nike-name">卖家昵称：</label>
-            <input className="message,form-control" value={this.state.username} readOnly="true"/>
+            <input className="message form-control" value={this.state.username} readOnly="true"/>
             <label className="publisher-phone">卖家联系电话：</label>
-            <input className="message,form-control" value={this.state.phone} readOnly="true"/>
+            <input className="message form-control" value={this.state.phone} readOnly="true"/>
             <label className="publisher-email">卖家邮箱：</label>
-            <input className="message,form-control" value={this.state.email} readOnly="true"/>
+            <input className="message form-control" value={this.state.email} readOnly="true"/>
         </div>
     }
 }

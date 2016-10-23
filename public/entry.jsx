@@ -22,7 +22,7 @@ const router = <Router history={hashHistory}>
         <Route path='/login' component={SignIn}/>
         <Route path='/share/:id' component={Share}/>
         <Route path='/personal' component={Personal}/>
-        <Route path='/connect/:publisher' component={Connect}/>
+        <Route path='/connect/:id' component={Connect}/>
     </Route>
 </Router>;
 
