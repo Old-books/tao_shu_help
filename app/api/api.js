@@ -5,6 +5,8 @@ import uploadedImagesApi from './uploaded-images';
 import booksApi from './books';
 import personalApi from './personal';
 import userBookApi from './user-book';
+import peopele_books from './people-books';
+import bookcart from './bookcart';
 
 const router = express.Router();
 router.use('/sessions', loginApi);
@@ -13,4 +15,6 @@ router.use('/uploaded-images', uploadedImagesApi);
 router.use('/books', booksApi);
 router.use('/personal', personalApi);
 router.use('/userBook',userBookApi);
+router.use('/current/people-books',peopele_books);
+router.use('/current/cart',bookcart);
 export default router;
