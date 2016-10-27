@@ -23,7 +23,7 @@ router.post('/', function (req, res, next) {
             if (state === true)
                 people_books[i++] = ({author, name, press, images, count, price, state, _id});
         });
-        for (let j = 0; j < 12; j++) {
+        for (let j = 0; j < 3; j++) {
             books.push(people_books[j]);
         }
         return res.status(201).json({people_books: books});

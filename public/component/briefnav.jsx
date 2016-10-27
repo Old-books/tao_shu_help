@@ -25,7 +25,6 @@ class Brief extends React.Component {
 
                     <div className="tab-pane" id="tab-three">
                         <div className="row feature">
-
                         </div>
                     </div>
                 </div>
