@@ -4,6 +4,8 @@ import {hashHistory} from 'react-router';
 import request from 'superagent';
 import _ from 'lodash';
 import '../css/publish.css';
+import Nav from './navigation.jsx';
+import Buttom from './buttom.jsx';
 
 class Publish extends React.Component {
     constructor(props) {
@@ -37,40 +39,46 @@ class Publish extends React.Component {
     }
 
     render() {
-        return <div className="publish-page">
-            <form onSubmit={this._onSubmit.bind(this)}>
-                <label>发布者</label>
-                <input type="text" value={this.state.publisher} className="book-attribute" required="required"
-                       disabled="true"/>
-                <label htmlFor="images">上传封面</label>
-                {this.state.uploadedImages.map(i => <img className="img-responsive" key={i} src={i}/>)}
-                <input type="file" id="images" className="upload-images"
-                       accept=".jpg,.jpeg,.png,.gif" required="required"
-                       onChange={(e)=>this._handleImageChange(e)}/>
-                <button className="upload-images-button" onClick={this._onImgUpload.bind(this)}>上传
-                </button>
-                <div>
-                    <label>书名:</label>
-                    <input type="text" placeholder="请输入书名" className="book-attribute" required="required"
-                           value={this.state.name} onChange={this._bookNameOnChange.bind(this)}/>
-                    <label>作者:</label>
-                    <input type="text" placeholder="请输入作者" className="book-attribute" required="required"
-                           value={this.state.author} onChange={this._authorOnChange.bind(this)}/>
-                    <label>出版社:</label>
-                    <input type="text" placeholder="请输入出版社" className="book-attribute" required="required"
-                           value={this.state.press} onChange={this._pressOnChange.bind(this)}/>
-                    <label>售价:</label>
-                    <input type="text" placeholder="请输入售价" className="book-attribute" required="required"
-                           value={this.state.price} onChange={this._priceOnchange.bind(this)}/>
-                    <label>数目:</label>
-                    <img src="../pictures/add.png" onClick={this._addCount.bind(this)}/>
-                    <label className="book-count">{this.state.count}</label>
-                    <img src="../pictures/reduce.png" onClick={this._reduceCount.bind(this)}/>
-                    <button className="publish-button" type="submit">
-                        发布
-                    </button>
-                </div>
-            </form>
+        return <div>
+            <Nav/>
+            <div className="publish-page">
+                <form onSubmit={this._onSubmit.bind(this)}>
+                    <label>发布者</label>
+                    <input type="text" value={this.state.publisher} className="book-attribute" required="required"
+                           disabled="true"/>
+                    <label htmlFor="images">上传封面</label>
+                    {this.state.uploadedImages.map(i => <img className="img-responsive" key={i} src={i}/>)}
+                    <input type="file" id="images" className="upload-images"
+                           accept=".jpg,.jpeg,.png,.gif" required="required"
+                           onChange={(e)=>this._handleImageChange(e)}/>
+                    <button className="upload-images-button" onClick={this._onImgUpload.bind(this)}>上传
+                    </button>index?_k=8wlfox
+                    <div>
+                        <label>书名:</label>
+                        <input type="text" placeholder="请输入书名" className="book-attribute" required="required"
+                               value={this.state.name} onChange={this._bookNameOnChange.bind(this)}/>
+                        <label>作者:</label>
+                        <input type="text" placeholder="请输入作者" className="book-attribute" required="required"
+                               value={this.state.author} onChange={this._authorOnChange.bind(this)}/>
+                        <label>出版社:</label>
+                        <input type="text" placeholder="请输入出版社" className="book-attribute" required="required"
+                               value={this.state.press} onChange={this._pressOnChange.bind(this)}/>
+                        <label>售价:</label>
+                        <input type="text" placeholder="请输入售价" className="book-attribute" required="required"
+                               value={this.state.price} onChange={this._priceOnchange.bind(this)}/>
+                        <label>数目:</label>
+                        <img src="../pictures/add.png" onClick={this._addCount.bind(this)}/>
+                        <label className="book-count">{this.state.count}</label>
+                        <img src="../pictures/reduce.png" onClick={this._reduceCount.bind(this)}/>
+                        <button className="publish-button" type="submit">
+                            发布
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <Buttom/>
+            </div>
         </div>
     }
 

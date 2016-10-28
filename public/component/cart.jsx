@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import {Link, hashHistory} from 'react-router';
 import request from 'superagent';
 import _ from 'lodash';
+import Nav from './navigation.jsx';
 require('../css/cart.css');
 class Book_cart extends React.Component {
     constructor(props) {
@@ -58,7 +59,7 @@ class Book_cart extends React.Component {
                                 });
 
                             });
-                            console.log(Book_list);
+                            // console.log(Book_list);
                             return (this.setState({cart_book: Book_list}));
                         }
                     });
@@ -69,21 +70,25 @@ class Book_cart extends React.Component {
         this.setState({all_price: price});
         //console.log("allprice: "+this.state.all_price);
     }
-
     render() {
         let i = 0;
         const bookList = _.map(this.state.cart_book, ({name, images, price, _id}) =>
             <div key={_id + i++}>
-                    <Book_list list={
-                    {
-                        name: name, images: images, price: price, _id: _id, all_price: this.state.all_price
-                    }} changePrice={this.changePrice.bind(this)}/>
+                <Book_list list={
+                {
+                    name: name, images: images, price: price, _id: _id, all_price: this.state.all_price
+                }} changePrice={this.changePrice.bind(this)}/>
             </div>);
 
-        return<div className="books">
-            {bookList}
-            <div className="total">
-                <h3> 总价:{this.state.all_price}</h3>
+        return <div>
+            <Nav/>
+            <div className="books">
+                <div className="bookList">
+                    {bookList}
+                </div>
+                <div className="total">
+                    <h3> 总价:{this.state.all_price}</h3>
+                </div>
             </div>
         </div>;
     }
@@ -140,26 +145,26 @@ class Book_list extends React.Component {
         });
         //这个值怎么传给父组件
         //用传过来的changePrice属性(props)，是个函数，呼叫它把price交给父组件中的函数去处理
-        this.props.changePrice(price)
+        this.props.changePrice(price);
     }
 
     render() {
         let price = this.state.price * this.state.count;
-        return <div>
-            <div className="pic">
-                <Link to={"/share/" + this.state._id}><img src={this.state.images}/></Link>
+        return <div className="cart-item">
+            <div className="col-md-2">
+                <Link to={"/share/" + this.state._id}><img className="photo" src={this.state.images}/></Link>
             </div>
-            <div className="book-item">
-                <div className="book-name">
-                    书名:{this.state.name}
-                    单价:{this.state.price}
+            <div className="col-md-10">
+                <div className="book-item">
+                    <div>书名:{this.state.name}</div>
+                    <div>单价:{this.state.price}</div>
+                    <label>数目:</label>
+                    <img src="../pictures/add.png" onClick={this._addCount.bind(this)}/>
+                    <label>{this.state.count}</label>
+                    <img src="../pictures/reduce.png" onClick={this._reduceCount.bind(this)}/>
+                    <button type="button" onClick={this._onClickDelete.bind(this)}>删除</button>
+                    <div onChange={this.handleChange.bind(this)}>价钱:{price}</div>
                 </div>
-                <label>数目:</label>
-                <img src="../pictures/add.png" onClick={this._addCount.bind(this)}/>
-                <label className="book-count">{this.state.count}</label>
-                <img src="../pictures/reduce.png" onClick={this._reduceCount.bind(this)}/>
-                <button type="button" onClick={this._onClickDelete.bind(this)}>删除</button>
-                <div onChange={this.handleChange.bind(this)}>价钱:{price}</div>
             </div>
         </div>;
     }
