@@ -7,7 +7,6 @@
 .feature-one{
     position: relative;
     left: 25%;
-    /*background-color: #00ffff;*/
     width: 50%;
 }
 .feature-one .change{
@@ -16,4 +15,8 @@
 }
 .feature-one .change .modify{
     margin-right: 20%;
+}
+.feature-three .btn{
+    position: relative;
+    left: 400px;
 }

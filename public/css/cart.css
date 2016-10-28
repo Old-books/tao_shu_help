@@ -1,0 +1,22 @@
+.books{
+    height: 80px;
+    background-color: #a6e1ec;
+    width: 70%;
+}
+.item{
+    background-color: #0000ed;
+    height: 80px;
+}
+label{
+    font-size: 15px;
+}
+.book-item{
+     font-size: 15px;
+}
+.book-item button{
+    margin-left: 3%;
+    border-radius: 15px;
+}
+.book-count{
+    background-color: #00ffff;
+}

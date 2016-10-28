@@ -2,7 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Link, hashHistory} from 'react-router';
 import request from 'superagent';
-import '../css/nav.css';
+require('../css/nav.css');
 class Nav extends React.Component {
     constructor(props) {
         super(props);
@@ -36,7 +36,7 @@ class Nav extends React.Component {
             {this.state.isLongIn ?
                 <div className="check-login">
                     <img src="../../pictures/cart.png" className="cart-picture"/>
-                    <Link to="#" className="cart-button">购物车</Link>
+                    <Link to="/cart" className="cart-button">购物车</Link>
                     <img src="../../pictures/own-center.png" className="own-center-picture"/>
                     <Link to="/personal" className="own-center-button">个人中心</Link>
                     {/*<Link className="quit" onClick={this._dropUp.bind(this)}>退出登陆</Link>*/}

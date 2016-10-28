@@ -5,6 +5,7 @@ import Home from './component/home.jsx';
 import Picture from './component/picturewall.jsx';
 import Publish from './component/publish.jsx';
 import Share from './component/share.jsx';
+import Book_cart from './component/cart.jsx';
 import Personal from './component/personal-page.jsx';
 import Connect from './component/connect.jsx';
 import TowCollections from './component/doublelinebooks.jsx';
@@ -29,6 +30,7 @@ const router = <Router history={hashHistory}>
         <Route path='/connect/:id' component={Connect}/>
         <Route path='/TowCollections' component={TowCollections}/>
         <Route path='/Brief' component={Brief}/>
+        <Route path='/cart' component={Book_cart}/>
     </Route>
 </Router>;
 

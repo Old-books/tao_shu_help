@@ -5,13 +5,18 @@ import {getUsernameFromToken, findUser} from './cookies';
 import _ from 'lodash';
 const router = express.Router();
 router.post('/', function (req, res, next) {
+    /*Cart.remove({
+    }, function (e) {
+        if (e) res.send(e.message);
+        else console.log('删除成功');
+    });*/
     let id_book = req.body.index;
     const token = req.cookies['token'];
     if (_.isEmpty(token)) {
-        return res.sendStatus(401);
+        return res.status(401).send("请先登陆注册");
     }
     if (token === null || token === undefined || token.length === 0 || !token.includes(':')) {
-        return res.sendStatus(401);
+        return res.status(401).send("请先登陆注册");
     }
     var id_user = '';
     let username = getUsernameFromToken(token);
@@ -46,75 +51,71 @@ router.post('/', function (req, res, next) {
         }
         else return res.status(401).send("没有登陆和注册");
     });
-    /*   Cart.remove({
-     }, function (e) {
-     if (e) res.send(e.message);
-     else console.log('删除成功');
-     });
-     */
+
 
 });
-/*router.post('/get_message', function (req, res, next) {
+router.post('/get_message', function (req, res, next) {
     let id_Cart = [];
     const token = req.cookies['token'];
     if (_.isEmpty(token)) {
-        return res.sendStatus(401);
+        return res.status(401).send("请先登陆注册");
     }
     if (token === null || token === undefined || token.length === 0 || !token.includes(':')) {
-        return res.sendStatus(401);
+        return res.status(401).send("请先登陆注册");
     }
     var id_user = '';
     let username = getUsernameFromToken(token);
+    console.log("username" + username);
     findUser(username, function (err, user) {
         if (err) next(err);
         if (user) {
             id_user = user._id;
             Cart.findOne({id_user: id_user}, function (err, cart) {
                 if (err) next(err);
-                //console.log("user cart: " + cart);
                 if (cart) {
-                    console.log("-------------: " + cart.id_books);
+                    console.log("cart : "+cart);
                     _.map(cart.id_books, function (id_book) {
-                        console.log(" id_book:  " + id_book);
                         if (id_book) {
-                            //console.log("id_user: " + id_user + " id_books:  " + id_book);
-                            id_Cart.push(id_book)
+                            id_Cart.push(id_book);
                         }
                         else {
-                            return res.status(404).send("购物车为空");
+                            return res.status(200).send("亲爱的aaaa"+username+": 你的的购物车目前空荡荡的,快去去采购吧");
                         }
-                        // console.log("id_Cart: " + id_Cart);
                     });
-                    _.map(id_Cart, function (id) {
-                        getMessage(id_Cart, function (book_message, err) {
-                            if (err) next(err);
-                            console.log("book message is " + book_message);
-                            console.log("       ");
-                            //return res.status(201).json({book_message:book_message});
-                        })
-                    })
-
+                    getBook(id_Cart, function (book_message, err) {
+                        if (err) next(err);
+                        if (book_message.length === id_Cart.length) {
+                            return res.status(201).json({book_message: book_message});
+                        }
+                    });
                 }
                 else {
-                    res.status(401).send("没有登陆和注册");
+                    res.status(200).send("亲爱的"+username+": 你的的购物车目前空荡荡的,快去去采购吧");
                 }
             });
         }
     })
 
 });
-function getMessage(id_Cart, callback) {
-    let message = [{
-        name: '', images: '', price: ''
-    }], i = 0;
-    /!* _.map(id_Cart, function (id) {*!/
-    Book.findOne({_id: id_Cart}, function (err, book) {
-        console.log(" book message " + book);
-
-        message.push({name: book.name, images: book.images, price: book.price});
-        // console.log("fdbgfdbdg: " + message[0].name);
+function getMessage(id, callback) {
+    Book.findOne({_id: id}, function (err, book) {
+        callback(book, null);
     });
-    /!* });*!/
-    callback(message, null);
-}*/
+}
+function getBook(id_Cart, callback) {
+    let message = [];
+    _.map(id_Cart, function (id) {
+        getMessage(id, function (book_message, err) {
+            if (err) next(err);
+            message.push({
+                name: book_message.name,
+                images: book_message.images[0],
+                price: book_message.price,
+                id:book_message._id
+            });
+            callback(message, null);
+        })
+    });
+
+}
 export default router;

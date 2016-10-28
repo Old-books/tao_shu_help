@@ -1,6 +1,6 @@
 import React from 'react';
 import request from 'superagent';
-import {hashHistory,Link} from 'react-router';
+import {hashHistory, Link} from 'react-router';
 require('../css/personal-page.css');
 
 class Personal extends React.Component {
@@ -40,7 +40,6 @@ class Personal extends React.Component {
         this.setState({
             status: true
         });
-        // document.getElementById('username').disabled = false;
         document.getElementById('password').disabled = false;
         document.getElementById('email').disabled = false;
         document.getElementById('phone').disabled = false;
@@ -117,9 +116,8 @@ class Personal extends React.Component {
         return (
             <div className="container">
                 <ul className="nav nav-pills" role="tablist">
-                    <li role="presentation" className="active"><a href="#tab-one" role="tab" data-toggle="tab">个人信息</a>
-                    </li>
-                    <li role="presentation"><a href="#tab-tow" role="tab" data-toggle="tab">购物车</a></li>
+                    <li role="presentation" className="active"><a href="#tab-one" role="tab" data-toggle="tab">个人信息</a></li>
+                    {/*<li role="presentation"><a href="#tab-tow" role="tab" data-toggle="tab">购物车</a></li>*/}
                     <li role="presentation"><a href="#tab-three" role="tab" data-toggle="tab">发布</a></li>
                 </ul>
                 <div className="tab-content">
@@ -181,13 +179,14 @@ class Personal extends React.Component {
 
                     <div className="tab-pane" id="tab-tow">
                         <div className="row feature-tow">
-                            dncijdncienciecneve
                         </div>
                     </div>
 
                     <div className="tab-pane" id="tab-three">
                         <div className="row feature-three">
-                            <Link to = '/publish'><button type="publish" className="btn">我要发布</button></Link>
+                            <Link to='/publish'>
+                                <button type="publish" className="btn">我要发布</button>
+                            </Link>
                         </div>
                     </div>
                 </div>
