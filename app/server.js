@@ -34,7 +34,7 @@ app.use(express.static('./public'));
 
 app.use('/api', apiRouter);
 if (require.main === module) {
-    app.listen(process.env.PORT, function () {
+    app.listen(process.env.PORT||3000, function () {
         db.connect((err) => {
             if (err) return console.error('db connection failed');
         });
