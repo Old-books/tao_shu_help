@@ -5,11 +5,11 @@ import {getUsernameFromToken, findUser} from './cookies';
 import _ from 'lodash';
 const router = express.Router();
 router.post('/', function (req, res, next) {
-    /*Cart.remove({
-     }, function (e) {
-     if (e) res.send(e.message);
-     else console.log('删除成功');
-     });*/
+    // Cart.remove({
+    // }, function (e) {
+    //     if (e) res.send(e.message);
+    //     else console.log('删除成功');
+    // });
     let id_book = req.body.index;
     const token = req.cookies['token'];
     if (_.isEmpty(token)) {

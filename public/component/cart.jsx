@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import {Link, hashHistory} from 'react-router';
 import request from 'superagent';
 import _ from 'lodash';
+import Nav from './navigation.jsx';
 require('../css/cart.css');
 let id_user = '';
 let all_price = 0;
@@ -66,7 +67,7 @@ class Book_cart extends React.Component {
                                 });
                                 element_id.push(id);
                             });
-                            console.log(Book_list);
+                            // console.log(Book_list);
                             return (this.setState({cart_book: Book_list}));
                         }
                     });
@@ -76,7 +77,6 @@ class Book_cart extends React.Component {
     changePrice() {
         this.setState({all_price: parseInt(all_price)});
     }
-
     render() {
         let i = 0;
         const bookList = _.map(this.state.cart_book, ({name, images, price, _id, count, publisher}) =>

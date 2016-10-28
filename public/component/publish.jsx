@@ -5,6 +5,7 @@ import request from 'superagent';
 import Nav from './navigation.jsx';
 import _ from 'lodash';
 import '../css/publish.css';
+import Buttom from './buttom.jsx';
 
 class Publish extends React.Component {
     constructor(props) {
@@ -75,6 +76,9 @@ class Publish extends React.Component {
                     </div>
                 </form>
             </div>
+            <div>
+                <Buttom/>
+            </div>
         </div>
     }
 
@@ -109,7 +113,7 @@ class Publish extends React.Component {
         });
     }
 
-    _onImgUpload(event) {
+    _onImgUpload() {
         const formData = new FormData();
         formData.append('image', this.state.selectedImage);
         request.post('/api/uploaded-images')
@@ -123,13 +127,13 @@ class Publish extends React.Component {
             })
     }
 
-    _addCount(event) {
+    _addCount() {
         this.setState({
             count: this.state.count + 1
         });
     }
 
-    _reduceCount(event) {
+    _reduceCount() {
         if (this.state.count < 1) {
             return false;
         } else {
