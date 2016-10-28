@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import 'jquery';
 import "bootstrap-webpack";
-import _ from 'lodash';
-import request from 'superagent';
+import {Link} from 'react-router';
 require('../css/singlebook.css');
 
 class Single extends React.Component {
@@ -18,6 +17,7 @@ class Single extends React.Component {
                 states:this.props.booklist.states,
                 _id: this.props.booklist._id
         }
+        console.log("fds"+this.state._id);
     }
 
 
@@ -25,9 +25,9 @@ class Single extends React.Component {
         return <div>
             <div className="col-sm-6 col-md-3">
                 <div className="thumbnail">
-                    <div className="pic"><img className="book" src= {this.state.uploadedImages}/></div>
+                    <div className="pic"><Link to={"/share/"+this.state._id}><img className="book" src= {this.state.uploadedImages}></img></Link></div>
                     <div className="caption">
-                        <h5>{this.state.book_name}</h5>
+                        <h5><Link to={"/share/"+this.state._id}>{this.state.book_name}</Link></h5>
                         <p>...</p>
                         <p><a href="#" className="btn btn-primary" role="button">Button</a>
                             <a href="#" className="btn btn-default" role="button">Button</a>

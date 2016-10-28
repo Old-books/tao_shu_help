@@ -65,7 +65,7 @@ router.post('/get_message', function (req, res, next) {
     }
     var id_user = '';
     let username = getUsernameFromToken(token);
-    console.log("username" + username);
+ //   console.log("username" + username);
     findUser(username, function (err, user) {
         if (err) next(err);
         if (user) {

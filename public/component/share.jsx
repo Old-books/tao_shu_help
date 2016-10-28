@@ -14,11 +14,12 @@ class Share extends React.Component {
             press: '',
             images: [],
             count: '',
-            price: ''
+            price: '',
+            index: this.props.params.id
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         request
             .get(`/api/books/${this.props.params.id}`)
             .end((err, res) => {
@@ -34,6 +35,29 @@ class Share extends React.Component {
             });
     }
 
+    _onClickCart() {
+        return ()=> {
+            console.log(this.state.index);
+            request.post('/api/current/cart')
+                .send({
+                    index: this.state.index
+                })
+                .end((err, res) => {
+                    if (err) {
+
+                        if (res.statusCode === 401)
+                            hashHistory.push('/login');
+                        else {
+                            return alert("加载错误!");
+                        }
+                    }
+                    if (res.statusCode === 201) {
+                        alert(res.text);
+                    }
+                })
+        }
+    }
+
     render() {
         return <div>
             <Nav/>
@@ -46,7 +70,8 @@ class Share extends React.Component {
                     <li>出版社：{this.state.press}</li>
                     <li>数量：{this.state.count}</li>
                 </ul>
-                <button className="add-cart">加入购物车</button>
+                <button type="button" onClick={this._onClickCart()} className="add-cart">加入购物车
+                </button>
                 <Link to={'/connect/' + this.props.params.id}>
                     <button className="connect-owner">联系卖家</button>
                 </Link>
