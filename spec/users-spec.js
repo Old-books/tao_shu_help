@@ -1,3 +1,4 @@
+/*
 'use strict';
 import request from 'supertest';
 import app from '../app/server';
@@ -94,3 +95,4 @@ describe('users-api test', () => {
 });
 
 
+*/

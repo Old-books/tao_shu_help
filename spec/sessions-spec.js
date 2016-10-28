@@ -1,3 +1,4 @@
+/*
 'use strict';
 
 import db from '../app/mongodb/db';
@@ -57,3 +58,4 @@ describe('sessions-spec', () => {
         ], finish(done));
     });
 });
+*/
