@@ -1,0 +1,19 @@
+.thumbnail{
+    height: 300px;
+    width: 250px;
+    margin-left: 10px;
+    margin-top: 10px;
+    /*background-color: #0000ed;*/
+}
+.pic{
+    padding-left: 20px;
+    /*background-color: #419641;*/
+}
+.book{
+    height: 150px;
+    width: 130px;
+}
+.caption{
+    height: 120px;
+    /*background-color: #dca7a7;*/
+}

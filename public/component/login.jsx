@@ -29,7 +29,7 @@ class Login extends React.Component {
                 }
                 if (res.statusCode === 201) {
                     alert(res.text);
-                    hashHistory.push('/publish');
+                    hashHistory.push('/personal');
                 }
             })
     }

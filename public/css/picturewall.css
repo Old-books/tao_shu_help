@@ -1,0 +1,24 @@
+.carousel {
+    height: 550px;
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 60px;
+}
+.carousel .item {
+    height: 550px;
+}
+.carousel .item img {
+    width: 100%;
+}
+@media (max-width: 768px) {
+    .carousel {
+        height: 300px;
+        margin-bottom: 30px;
+    }
+    .carousel .item {
+        height: 300px;
+    }
+    .carousel img {
+        min-height: 300px;
+    }
+}

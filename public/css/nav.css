@@ -40,23 +40,29 @@
 
 .cart-picture{
     position: relative;
-    left: 80px;
+    left: 15px;
 }
 .cart-button{
     position: relative;
     color: #828a96;
-    left: 85px;
-    font-size: 10px;
+    left: 20px;
+    font-size: 15px;
 }
 
 .own-center-picture{
     position: relative;
-    left: 120px;
+    left: 50px;
 }
 
 .own-center-button{
     position: relative;
     color:#828a96;
-    left: 125px;
-    font-size: 10px;
+    left: 55px;
+    font-size: 15px;
+}
+.quit{
+    position: relative;
+    color: #828a96;
+    left: 70px;
+    font-size: 15px;
 }

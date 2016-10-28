@@ -1,20 +1,22 @@
-.body {
+.container {
     font-family: sans-serif;
-    font-size: x-large;;
 }
-
-h3 {
-    text-align: center;
+.nav{
+    /*background-color: #00ee00;*/
 }
-
-span {
-    float: right;
+.feature-one{
+    position: relative;
+    left: 25%;
+    width: 50%;
 }
-
-.personal {
-    position: absolute;
-    width: 40%;
-    padding-left: 8%;
-    margin-left: 20%;
-    margin-top: 5%;
+.feature-one .change{
+    position: relative;
+    padding-left: 20%;
+}
+.feature-one .change .modify{
+    margin-right: 20%;
+}
+.feature-three .btn{
+    position: relative;
+    left: 400px;
 }
