@@ -36,7 +36,7 @@ class Nav extends React.Component {
                 <input className="search-button" type="image" src="../../pictures/search-button.png"/>
             </form>
             <img src="../../pictures/cart.png" className="cart-picture"/>
-            <Link to="#" className="cart-button">购物车</Link>
+            <Link to="/cart" className="cart-button">购物车</Link>
             <img src="../../pictures/own-center.png" className="own-center-picture"/>
             <Link to="/personal" className="own-center-button">个人中心</Link>
         </div>

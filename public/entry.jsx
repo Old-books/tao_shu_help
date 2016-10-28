@@ -4,6 +4,7 @@ import App from './component/app.jsx';
 import Home from './component/home.jsx';
 import Publish from './component/publish.jsx';
 import Share from './component/share.jsx';
+import Bookcart from './component/cart.jsx';
 import Personal from './component/personal-page.jsx';
 import Connect from './component/connect.jsx';
 import React from 'react';
@@ -23,6 +24,7 @@ const router = <Router history={hashHistory}>
         <Route path='/share/:id' component={Share}/>
         <Route path='/personal' component={Personal}/>
         <Route path='/connect/:id' component={Connect}/>
+        <Route path='/cart' component={Bookcart}/>
     </Route>
 </Router>;
 

@@ -1,12 +1,68 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
-import {Link} from 'react-router';
 import Nav from './navigation.jsx';
 import 'jquery';
 import "bootstrap-webpack";
-
+import _ from 'lodash';
+import request from 'superagent';
+import {Link} from 'react-router';
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            booklist: [{
+                author: "",
+                book_name: "",
+                press: "",
+                uploadedImages: "",
+                count: 0,
+                price: 0,
+                states: "",
+                _id: ""
+
+            }]
+        };
+    }
+
+    componentWillMount() {
+        request.post('/api/current/people-books')
+            .end((err, res)=> {
+                if (err) return alert('页面错误');
+                if (res.statusCode === 201) {
+                    let Booklist = [];
+                    _.map(res.body.people_books, function ({
+                        author, name, press, images, count, price, state, _id
+                    }) {
+                        Booklist.push({
+                            author: author, book_name: name, press: press, uploadedImages: images[0], price: price,
+                            count: count, states: state, _id: _id
+                        });
+
+                    });
+                    return (this.setState({booklist: Booklist}));
+
+                }
+
+            });
+    }
+
+
     render() {
+        const bookList = _.map(this.state.booklist, ({author, book_name, press, uploadedImages, count, price, _id}) =>
+            <div key={_id} >
+                <div>
+                    <Link to={"/share/" + _id}><  img src={uploadedImages}/></Link>
+                    <h4>书名:{book_name}<br/>
+                        作者:{book_name}<br/>
+                        出版社:{press}<br/>
+                        单价:{price}<br/>
+                        剩余数量:{count}<br/>
+                    </h4>
+                    <br/><br/>
+                </div>
+            </div>
+        );
+
         return <div>
             <Nav/>
             <div>
@@ -70,7 +126,16 @@ class Home extends Component {
                 <Link to="#"><img src="#"/></Link>
                 <Link to="#"><img src="#"/></Link>
             </div>
+            <div>
+                <br/><br/>
+                <h2>书的走廊:</h2>
+            </div>
+            <div>
+                {bookList}
+            </div>
+
         </div>
+
     }
 }
 export default Home;

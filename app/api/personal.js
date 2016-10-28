@@ -45,7 +45,7 @@ router.post('/:_id', function (req, res, next) {
         });
     }
     else {
-        console.log(legal.message);
+      //  console.log(legal.message);
         return res.status(400).send(legal.message);
     }
 });

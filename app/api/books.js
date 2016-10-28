@@ -54,6 +54,7 @@ router.post('/search', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
     const bookId = req.params.id;
     Book.findOne({_id: bookId}, function (err, book) {
+       // console.log("book:"+book);
         if (err) return next(err);
         return res.status(200).json(book);
     });

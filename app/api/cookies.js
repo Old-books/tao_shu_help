@@ -34,5 +34,5 @@ function findUser(username, callback) {
 }
 export {
     validateToken,
-    getUsernameFromToken
+    getUsernameFromToken,findUser
 };
