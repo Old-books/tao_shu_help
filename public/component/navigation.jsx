@@ -26,7 +26,7 @@ class Nav extends React.Component {
 
     render() {
         return <div className="container">
-            <h1 className="logo">淘书帮</h1>
+            <h1 className="logo"><Link to="/index"className="logo-button">淘书帮</Link></h1>
             <form className="form-container" onSubmit={this._onSubmit.bind(this)}>
                 <input type="text" placeholder="书名 作者 出版社" className="search-input"
                        value={this.state.content} onChange={this._searchContent.bind(this)}/>
@@ -39,7 +39,7 @@ class Nav extends React.Component {
                     <Link to="/cart" className="cart-button">购物车</Link>
                     <img src="../../pictures/own-center.png" className="own-center-picture"/>
                     <Link to="/personal" className="own-center-button">个人中心</Link>
-                    {/*<Link className="quit" onClick={this._dropUp.bind(this)}>退出登陆</Link>*/}
+                    <Link to='' className="quit" onClick={this._dropUp.bind(this)}>退出</Link>
                 </div> :
                 <div className="check-login">
                     <img src="../../pictures/login.png" className="cart-picture"/>
@@ -62,18 +62,19 @@ class Nav extends React.Component {
         hashHistory.push('/search/' + this.state.content);
     }
 
-    // _dropUp(event){
-    //     event.preventDefault();
-    //     request.delete('/api/sessions/current')
-    //           .end((err,res) =>{
-    //         if(res.statusCode === 200) {
-    //             return this.setState({
-    //                 isLongIn: false
-    //             });
-    //         }
-    //     });
-    //     hashHistory.push('/index');
-    // }
+    _dropUp(){
+        request
+            .delete('/api/sessions/current')
+            .end((err, res)=> {
+                if (err) alert(err);
+                if(res.statusCode === 200) {
+                    this.setState({
+                        isLongIn: false
+                    });
+                    hashHistory.push('/index');
+                }
+            });
+    }
 }
 
 export default Nav;
