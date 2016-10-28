@@ -1,6 +1,7 @@
 import React from 'react';
 import request from 'superagent';
 import {hashHistory, Link} from 'react-router';
+import Nav from './navigation.jsx';
 require('../css/personal-page.css');
 
 class Personal extends React.Component {
@@ -115,6 +116,7 @@ class Personal extends React.Component {
     render() {
         return (
             <div className="container">
+                <Nav/>
                 <ul className="nav nav-pills" role="tablist">
                     <li role="presentation" className="active"><a href="#tab-one" role="tab" data-toggle="tab">个人信息</a></li>
                     {/*<li role="presentation"><a href="#tab-tow" role="tab" data-toggle="tab">购物车</a></li>*/}

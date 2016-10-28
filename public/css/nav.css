@@ -1,66 +1,79 @@
-.container{
+.container {
     margin: 37px auto;
     width: 1200px;
     color: #214c90;
 }
-.logo{
+
+.logo {
     display: inline;
 }
-.check-login{
+
+.logo-button:hover {
+    text-decoration: none;
+    color: #80a4c9;
+}
+
+.check-login {
     display: inline;
 }
-.form-container{
+
+.form-container {
     display: inline;
 }
-.search-input{
+
+.search-input {
     width: 550px;
     height: 38px;
-    border:2px solid #80a4c9;
+    border: 2px solid #80a4c9;
     border-radius: 5px;
     margin-left: 148px;
     color: #828a96;
 }
-.search-input:focus{
+
+.search-input:focus {
     outline: none;
 }
 
-.search-line{
+.search-line {
     position: relative;
     left: -75px;
 }
 
-.search-button{
+.search-button {
     position: relative;
     left: -70px;
-    top:10px;
+    top: 10px;
 }
-.search-button:focus{
+
+.search-button:focus {
     outline: none;
 }
 
-.cart-picture{
+.cart-picture {
     position: relative;
     left: 15px;
 }
-.cart-button{
+
+.cart-button {
     position: relative;
     color: #828a96;
     left: 20px;
     font-size: 15px;
 }
 
-.own-center-picture{
+.own-center-picture {
     position: relative;
     left: 50px;
 }
 
-.own-center-button{
+.own-center-button {
     position: relative;
-    color:#828a96;
+    color: #828a96;
     left: 55px;
     font-size: 15px;
 }
-.quit{
+
+.quit {
     position: relative;
     color: #828a96;
     left: 70px;
