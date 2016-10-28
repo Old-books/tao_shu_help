@@ -51,7 +51,9 @@
     "jasmine": "2.4.1",
     "babel-preset-react": "6.11.1",
     "babel-preset-es2015": "6.13.2",
-    "express-fileupload":"0.0.5"
+    "express-fileupload":"0.0.5",
+    "mongodb":"2.2.11" 
+
   },
   "engines": {
     "node": ">=6.0.0"
