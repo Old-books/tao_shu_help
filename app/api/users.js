@@ -7,7 +7,6 @@ router.post('/', function (req, res, next) {
     const userData = req.body;
     const legal = isUserInformationLegal(userData);
     if (legal.type === true && legal.message === 'type is true') {
-
         isExist(userData, next, function (err, doc) {
             if (err) return next(err);
             if (doc === null) {

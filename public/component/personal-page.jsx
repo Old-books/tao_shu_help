@@ -72,6 +72,13 @@ class Personal extends React.Component {
                             if (res.statusCode === 400 && res.text === 'The phone number is error') {
                                 alert("The phone number is error!");
                             }
+                            if(res.statusCode === 400 && res.text === 'wrong') {
+                                alert('wrong! please login');
+                                hashHistory.push('/login');
+                            }
+                            if(res.statusCode === 409 && res.text === 'the name is exist') {
+                                alert('the name is exist,please input again');
+                            }
                             return console.error(err);
                         }
                         if (res.statusCode === 201 && res.text === '数据信息已存入数据库') {
