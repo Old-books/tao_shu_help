@@ -6,10 +6,10 @@ import _ from 'lodash';
 const router = express.Router();
 router.post('/', function (req, res, next) {
     /*Cart.remove({
-    }, function (e) {
-        if (e) res.send(e.message);
-        else console.log('删除成功');
-    });*/
+     }, function (e) {
+     if (e) res.send(e.message);
+     else console.log('删除成功');
+     });*/
     let id_book = req.body.index;
     const token = req.cookies['token'];
     if (_.isEmpty(token)) {
@@ -65,7 +65,7 @@ router.post('/get_message', function (req, res, next) {
     }
     var id_user = '';
     let username = getUsernameFromToken(token);
- //   console.log("username" + username);
+    //   console.log("username" + username);
     findUser(username, function (err, user) {
         if (err) next(err);
         if (user) {

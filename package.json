@@ -1,12 +1,13 @@
 {
-  "name": "es6-project-demo",
+  "name": "tao_shu_help",
   "version": "1.0.0",
-  "description": "Tao_Shu_Help =================",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "babel-node app/server.js --ignore 'node_modules/' || exit 0",
     "lint": "eslint . -c twa-camp-2016 --no-eslintrc || exit 0",
-    "test": "jasmine || exit 1"
+    "test": "jasmine",
+    "test-all": "JASMINE_CONFIG_PATH=spec/support/jasmine-all.json jasmine || exit 0"
   },
   "keywords": [],
   "author": "",
@@ -41,7 +42,7 @@
     "body-parser": "1.15.2",
     "bootstrap": "3.3.7",
     "bootstrap-webpack": "0.0.5",
-    "babel-cli":"6.18.0",
+    "babel-cli": "6.18.0",
     "cookie-parser": "1.4.3",
     "exports-loader": "0.6.3",
     "expose-loader": "0.7.1",
@@ -66,13 +67,5 @@
   },
   "engines": {
     "node": ">=6.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/flashyy/tao_shu_help.git"
-  },
-  "bugs": {
-    "url": "https://github.com/flashyy/tao_shu_help/issues"
-  },
-  "homepage": "https://github.com/flashyy/tao_shu_help#readme"
+  }
 }
