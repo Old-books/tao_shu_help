@@ -74,10 +74,10 @@ class Book_cart extends React.Component {
         let i = 0;
         const bookList = _.map(this.state.cart_book, ({name, images, price, _id}) =>
             <div key={_id + i++}>
-                    <Book_list list={
-                    {
-                        name: name, images: images, price: price, _id: _id, all_price: this.state.all_price
-                    }} changePrice={this.changePrice.bind(this)}/>
+                <Book_list list={
+                {
+                    name: name, images: images, price: price, _id: _id, all_price: this.state.all_price
+                }} changePrice={this.changePrice.bind(this)}/>
             </div>);
 
         return<div className="books">

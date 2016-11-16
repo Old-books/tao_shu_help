@@ -6,10 +6,10 @@ import _ from 'lodash';
 const router = express.Router();
 router.post('/', function (req, res, next) {
     /*Cart.remove({
-    }, function (e) {
-        if (e) res.send(e.message);
-        else console.log('删除成功');
-    });*/
+     }, function (e) {
+     if (e) res.send(e.message);
+     else console.log('删除成功');
+     });*/
     let id_book = req.body.index;
     const token = req.cookies['token'];
     if (_.isEmpty(token)) {
@@ -65,7 +65,7 @@ router.post('/get_message', function (req, res, next) {
     }
     var id_user = '';
     let username = getUsernameFromToken(token);
- //   console.log("username" + username);
+    //   console.log("username" + username);
     findUser(username, function (err, user) {
         if (err) next(err);
         if (user) {
@@ -73,13 +73,13 @@ router.post('/get_message', function (req, res, next) {
             Cart.findOne({id_user: id_user}, function (err, cart) {
                 if (err) next(err);
                 if (cart) {
-                    console.log("cart : "+cart);
+                    console.log("cart : " + cart);
                     _.map(cart.id_books, function (id_book) {
                         if (id_book) {
                             id_Cart.push(id_book);
                         }
                         else {
-                            return res.status(200).send("亲爱的aaaa"+username+": 你的的购物车目前空荡荡的,快去去采购吧");
+                            return res.status(200).send("亲爱的aaaa" + username + ": 你的的购物车目前空荡荡的,快去去采购吧");
                         }
                     });
                     getBook(id_Cart, function (book_message, err) {
@@ -90,7 +90,7 @@ router.post('/get_message', function (req, res, next) {
                     });
                 }
                 else {
-                    res.status(200).send("亲爱的"+username+": 你的的购物车目前空荡荡的,快去去采购吧");
+                    res.status(200).send("亲爱的" + username + ": 你的的购物车目前空荡荡的,快去去采购吧");
                 }
             });
         }
@@ -111,7 +111,7 @@ function getBook(id_Cart, callback) {
                 name: book_message.name,
                 images: book_message.images[0],
                 price: book_message.price,
-                id:book_message._id
+                id: book_message._id
             });
             callback(message, null);
         })

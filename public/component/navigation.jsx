@@ -13,7 +13,7 @@ class Nav extends React.Component {
     }
 
     componentWillMount(){
-       request.get('/api/sessions/current')
+        request.get('/api/sessions/current')
             .end((err, res) => {
                 if (res.statusCode === 201) {
                     return this.setState({
