@@ -13,7 +13,6 @@ class Login extends React.Component {
     }
 
     _onSubmit(event) {
-        event.preventDefault();
         request.post('/api/sessions')
             .send({
                 username: this.state.username,

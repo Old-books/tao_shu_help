@@ -1,26 +1,29 @@
-Tao_Shu_Help
-=================
-
+淘书帮
+===
 CI status: ![Build Status](https://travis-ci.org/Old-books/tao_shu_help.svg?branch=master)
-A basic es6 project, which includes:
-
+基于ES6的项目，包括：
 1. webpack
 2. babel
 3. express
 4. jquery
 5. react
 
-All the changes to js/jsx files can be hot-reloaded in browser.
+在运行项目前确保你的电脑安装：
+```
+mongodb
+node
+npm
+```
 
+在运行前需要安装：
 ```
 npm install -g babel-cli
 npm install
 npm start
 ```
 
-Then visit <http://localhost:3000>, you will see `Hello world` on the page.
+访问 <http://localhost:3000>, 你将会看到我们的淘书帮
 
-If you modify `public/hello.jsx` to change the text, you will see the changes are applied to page instantly.
 
 
 
