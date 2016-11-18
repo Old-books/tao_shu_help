@@ -1,13 +1,13 @@
 import express from 'express';
 import {Book, user_book, User} from '../mongodb/schema';
-import {isEmpty} from '../../shared/check-books-validation';
+import {isEmpty} from '../shared/check-books-validation';
 
 const router = express.Router();
 router.post('/', function (req, res, next) {
     const {publisher, author, name, press, images, count, price, tags, state} = req.body;
     const bookAttribute = {publisher, author, name, press, images, count, price, tags, state};
     if (isEmpty(bookAttribute)) {
-        var book = new Book({
+        let book = new Book({
             author: author,
             name: name,
             press: press,

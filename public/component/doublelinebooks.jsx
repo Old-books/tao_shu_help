@@ -37,7 +37,7 @@ class TowCollections extends React.Component {
                         });
                     });
                     (this.setState({booklist: Booklist}));
-                    // console.log("fsddf"+this.state.booklist)
+                     console.log("fsddf"+this.state.booklist)
                 }
 
             });
