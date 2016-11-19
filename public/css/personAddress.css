@@ -1,0 +1,7 @@
+.cart-button {
+    position: relative;
+    height: 80px;
+    width: 80%;
+    background-color: #00ffff;
+    border: thin;
+}

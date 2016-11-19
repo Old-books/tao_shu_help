@@ -4,7 +4,10 @@ const UserModel = new Schema({
     username: String,
     password: String,
     phone: String,
-    email: String
+    email: String,
+    province:String,
+    city:String,
+    specificAddress:String
 });
 
 const publishBookModel = new Schema({

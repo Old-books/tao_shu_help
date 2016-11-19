@@ -6,12 +6,13 @@ import Picture from './component/picturewall.jsx';
 import Publish from './component/publish.jsx';
 import Share from './component/share.jsx';
 import Book_cart from './component/cart.jsx';
-import Personal from './component/personal-page.jsx';
+import PersonalCenter from './component/personal-page.jsx';
 import Connect from './component/connect.jsx';
 import TowCollections from './component/doublelinebooks.jsx';
 import Brief from './component/briefnav.jsx';
 import orderPage from './component/orderPage.jsx';
 import SearchPage from './component/search.jsx';
+import Address from './component/personalAddress.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
@@ -28,13 +29,14 @@ const router = <Router history={hashHistory}>
         <Route path='/register' component={Register}/>
         <Route path='/login' component={SignIn}/>
         <Route path='/share/:id' component={Share}/>
-        <Route path='/personal' component={Personal}/>
+        <Route path='/personal' component={PersonalCenter}/>
         <Route path='/connect/:id' component={Connect}/>
         <Route path='/TowCollections' component={TowCollections}/>
         <Route path='/Brief' component={Brief}/>
         <Route path='/cart' component={Book_cart}/>
         <Route path='/order' component={orderPage}/>
         <Route path='/search/:content' component={SearchPage}/>
+        <Route path='/address' component={Address}/>
     </Route>
 </Router>;
 

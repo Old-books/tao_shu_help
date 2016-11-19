@@ -77,6 +77,7 @@ class Book_cart extends React.Component {
     changePrice() {
         this.setState({all_price: parseInt(all_price)});
     }
+
     render() {
         let i = 0;
         const bookList = _.map(this.state.cart_book, ({name, images, price, _id, count, publisher}) =>
