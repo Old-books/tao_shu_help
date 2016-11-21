@@ -38,8 +38,11 @@
 
 #pay {
     width: 150px;
-    height: 25px;
+    height: 29px;
     border:1px solid #828a96;
+    border-radius: 5px;
+    letter-spacing: 15px;
+    text-align: center;
 }
 
 #pay:focus {
