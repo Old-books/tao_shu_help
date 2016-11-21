@@ -25,7 +25,7 @@ class Nav extends React.Component {
     }
 
     render() {
-        return <div className="container">
+        return <div className="nav-container">
             <h1 className="logo"><Link to="/index"className="logo-button">淘书帮</Link></h1>
             <form className="form-container" onSubmit={this._onSubmit.bind(this)}>
                 <input type="text" placeholder="书名 作者 出版社" className="search-input"

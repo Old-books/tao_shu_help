@@ -1,4 +1,4 @@
-.container {
+.nav-container {
     margin: 37px auto;
     width: 1200px;
     color: #214c90;
@@ -6,6 +6,7 @@
 
 .logo {
     display: inline;
+    margin-left: 50px;
 }
 
 .logo-button:hover {
