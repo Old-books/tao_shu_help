@@ -35,32 +35,20 @@ class SearchPage extends React.Component {
         return (
             <div>
                 <Nav/>
-                {this.state.result.map(item => <div className="container">
-                    <ul className="bigimg">
-                        <li className="search-book-item">{item.images.map(i => <Link to={`/share/${item._id}`}><img key={i} src={i} className="book-image"/></Link>)}
-                            <Link to={`/share/${item._id}`}>
-                                <p className="name-in-book">{item.name}</p>
-                            </Link>
-                            <p>{item.press}</p>
-                            <p>{item.price}</p>
-                        </li>
-                    </ul>
-                </div>)}
+                {this.state.result.map(item => <ul className="container bigimg">
+                    <li className="search-book-item">{item.images.map(i => <Link to={`/share/${item._id}`}><img
+                        key={i} src={i} className="book-image"/></Link>)}
+                        <Link to={`/share/${item._id}`}>
+                            <p className="name-in-book">{item.name}</p>
+                        </Link>
+                        <p className="author-in-book">{item.author}</p>
+                        <p className="name-in-press">{item.press}</p>
+                        <p className="price-in-book"><img src="../pictures/yuan.png"/>{item.price}元</p>
+                    </li>
+                </ul>)}
             </div>
         )
     }
 }
-// [
-//     {
-//         "_id": "5832bbabb44df50e84444d84",
-//         "author": "zhaotong",
-//         "name": "Linux",
-//         "press": "aaa",
-//         "count": 1,
-//         "price": 10,
-//         "state": true,
-//         "__v": 0,
-//         "images": ["./uploaded-images/138-141022104353-1479719836488.jpg"]
-//     }
-// ]
+
 export default SearchPage;
