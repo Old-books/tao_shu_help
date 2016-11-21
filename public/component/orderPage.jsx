@@ -85,7 +85,7 @@ class Payment extends React.Component {
                         <a><img src="../pictures/false.png" id="close" onClick={this._closeWindow.bind(this)}/></a>
                         <h1 className="logo-payment">淘书帮</h1>
                         <label className="text-mark">请输入支付密码: <input type="password" id="pay" value={this.state.password}
-                                   onChange={this._getPassword.bind(this)} autoFocus="autoFocus"/>
+                                   onChange={this._getPassword.bind(this)} autoFocus="autoFocus" maxLength="6"/>
                         </label>
                         <button type="button" id="verify" onClick={this._verify.bind(this)}>确认支付</button>
                     </div>

@@ -11,6 +11,7 @@ import Connect from './component/connect.jsx';
 import TowCollections from './component/doublelinebooks.jsx';
 import Brief from './component/briefnav.jsx';
 import orderPage from './component/orderPage.jsx';
+import SearchPage from './component/search.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
@@ -33,6 +34,7 @@ const router = <Router history={hashHistory}>
         <Route path='/Brief' component={Brief}/>
         <Route path='/cart' component={Book_cart}/>
         <Route path='/order' component={orderPage}/>
+        <Route path='/search/:content' component={SearchPage}/>
     </Route>
 </Router>;
 

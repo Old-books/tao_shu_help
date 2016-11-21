@@ -1,0 +1,13 @@
+.bigimg {
+    list-style: none;
+}
+
+.book-image {
+    display: inline;
+    width: 200px;
+    height: 200px;
+}
+
+.name-in-book {
+    color: black;
+}
