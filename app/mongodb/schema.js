@@ -32,9 +32,10 @@ const bargainModel = new Schema({
     finished: Boolean//是否下单完成
 });
 const orderModel = new Schema({
-    orderUser: String,
-    purchaseBook: [String],
-    purchaseCount: [Number]
+    custom: String,
+    buyedBook: [String],
+    buyedCount: [Number],
+    seller: [String]
 });
 
 const User = mongoose.model('users', UserModel);
@@ -43,4 +44,4 @@ const user_book = mongoose.model('userBooks', userBookModel);
 const Cart = mongoose.model('carts', cartModel);
 const Bargain = mongoose.model('bargains', bargainModel);
 const Order = mongoose.model('orders', orderModel);
-module.exports = {User, Book, user_book,Cart, Bargain, Order};
+module.exports = {User, Book, user_book, Cart, Bargain, Order};

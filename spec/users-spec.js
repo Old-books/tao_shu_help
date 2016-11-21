@@ -17,18 +17,16 @@ describe('users-api test', () => {
     afterEach((done) => {
         db.close(finish(done));
     });
-    it('saved json in mongodb', (done)=> {
-        async.series([
-            (cb) =>request(app)
-                .post('/api/users')
-                .send({
-                    username: 'xy',
-                    password: 'zyn199',
-                    email: 'zyn123@163.com',
-                    phone: '+8618292080565'
-                }).expect(201, 'register success', cb)
-        ], finish(done));
-    });
+    // it('saved json in mongodb', (done)=> {
+    //         (cb) =>request(app)
+    //             .post('/api/users')
+    //             .send({
+    //                 username: 'xy',
+    //                 password: 'zyn199',
+    //                 email: 'zyn123@163.com',
+    //                 phone: '+8618292080565'
+    //             }).expect(201, 'register success', cb);
+    // });
     it('check repeat username', (done) => {
         async.waterfall([
             (cb) => new User({

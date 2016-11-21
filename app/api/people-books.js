@@ -16,6 +16,7 @@ router.post('/', function (req, res, next) {
     }], i = 0;
     let books = [];
     Book.find({}, function (err, people_book) {
+        console.log("people: "+people_book);
         if (err) return next(err);
         _.map(people_book, function ({
             author, name, press, images, count, price, state, _id
@@ -23,7 +24,7 @@ router.post('/', function (req, res, next) {
             if (state === true)
                 people_books[i++] = ({author, name, press, images, count, price, state, _id});
         });
-        for (let j = 0; j < 3; j++) {
+        for (let j = 0; j < people_books.length; j++) {
             books.push(people_books[j]);
         }
         return res.status(201).json({people_books: books});

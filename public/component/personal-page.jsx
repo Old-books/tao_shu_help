@@ -115,85 +115,89 @@ class Personal extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <div>
                 <Nav/>
-                <ul className="nav nav-pills" role="tablist">
-                    <li role="presentation" className="active"><a href="#tab-one" role="tab" data-toggle="tab">个人信息</a></li>
-                    {/*<li role="presentation"><a href="#tab-tow" role="tab" data-toggle="tab">购物车</a></li>*/}
-                    <li role="presentation"><a href="#tab-three" role="tab" data-toggle="tab">发布</a></li>
-                </ul>
-                <div className="tab-content">
-                    <div className="tab-pane active" id="tab-one">
-                        <div className="row feature-one">
-                            <form role="form">
-                                <h2>个人信息</h2>
-                                <div className="form-group">
-                                    <label htmlFor="inputName">姓名</label>
-                                    <input type="username" className="form-control" id="username" placeholder="用户名"
-                                           disabled={true}
-                                           required="required"
-                                           value={this.state.username} onChange={this._onUsernameChange.bind(this)}/>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="inputPassword">密码</label>
-                                    <input type="password" className="form-control" id="password" placeholder="密码"
-                                           disabled={true}
-                                           required="required" pattern="^.{6,18}$"
-                                           value={this.state.password} onChange={this._onPasswordChange.bind(this)}/>
-                                </div>
-                                {this.state.status === false ? <div></div> :
+                <div className="container">
+                    <ul className="nav nav-pills" role="tablist">
+                        <li role="presentation" className="active"><a href="#tab-one" role="tab"
+                                                                      data-toggle="tab">个人信息</a></li>
+                        {/*<li role="presentation"><a href="#tab-tow" role="tab" data-toggle="tab">购物车</a></li>*/}
+                        <li role="presentation"><a href="#tab-three" role="tab" data-toggle="tab">发布</a></li>
+                    </ul>
+                    <div className="tab-content">
+                        <div className="tab-pane active" id="tab-one">
+                            <div className="row feature-one">
+                                <form role="form">
+                                    <h2>个人信息</h2>
                                     <div className="form-group">
-                                        <label htmlFor="inputConfirmPassword">确认密码</label>
-                                        <input type="confirmPassword" className="form-control" id="confirmPassword"
-                                               placeholder="密码"
-                                               required="required" pattern="^.{6,18}$"
-                                               value={this.state.confirmPassword}
-                                               onChange={this._onConfirmPasswordChange.bind(this)}/>
+                                        <label htmlFor="inputName">姓名</label>
+                                        <input type="username" className="form-control" id="username" placeholder="用户名"
+                                               disabled={true}
+                                               required="required"
+                                               value={this.state.username}
+                                               onChange={this._onUsernameChange.bind(this)}/>
                                     </div>
-                                }
-                                <div className="form-group">
-                                    <label htmlFor="inputEmail">电子邮箱</label>
-                                    <input type="email" className="form-control" id="email" placeholder="邮箱"
-                                           disabled={true}
-                                           required="required"
-                                           value={this.state.email} onChange={this._onEmailChange.bind(this)}/>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="inputPhone">手机号码</label>
-                                    <input type="phone" className="form-control" id="phone" placeholder="手机"
-                                           disabled={true}
-                                           required="required" pattern="^(\+86)?(1[0-9]{10})$"
-                                           value={this.state.phone} onChange={this._onPhoneChange.bind(this)}/>
-                                </div>
-                                <div className="change">
-                                    <button type="button" className="btn btn-primary modify"
-                                            onClick={this._onClickModify.bind(this)}>
-                                        修改
-                                    </button>
-                                    <button type="submit" className="btn btn-primary" id="submitId"
-                                            onClick={this._onSubmit.bind(this)}>
-                                        提交
-                                    </button>
-                                </div>
-                            </form>
+                                    <div className="form-group">
+                                        <label htmlFor="inputPassword">密码</label>
+                                        <input type="password" className="form-control" id="password" placeholder="密码"
+                                               disabled={true}
+                                               required="required" pattern="^.{6,18}$"
+                                               value={this.state.password}
+                                               onChange={this._onPasswordChange.bind(this)}/>
+                                    </div>
+                                    {this.state.status === false ? <div></div> :
+                                        <div className="form-group">
+                                            <label htmlFor="inputConfirmPassword">确认密码</label>
+                                            <input type="confirmPassword" className="form-control" id="confirmPassword"
+                                                   placeholder="密码"
+                                                   required="required" pattern="^.{6,18}$"
+                                                   value={this.state.confirmPassword}
+                                                   onChange={this._onConfirmPasswordChange.bind(this)}/>
+                                        </div>
+                                    }
+                                    <div className="form-group">
+                                        <label htmlFor="inputEmail">电子邮箱</label>
+                                        <input type="email" className="form-control" id="email" placeholder="邮箱"
+                                               disabled={true}
+                                               required="required"
+                                               value={this.state.email} onChange={this._onEmailChange.bind(this)}/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="inputPhone">手机号码</label>
+                                        <input type="phone" className="form-control" id="phone" placeholder="手机"
+                                               disabled={true}
+                                               required="required" pattern="^(\+86)?(1[0-9]{10})$"
+                                               value={this.state.phone} onChange={this._onPhoneChange.bind(this)}/>
+                                    </div>
+                                    <div className="change">
+                                        <button type="button" className="btn btn-primary modify"
+                                                onClick={this._onClickModify.bind(this)}>
+                                            修改
+                                        </button>
+                                        <button type="submit" className="btn btn-primary" id="submitId"
+                                                onClick={this._onSubmit.bind(this)}>
+                                            提交
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div className="tab-pane" id="tab-tow">
+                            <div className="row feature-tow">
+                            </div>
+                        </div>
+
+                        <div className="tab-pane" id="tab-three">
+                            <div className="row feature-three">
+                                <Link to='/publish'>
+                                    <button type="publish" className="btn">我要发布</button>
+                                </Link>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="tab-pane" id="tab-tow">
-                        <div className="row feature-tow">
-                        </div>
-                    </div>
-
-                    <div className="tab-pane" id="tab-three">
-                        <div className="row feature-three">
-                            <Link to='/publish'>
-                                <button type="publish" className="btn">我要发布</button>
-                            </Link>
-                        </div>
-                    </div>
                 </div>
-
-
             </div>
         )
     }
