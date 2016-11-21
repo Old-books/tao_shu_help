@@ -7,7 +7,8 @@ router.post('/', function (req, res, next) {
     const {publisher, author, name, press, images, count, price, tags, state} = req.body;
     const bookAttribute = {publisher, author, name, press, images, count, price, tags, state};
     if (isEmpty(bookAttribute)) {
-        let book = new Book({
+        var book = new Book({
+            publisher:publisher,
             author: author,
             name: name,
             press: press,
@@ -17,17 +18,16 @@ router.post('/', function (req, res, next) {
             tags: tags,
             state: state
         });
-
         book.save((err, book) => {
             if (err) return next(err);
-            User.findOne({username: publisher}, (err, user)=> {
+            User.findOne({username: publisher}, (err, user) => {
                 var userBook = new user_book({
                     id_user: user._id,
                     id_book: book._id,
                     publishTime: Date.now()
                 });
 
-                userBook.save((err)=> {
+                userBook.save((err) => {
                     if (err) return next(err);
                 });
             });

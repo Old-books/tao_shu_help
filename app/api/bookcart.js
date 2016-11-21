@@ -31,7 +31,7 @@ router.post('/', function (req, res, next) {
                 if (cart) {
                     //console.log("该用户存在进入更新: " + id_user);
                     Cart.update({id_user: id_user}, {$push: {id_books: id_book}}, function (err, updatecart) {
-                        if (err)  next(err);
+                        if (err) next(err);
                         return res.status(201).send("已经加入购物车!");
                         //console.log(updatecart);
                     })
@@ -53,6 +53,28 @@ router.post('/', function (req, res, next) {
     });
 
 
+});
+router.post('/delete',function (req,res,next) {
+   console.log("into car delete");
+   let id=req.body._id;
+   let id_user=req.body.id_user;
+   Cart.findOne({id_user:id_user},function (err,car) {
+       if(err) next(err);
+       if(car) {
+           let id_books = car.id_books;
+           let _id = [id];
+           let new_books = _.difference(id_books, _id);
+           console.log('car:  ' + car);
+           console.log(new_books);
+           Cart.update({id_user: id_user}, {$set: {id_books: new_books}}, function (err, newcar) {
+               if (err) next(err);
+               console.log("new car " + newcar);
+               return res.status(201);
+           });
+       }
+       else   return res.status(401);
+   });
+   console.log("/delete id: "+id_user);
 });
 router.post('/get_message', function (req, res, next) {
     let id_Cart = [];
@@ -79,13 +101,15 @@ router.post('/get_message', function (req, res, next) {
                             id_Cart.push(id_book);
                         }
                         else {
-                            return res.status(200).send("亲爱的aaaa" + username + ": 你的的购物车目前空荡荡的,快去去采购吧");
+                            return res.status(200).send("亲爱的" + username + ": 你的的购物车目前空荡荡的,快去去采购吧");
                         }
                     });
                     getBook(id_Cart, function (book_message, err) {
                         if (err) next(err);
                         if (book_message.length === id_Cart.length) {
-                            return res.status(201).json({book_message: book_message});
+                           let deletebook=deleteRepeat(book_message);
+                            console.log("publisher:  "+deletebook[0].publisher);
+                            return res.status(201).json({book_message:deletebook,id_user:id_user});
                         }
                     });
                 }
@@ -99,6 +123,7 @@ router.post('/get_message', function (req, res, next) {
 });
 function getMessage(id, callback) {
     Book.findOne({_id: id}, function (err, book) {
+        console.log("book~~~~~~~~~"+book);
         callback(book, null);
     });
 }
@@ -108,6 +133,7 @@ function getBook(id_Cart, callback) {
         getMessage(id, function (book_message, err) {
             if (err) next(err);
             message.push({
+                publisher:book_message.publisher,
                 name: book_message.name,
                 images: book_message.images[0],
                 price: book_message.price,
@@ -117,5 +143,42 @@ function getBook(id_Cart, callback) {
         })
     });
 
+}
+function deleteRepeat(book_message) {
+
+    let book=[{
+        publisher:book_message[0].publisher,
+        name:book_message[0].name,
+        images:book_message[0].images,
+        price: book_message[0].price,
+        id: book_message[0].id,
+        count:1
+    }];
+    console.log("publisher:  "+book_message[0].publisher);
+    let k=1;
+    for(let i=1;i<book_message.length;i++)
+    {
+        let flage=true;
+       for(let j=0;j<book.length;j++)
+       {
+           if(_.isEqual(book[j].id,book_message[i].id)===true)
+           {
+               flage=false;
+               book[j].count+=1;break;
+           }
+       }
+       if(flage===true)
+       {
+           book[k++]={
+               publisher:book_message[i].publisher,
+               name:book_message[i].name,
+               images:book_message[i].images,
+               price: book_message[i].price,
+               id: book_message[i].id,
+               count:1
+           };
+       }
+    }
+    return book;
 }
 export default router;
