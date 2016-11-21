@@ -14,6 +14,9 @@ class Payment extends React.Component {
     _overlay() {
         let e = this.refs.overlay;
         e.style.visibility = "visible";
+        this.setState({
+           password:""
+        });
     }
 
     _getPassword(event) {
