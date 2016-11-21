@@ -8,6 +8,7 @@ const UserModel = new Schema({
 });
 
 const publishBookModel = new Schema({
+    publisher:String,
     author: String,
     name: String,
     press: String,
