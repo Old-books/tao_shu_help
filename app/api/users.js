@@ -15,7 +15,11 @@ router.post('/', function (req, res, next) {
                     username: userData.username,
                     password: userData.password,
                     email: userData.email,
-                    phone: userData.phone
+                    phone: userData.phone,
+                    province:'noExist',
+                    city:'noExist',
+                    county:'noExist',
+                    specificAddress:'noExist'
                 });
                 // User.remove({},function (user,err) {
                 // if(err) next(err);
@@ -23,7 +27,6 @@ router.post('/', function (req, res, next) {
                 // });
                 user.save(function (err) {
                     if (err) return next(err);
-                    console.log('save status:', err ? 'failed' : 'success');
                     res.status(201).send('register success');
                 });
             }
@@ -33,7 +36,6 @@ router.post('/', function (req, res, next) {
         });
     }
     else {
-        // console.log(legal.message);
         res.status(400).send(legal.message);
     }
 });

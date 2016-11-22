@@ -4,7 +4,7 @@ import {hashHistory, Link} from 'react-router';
 import Nav from './navigation.jsx';
 require('../css/personal-page.css');
 
-class Personal extends React.Component {
+class PersonalCenter extends React.Component {
 
     constructor(props) {
         super(props);
@@ -15,6 +15,9 @@ class Personal extends React.Component {
             phone: '',
             email: '',
             _id: '',
+            province: 'aa',
+            city: 'bb',
+            specificAddress: 'cc',
             status: false
         };
     }
@@ -22,7 +25,6 @@ class Personal extends React.Component {
     componentWillMount() {
         request.get('/api/personal')
             .end((err, res) => {
-                console.log(err);
                 if (err) {
                     if (res.statusCode === 401) {
                         alert('please login!');
@@ -32,9 +34,23 @@ class Personal extends React.Component {
                     }
                 }
                 console.log("statusCode:" + res.statusCode);
-                const {username, email, phone, password, _id} = res.body;
-                this.setState({username, email, phone, password, _id});
-            })
+                const {username, email, phone, password, _id, province, city, county, specificAddress} = res.body;
+                this.setState({username, email, phone, password, _id, province, city, county, specificAddress});
+            });
+    }
+
+    _myAddress() {
+        const {history} =this.props;
+        history.push({
+            pathname: "/address",
+            state: {
+                _id: this.state._id,
+                province: this.state.province,
+                city: this.state.city,
+                county: this.state.county,
+                specificAddress: this.state.specificAddress
+            }
+        });
     }
 
     _onClickModify() {
@@ -76,17 +92,26 @@ class Personal extends React.Component {
                         }
                         if (res.statusCode === 201 && res.text === '数据信息已存入数据库') {
                             alert('修改成功!');
+                            request.delete('/api/sessions/current').end((err) => {
+                                if (err)
+                                    return console.error(err);
+                            });
+                            console.log('我是分界线');
+                            request.post('/api/sessions')
+                                .send({
+                                    username: this.state.username,
+                                    password: this.state.password
+                                })
+                                .end((err, res) => {
+                                    if (err) {
+                                        return console.error(err);
+                                    }
+                                });
                             hashHistory.push('/personal');
                         }
                     });
             }
         }
-    }
-
-    _onUsernameChange(event) {
-        this.setState({
-            username: event.target.value
-        });
     }
 
     _onPasswordChange(event) {
@@ -120,8 +145,8 @@ class Personal extends React.Component {
                 <div className="container">
                     <ul className="nav nav-pills" role="tablist">
                         <li role="presentation" className="active"><a href="#tab-one" role="tab"
-                                                                      data-toggle="tab">个人信息</a></li>
-                        {/*<li role="presentation"><a href="#tab-tow" role="tab" data-toggle="tab">购物车</a></li>*/}
+                                                                      data-toggle="tab">个人信息</a>
+                        </li>
                         <li role="presentation"><a href="#tab-three" role="tab" data-toggle="tab">发布</a></li>
                     </ul>
                     <div className="tab-content">
@@ -132,10 +157,8 @@ class Personal extends React.Component {
                                     <div className="form-group">
                                         <label htmlFor="inputName">姓名</label>
                                         <input type="username" className="form-control" id="username" placeholder="用户名"
-                                               disabled={true}
                                                required="required"
-                                               value={this.state.username}
-                                               onChange={this._onUsernameChange.bind(this)}/>
+                                               value={this.state.username} readOnly="true"/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="inputPassword">密码</label>
@@ -174,14 +197,19 @@ class Personal extends React.Component {
                                                 onClick={this._onClickModify.bind(this)}>
                                             修改
                                         </button>
-                                        <button type="submit" className="btn btn-primary" id="submitId"
+                                        <button type="submit" className="btn btn-primary"
                                                 onClick={this._onSubmit.bind(this)}>
                                             提交
+                                        </button>
+                                        <button type="button" className="btn btn-primary"
+                                                onClick={this._myAddress.bind(this)}>
+                                            我的地址
                                         </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
+
 
                         <div className="tab-pane" id="tab-tow">
                             <div className="row feature-tow">
@@ -195,11 +223,11 @@ class Personal extends React.Component {
                                 </Link>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         )
     }
 }
-export default Personal;
+export default PersonalCenter;
