@@ -13,6 +13,7 @@ import Brief from './component/briefnav.jsx';
 import orderPage from './component/orderPage.jsx';
 import SearchPage from './component/search.jsx';
 import Address from './component/personalAddress.jsx';
+import TestAddress from  './component/selectAddress.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
@@ -37,6 +38,7 @@ const router = <Router history={hashHistory}>
         <Route path='/order' component={orderPage}/>
         <Route path='/search/:content' component={SearchPage}/>
         <Route path='/address' component={Address}/>
+        <Route path='/addressSelect' component={TestAddress}/>
     </Route>
 </Router>;
 

@@ -34,17 +34,22 @@ class PersonalCenter extends React.Component {
                     }
                 }
                 console.log("statusCode:" + res.statusCode);
-                const {username, email, phone, password, _id, province, city, specificAddress} = res.body;
-                this.setState({username, email, phone, password, _id, province, city, specificAddress});
+                const {username, email, phone, password, _id, province, city, county, specificAddress} = res.body;
+                this.setState({username, email, phone, password, _id, province, city, county, specificAddress});
             });
     }
 
     _myAddress() {
-        // console.log(this.state.province);
         const {history} =this.props;
         history.push({
             pathname: "/address",
-            state: {province: this.state.province, city: this.state.city, specificAddress: this.state.specificAddress}
+            state: {
+                _id: this.state._id,
+                province: this.state.province,
+                city: this.state.city,
+                county: this.state.county,
+                specificAddress: this.state.specificAddress
+            }
         });
     }
 

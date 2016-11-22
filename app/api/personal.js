@@ -15,8 +15,8 @@ router.get('/', function (req, res, next) {
         validateToken(token, function (err, isValidateToken, user) {
             if (err) return next(err);
             if (isValidateToken) {
-                const {username, email, phone, password, _id, province, city, specificAddress} = user;
-                return res.json({username, email, phone, password, _id, province, city, specificAddress});
+                const {username, email, phone, password, _id, province, city, county, specificAddress} = user;
+                return res.json({username, email, phone, password, _id, province, city, county, specificAddress});
             }
             return res.sendStatus(401);
         });
@@ -45,4 +45,36 @@ router.post('/:_id', function (req, res, next) {
     }
 });
 
+router.post('/address/:_id', function (req, res, next) {
+    const id = req.params._id;
+    const userAddress = req.body;
+    User.update({_id: id}, {
+        $set: {
+            province: userAddress.province,
+            city: userAddress.city,
+            county: userAddress.county,
+            specificAddress: userAddress.specificAddress,
+        }
+    }, function (err) {
+        if (err) return next(err);
+        return res.status(201).send('地址已存入数据库');
+    });
+});
+
+router.post('/deleteAddress/:_id', function (req, res, next) {
+    const id = req.params._id;
+    User.update({_id: id}, {
+        $set: {
+            province: 'noExist',
+            city: 'noExist',
+            county: 'noExist',
+            specificAddress: 'noExist'
+        }
+    }, function (err) {
+        if (err) return next(err);
+        res.status(201).send('地址已删除!');
+    });
+});
+
 export default router;
+

@@ -18,6 +18,7 @@ router.post('/', function (req, res, next) {
                     phone: userData.phone,
                     province:'noExist',
                     city:'noExist',
+                    county:'noExist',
                     specificAddress:'noExist'
                 });
                 // User.remove({},function (user,err) {

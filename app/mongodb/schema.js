@@ -7,6 +7,7 @@ const UserModel = new Schema({
     email: String,
     province:String,
     city:String,
+    county:String,
     specificAddress:String
 });
 
