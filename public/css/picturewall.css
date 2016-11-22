@@ -1,24 +1,84 @@
-.carousel {
-    height: 550px;
-    width: 90%;
-    margin-left: 5%;
-    margin-bottom: 60px;
+body {
+    padding: 20px;
 }
-.carousel .item {
-    height: 550px;
+
+#container {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    overflow: hidden;
 }
-.carousel .item img {
-    width: 100%;
+
+#list {
+    position: absolute;
+    z-index: 1;
+    width: 4200px;
+    height: 400px;
 }
-@media (max-width: 768px) {
-    .carousel {
-        height: 300px;
-        margin-bottom: 30px;
-    }
-    .carousel .item {
-        height: 300px;
-    }
-    .carousel img {
-        min-height: 300px;
-    }
+
+#list img {
+    float: left;
+    width: 600px;
+    height: 400px;
+}
+
+#buttons {
+    position: absolute;
+    left: 250px;
+    bottom: 20px;
+    z-index: 2;
+    height: 10px;
+    width: 100px;
+}
+
+#buttons span {
+    float: left;
+    margin-left: 5px;
+    width: 10px;
+    height: 10px;
+    border:1px solid #fff;
+    border-radius: 50%;
+    background: #333;
+    cursor: pointer;
+}
+
+#buttons span:focus {
+    outline: none;
+}
+#buttons .on {
+    background: white;
+}
+
+.arrow {
+    position: absolute;
+    top:180px;
+    z-index: 2;
+    display: none;
+    width: 40px;
+    height: 40px;
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 39px;
+    text-align: center;
+    color: #fff;
+    background-color: RGBA(0, 0, 0, .3);
+    cursor:pointer;
+}
+
+.arrow:hover {
+    background-color: RGBA(0, 0, 0, .7);
+    color: #fff;
+    text-decoration: none;
+}
+
+#container:hover .arrow {
+    display: block;
+}
+
+#prev {
+    left: 20px;
+}
+
+#next {
+    right: 10px;
 }

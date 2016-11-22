@@ -63,7 +63,7 @@ class Share extends React.Component {
             <Nav/>
             <h3 className="book-name">{this.state.name}</h3>
             <div>
-                {this.state.images.map(i => <img className="book-cover" key={i} src={i}/>)}
+                {this.state.images.map(i => <img className="img-responsive" key={i} src={i}/>)}
                 <ul className="book-details">
                     <li>定价：<img src="../pictures/yuan.png"/>{this.state.price}</li>
                     <li>作者：{this.state.author}</li>

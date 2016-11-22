@@ -108,9 +108,8 @@ class Publish extends React.Component {
     }
 
     _handleImageChange(event) {
-        const file = event.target.files[0];
         this.setState({
-            selectedImage: file
+            selectedImage: event.target.files[0]
         });
     }
 

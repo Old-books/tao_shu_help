@@ -2,8 +2,9 @@
 import express from 'express';
 import _ from 'lodash';
 import sha1 from 'sha1';
-import {validateToken, getUsernameFromToken, generateToken} from './cookies';
+import {validateToken, getUsernameFromToken} from './cookies';
 import {User, Book, user_book, Cart} from '../mongodb/schema';
+
 const router = express.Router();
 
 router.post('/', function (req, res, next) {
@@ -22,6 +23,10 @@ router.post('/', function (req, res, next) {
         }
     });
 });
+
+function generateToken(username, password) {
+    return username + ':' + sha1(password);
+}
 
 router.get('/current', function (req, res, next) {
     const token = req.cookies['token'];
