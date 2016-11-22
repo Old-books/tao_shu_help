@@ -152,7 +152,6 @@ class Publish extends React.Component {
                 images: this.state.uploadedImages,
                 count: this.state.count,
                 price: this.state.price,
-                tags: [this.state.name, this.state.author, this.state.press],
                 state: true
             })
             .end((err, res) => {

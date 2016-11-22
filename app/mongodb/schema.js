@@ -15,7 +15,6 @@ const publishBookModel = new Schema({
     images: [String],
     count: Number,
     price: Number,
-    tags: [String],
     state: Boolean//是否出售
 });
 
