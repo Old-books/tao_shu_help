@@ -54,7 +54,7 @@ class Address extends React.Component {
                         <input className="address form-control" value={this.state.province} readOnly="true"/>
                         <label className="address-city">城市：</label>
                         <input className="address form-control" value={this.state.city} readOnly="true"/>
-                        <label className="address-county">城市：</label>
+                        <label className="address-county">地区：</label>
                         <input className="address form-control" value={this.state.county} readOnly="true"/>
                         <label className="address-specificAddress">具体地址：</label>
                         <input className="address form-control" value={this.state.specificAddress} readOnly="true"/>
