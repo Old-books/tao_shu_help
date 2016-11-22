@@ -20,7 +20,6 @@ function validateToken(token, callback) {
         }
     });
 }
-
 function getUsernameFromToken(token) {
     const index = _.lastIndexOf(token, ':');
     return token.substring(0, index);
