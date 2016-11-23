@@ -2,13 +2,12 @@
 import express from 'express';
 import _ from 'lodash';
 import sha1 from 'sha1';
-import {validateToken, getUsernameFromToken} from './cookies';
+import {validateToken, getUsernameFromToken,generateToken} from './cookies';
 import {User, Book, user_book,Cart} from '../mongodb/schema';
 const router = express.Router();
 
 router.post('/', function (req, res, next) {
-    const username = req.body.username;
-    const password = req.body.password;
+    const {username,password} = req.body;
     console.log("name: " + username + "  password: " + password);
 /*    Cart.remove({
     }, function (e) {
@@ -31,17 +30,19 @@ router.post('/', function (req, res, next) {
         else console.log('userbook  删除成功');
     })*/
     if (_.isEmpty(username) || _.isEmpty(password)) {
-        console.log("empty");
         return res.status(400).send('数据不能为空');
     }
     User.findOne({username: username}, function (err, user) {
+        console.log("user: "+user);
         if (err) return next(err);
         if (user === null || user.password != password) {
             console.log("wrong " + user);
             res.status(401).send("username or password wrong");
         }
         else {
+            console.log("login success");
             res.cookie('token', generateToken(username, password));
+            console.log("login success");
             res.status(201).send('login success');
         }
     });
@@ -63,8 +64,5 @@ router.delete('/current', function (req, res) {
     res.cookie('token', ':').sendStatus(200);
 });
 
-function generateToken(username, password) {
-    return username + ':' + sha1(password);
-}
 export default router;
 // {maxAge: 30*1000}

@@ -6,6 +6,7 @@ import ItemNav from './Item.jsx';
 import Picture from './picturewall.jsx';
 import TowCollections from './doublelinebooks.jsx';
 import Brief from './briefnav.jsx';
+import Buttom from './buttom.jsx';
 import 'jquery';
 import "bootstrap-webpack";
 
@@ -17,7 +18,9 @@ class Home extends Component {
             <Picture/>
             <TowCollections/>
             <Brief/>
+            <Buttom/>
         </div>
     }
 }
+
 export default Home;

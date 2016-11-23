@@ -5,6 +5,7 @@ import request from 'superagent';
 import Nav from './navigation.jsx';
 import _ from 'lodash';
 import '../css/publish.css';
+import Buttom from './buttom.jsx';
 
 class Publish extends React.Component {
     constructor(props) {
@@ -49,7 +50,7 @@ class Publish extends React.Component {
                     {this.state.uploadedImages.map(i => <img className="img-responsive" key={i} src={i}/>)}
                     <input type="file" id="images" className="upload-images"
                            accept=".jpg,.jpeg,.png,.gif" required="required"
-                           onChange={(e)=>this._handleImageChange(e)}/>
+                           onChange={(e) => this._handleImageChange(e)}/>
                     <button className="upload-images-button" onClick={this._onImgUpload.bind(this)}>上传
                     </button>
                     <div>
@@ -74,6 +75,10 @@ class Publish extends React.Component {
                         </button>
                     </div>
                 </form>
+            </div>
+
+            <div>
+                <Buttom/>
             </div>
         </div>
     }
@@ -109,7 +114,7 @@ class Publish extends React.Component {
         });
     }
 
-    _onImgUpload(event) {
+    _onImgUpload() {
         const formData = new FormData();
         formData.append('image', this.state.selectedImage);
         request.post('/api/uploaded-images')
@@ -123,13 +128,13 @@ class Publish extends React.Component {
             })
     }
 
-    _addCount(event) {
+    _addCount() {
         this.setState({
             count: this.state.count + 1
         });
     }
 
-    _reduceCount(event) {
+    _reduceCount() {
         if (this.state.count < 1) {
             return false;
         } else {
@@ -152,7 +157,6 @@ class Publish extends React.Component {
                 images: this.state.uploadedImages,
                 count: this.state.count,
                 price: this.state.price,
-                tags: [this.state.name, this.state.author, this.state.press],
                 state: true
             })
             .end((err, res) => {

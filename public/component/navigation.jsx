@@ -36,14 +36,14 @@ class Nav extends React.Component {
             {this.state.isLongIn ?
                 <div className="check-login">
                     <img src="../../pictures/cart.png" className="cart-picture"/>
-                    <Link to="/cart" className="cart-button">购物车</Link>
+                    <Link to="/cart" className="cartButton">购物车</Link>
                     <img src="../../pictures/own-center.png" className="own-center-picture"/>
                     <Link to="/personal" className="own-center-button">个人中心</Link>
                     <Link to='' className="quit" onClick={this._dropUp.bind(this)}>退出</Link>
                 </div> :
                 <div className="check-login">
                     <img src="../../pictures/login.png" className="cart-picture"/>
-                    <Link to="/login" className="cart-button">登录</Link>
+                    <Link to="/login" className="cartButton">登录</Link>
                     <img src="../../pictures/register.png" className="own-center-picture"/>
                     <Link to="/register" className="own-center-button">注册</Link>
                 </div>

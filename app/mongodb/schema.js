@@ -4,7 +4,11 @@ const UserModel = new Schema({
     username: String,
     password: String,
     phone: String,
-    email: String
+    email: String,
+    province:String,
+    city:String,
+    county:String,
+    specificAddress:String
 });
 
 const publishBookModel = new Schema({
@@ -15,7 +19,6 @@ const publishBookModel = new Schema({
     images: [String],
     count: Number,
     price: Number,
-    tags: [String],
     state: Boolean//是否出售
 });
 
