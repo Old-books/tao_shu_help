@@ -1,4 +1,4 @@
-'use strict';
+    'use strict';
 import express from 'express';
 import {Cart, Book} from '../mongodb/schema';
 import {getUsernameFromToken, findUser} from './cookies';
@@ -104,7 +104,7 @@ router.post('/get_message', function (req, res, next) {
                         if (book_message.length === id_Cart.length) {
                            let deletebook=deleteRepeat(book_message);
                             console.log("publisher:  "+deletebook[0].publisher);
-                            return res.status(201).json({book_message:deletebook,id_user:id_user});
+                            return res.status(201).json({book_message:deletebook,id_user:id_user,username:username});
                         }
                     });
                 }

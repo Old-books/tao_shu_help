@@ -20,6 +20,7 @@ class Login extends React.Component {
             })
             .end((err, res) => {
                 if (err) {
+                    alert("error");
                     if (res.statusCode === 400 || res.statusCode === 401) {
                         alert(res.text);
                         hashHistory.push('/login');
@@ -27,6 +28,7 @@ class Login extends React.Component {
                     return console.error(err);
                 }
                 if (res.statusCode === 201) {
+                    console.log("success");
                     alert(res.text);
                     hashHistory.push('/index');
                 }
