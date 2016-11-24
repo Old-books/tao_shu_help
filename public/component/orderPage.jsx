@@ -2,13 +2,18 @@ import React from 'react';
 import {render} from 'react-dom';
 import request from 'superagent';
 import '../css/order.css';
-
+import _ from 'lodash';
+import {hashHistory, Link} from 'react-router';
 class Payment extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            password: ""
-        }
+            pay_list: this.props.location.state.pay_list,
+            payPrice: this.props.location.state.all_price,
+            password: '',
+            custom:this.props.location.state.custom
+        };
+        console.log(this.state.custom);
     }
 
     _overlay() {
@@ -34,24 +39,11 @@ class Payment extends React.Component {
         event.preventDefault();
         let e = this.refs.overlay;
         e.style.visibility = "hidden";
-        let buyedBooks = [];
-        let buyedCount = [];
-        let seller = [];
-        let bookname = this.refs.bookName;
-        buyedBooks.push(bookname.innerHTML);
-        let bookCount = this.refs.bookCount;
-        buyedCount.push(bookCount.innerHTML);
-        let customName = this.refs.custom;
-        let custom = customName.innerHTML;
-        let publisher = this.refs.publisher;
-        seller.push(publisher.innerHTML);
         request
             .post("/api/order")
             .send({
-                custom: custom,
-                buyedBook: buyedBooks,
-                buyedCount: buyedCount,
-                seller: seller,
+                custom: this.state.custom,
+                pay_list: this.state.pay_list,
                 password: this.state.password
             })
             .end((err, res) => {
@@ -69,16 +61,25 @@ class Payment extends React.Component {
 
 
     render() {
+        let i = 0;
+        const bookList = _.map(this.state.pay_list, ({name, images, price, _id, count, publisher}) =>
+            <div key={_id + i++}>
+                <Book_pay list={
+                    {
+                        publisher: publisher,
+                        name: name,
+                        images: images,
+                        price: price,
+                        _id: _id,
+                        count: count,
+                        all_price: this.state.all_price
+                    }} ref={"book_list"}/>
+            </div>);
         return (
             <div>
-                <ul>
-                    <li>顾客:<a ref="custom">赵悦妮</a></li>
-                    <li>商品名称：<a ref="bookName">c语言</a></li>
-                    <li>商品数量：<a ref="bookCount">3</a></li>
-                    <li>发布人：<a ref="publisher">nike</a></li>
-                    <li>小计：<a ref="subTotal">30</a>元</li>
-                    <li>总计：<a ref="total">30</a>元</li>
-                </ul>
+                顾客:{this.state.custom}
+                {bookList}
+                <br/>
                 <button typeof="button" onClick={this._overlay.bind(this)} id="account">结算</button>
                 <div id="modal-overlay" ref="overlay">
                     <div id="popup">
@@ -96,5 +97,34 @@ class Payment extends React.Component {
         );
     }
 }
+class Book_pay extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            _id: this.props.list._id,
+            publisher: this.props.list.publisher,
+            name: this.props.list.name,
+            images: this.props.list.images,
+            price: this.props.list.price,
+            count: this.props.list.count,
+            all_price: this.props.list.price * this.props.list.count,
+        };
 
+    }
+
+    render() {
+        let price = this.state.price * this.state.count;
+        return <div>
+            <div className="pic">
+                <Link to={"/share/" + this.state._id}><img src={this.state.images} width="180px" height="160px"/></Link>
+            </div>
+            <ul>
+                <li>商品名称：<a >{this.state.name}</a></li>
+                <li>商品数量：<a>{this.state.count}</a></li>
+                <li>发布人：<a >{this.state.publisher}</a></li>
+                <li>小计：<a>{price}</a>元</li>
+            </ul>
+        </div>;
+    }
+}
 export default Payment;
