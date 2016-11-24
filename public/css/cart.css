@@ -1,12 +1,12 @@
+
 .books{
     height: 80px;
-    /*background-color: #a6e1ec;*/
     width: 70%;
 }
 .photo{
     height: 200px;
     width: 150px;
-}
+}/*
 .book-item{
     padding-top: 15px;
     color: #2aabd2;
@@ -22,3 +22,4 @@
  label{
     font-size: 20px;
 }
+*/

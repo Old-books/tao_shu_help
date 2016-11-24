@@ -21,7 +21,10 @@ class Book_cart extends React.Component {
                 count: 1,
 
             }],
-            all_price: 0
+            all_price: 0,
+            status: true,
+            message: '',
+            username:''
         };
     }
 
@@ -46,8 +49,14 @@ class Book_cart extends React.Component {
                             }
                         }
                         if (res.statusCode === 200) {
-                            alert(res.text);
-                            hashHistory.push('/index');
+                            this.setState({
+                                status: false,
+                                message: res.text
+                            });
+                            console.log("是否为空:" + (this.state.status === true));
+                            console.log("message: " + this.state.message);
+                            //alert(res.text);
+                            // hashHistory.push('/index');
                         }
                         if (res.statusCode === 201) {
 
@@ -67,8 +76,8 @@ class Book_cart extends React.Component {
                                 });
                                 element_id.push(id);
                             });
-                            // console.log(Book_list);
-                            return (this.setState({cart_book: Book_list}));
+                            console.log(res.body.username);
+                            return (this.setState({cart_book: Book_list,username:res.body.username}));
                         }
                     });
             });
@@ -76,6 +85,28 @@ class Book_cart extends React.Component {
 
     changePrice() {
         this.setState({all_price: parseInt(all_price)});
+    }
+
+    intoPayFor() {
+        let pay_list = [];
+        _.map(this.state.cart_book, ({name, images, price, _id, count, publisher}) => {
+            if (_.isEqual(isCheck(_id), 'false')) {
+                pay_list.push({
+                    name: name, images: images, price: price, _id: _id, count: count, publisher: publisher
+                })
+            }
+        });
+        console.log("pay_list: " + pay_list[0].name);
+        console.log("pay_list: " + pay_list);
+        const {history} =this.props;
+        history.push({
+            pathname: "/order",
+            state: {
+                pay_list: pay_list,
+                payPrice: all_price,
+                custom:this.state.username
+            }
+        });
     }
 
     render() {
@@ -93,18 +124,24 @@ class Book_cart extends React.Component {
                         all_price: this.state.all_price
                     }} ref={"book_list"}/>
             </div>);
-
-        return <div className="books">
-            {bookList}
+        let isEmpty =
             <div>
-                <input type="button" value='计算总价钱' onClick={this.changePrice.bind(this)}/>
-                <br/>
-                <Link to="/order">进入支付</Link>
-            </div>
-            <div className="total">
-                <h3 id="count_price">{this.state.all_price}</h3>
-            </div>
-        </div>;
+                <h3><Link to="/index">{this.state.message}</Link></h3>
+            </div>;
+        return <div>
+            {this.state.status === true ?
+                <div className="books">
+                    {bookList}
+                    <br/>
+                    <div className="total">
+                        合计:<h3 id="count_price">{this.state.all_price}</h3>
+                    </div>
+                    <div>
+                        <br/>
+                        <button onClick={this.intoPayFor.bind(this)}>结算</button>
+                    </div>
+                </div> : isEmpty}
+        </div>
     }
 }
 

@@ -167,6 +167,7 @@ class PersonalCenter extends React.Component {
                                                required="required" pattern="^.{6,18}$"
                                                value={this.state.password}
                                                onChange={this._onPasswordChange.bind(this)}/>
+
                                     </div>
                                     {this.state.status === false ? <div></div> :
                                         <div className="form-group">
@@ -197,6 +198,7 @@ class PersonalCenter extends React.Component {
                                                 onClick={this._onClickModify.bind(this)}>
                                             修改
                                         </button>
+
                                         <button type="submit" className="btn btn-primary"
                                                 onClick={this._onSubmit.bind(this)}>
                                             提交
@@ -225,6 +227,7 @@ class PersonalCenter extends React.Component {
                         </div>
 
                     </div>
+
                 </div>
             </div>
         )

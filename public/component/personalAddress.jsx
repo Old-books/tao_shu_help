@@ -68,7 +68,7 @@ class Address extends React.Component {
                                 </button>
                             </Link>
                         </div>
-                    </div> : addAddress}
+                    </div> :addAddress}
             </div>);
     }
 }

@@ -50,7 +50,7 @@ class Publish extends React.Component {
                     {this.state.uploadedImages.map(i => <img className="img-responsive" key={i} src={i}/>)}
                     <input type="file" id="images" className="upload-images"
                            accept=".jpg,.jpeg,.png,.gif" required="required"
-                           onChange={(e)=>this._handleImageChange(e)}/>
+                           onChange={(e) => this._handleImageChange(e)}/>
                     <button className="upload-images-button" onClick={this._onImgUpload.bind(this)}>上传
                     </button>
                     <div>
@@ -76,6 +76,7 @@ class Publish extends React.Component {
                     </div>
                 </form>
             </div>
+
             <div>
                 <Buttom/>
             </div>
