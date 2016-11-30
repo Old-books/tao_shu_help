@@ -9,11 +9,11 @@ class Payment extends React.Component {
         super(props);
         this.state = {
             pay_list: this.props.location.state.pay_list,
-            payPrice: this.props.location.state.all_price,
+            payPrice: this.props.location.state.payPrice,
             password: '',
-            custom:this.props.location.state.custom
+            custom: this.props.location.state.custom
         };
-        console.log(this.state.custom);
+        console.log("pay: " + this.state.payPrice);
     }
 
     _overlay() {
@@ -54,6 +54,7 @@ class Payment extends React.Component {
                     return console.log(err);
                 }
                 if (res.statusCode === 201) {
+                    hashHistory.push('/index');
                     return alert(res.text);
                 }
             })
@@ -80,7 +81,10 @@ class Payment extends React.Component {
                 顾客:{this.state.custom}
                 {bookList}
                 <br/>
-                <button typeof="button" onClick={this._overlay.bind(this)} id="account">结算</button>
+                <div>
+                    <button typeof="button" onClick={this._overlay.bind(this)} id="account">结算:</button>
+                    {this.state.payPrice}
+                </div>
                 <div id="modal-overlay" ref="overlay">
                     <div id="popup">
                         <a><img src="../pictures/false.png" id="close" onClick={this._closeWindow.bind(this)}/></a>

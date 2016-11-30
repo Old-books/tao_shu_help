@@ -96,8 +96,6 @@ class Book_cart extends React.Component {
                 })
             }
         });
-        console.log("pay_list: " + pay_list[0].name);
-        console.log("pay_list: " + pay_list);
         const {history} =this.props;
         history.push({
             pathname: "/order",
