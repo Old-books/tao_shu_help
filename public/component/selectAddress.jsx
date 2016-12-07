@@ -40,14 +40,31 @@ class AddressItem extends React.Component {
                     specificAddress: this.state.specificAddress
                 })
                 .end((err, res) => {
-                    if(err){
+                    if (err) {
                         if (res.statusCode === 400) {
                             alert("添加有问题");
                         }
                     }
                     if (res.statusCode === 201 && res.text === '地址已存入数据库') {
-                        alert("添加成功!");
-                        hashHistory.push('/personal');
+                        /* hash	返回一个URL的锚部分
+                         host	返回一个URL的主机名和端口
+                         hostname	返回URL的主机名
+                         href	返回完整的URL
+                         pathname	返回的URL路径名。
+                         port	返回一个URL服务器使用的端口号
+                         protocol	返回一个URL协议
+                         search*/
+                       /* let thisURL = location.hash;
+                        console.log("hash    :   " + thisURL);
+                        console.log("host    :   " + location.host);
+                        console.log("pathname    :   " + location.pathname);
+                        console.log("search    :   " + location.search);
+                        console.log("href:" + location.href);
+                        let startPos = thisURL.toString().indexOf("#");
+                        let endPos = thisURL.toString().indexOf("?");
+                        console.log("window.location:" + startPos + "   " + endPos + "   " + thisURL.toString().substring(startPos+1, endPos));
+                         alert("添加成功!");*/
+                        hashHistory.push('/');
                     }
                 });
         }
@@ -137,15 +154,17 @@ class AddressItem extends React.Component {
                            value={this.state.specificAddress} onChange={this._onSpecificAddressChange.bind(this)}/>
                 </div>
                 <div className="change">
+
                     <button type="submit" className="btn btn-primary"
                             onClick={this._onSubmit.bind(this)}>
                         提交
                     </button>
-                    <Link to = '/personal'>
-                        <button type="submit" className="btn btn-primary">
-                            返回
-                        </button>
-                    </Link>
+
+                    {/*  <Link to = '/personal'>
+                     <button type="submit" className="btn btn-primary">
+                     返回
+                     </button>
+                     </Link>*/}
                 </div>
             </form>
         </div>

@@ -16,7 +16,6 @@ router.post('/', function (req, res, next) {
     }], i = 0;
     let books = [];
     Book.find({}, function (err, people_book) {
-        console.log("people: "+people_book);
         if (err) return next(err);
         _.map(people_book, function ({
             author, name, press, images, count, price, state, _id

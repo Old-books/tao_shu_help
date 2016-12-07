@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import request from 'superagent';
 import '../css/order.css';
 import _ from 'lodash';
+import Address from './personalAddress.jsx';
 import {hashHistory, Link} from 'react-router';
 class Payment extends React.Component {
     constructor(props) {
@@ -11,9 +12,9 @@ class Payment extends React.Component {
             pay_list: this.props.location.state.pay_list,
             payPrice: this.props.location.state.payPrice,
             password: '',
-            custom: this.props.location.state.custom
+            custom: this.props.location.state.custom,
+            id_user: this.props.location.state.id_user
         };
-        console.log("pay: " + this.state.payPrice);
     }
 
     _overlay() {
@@ -44,7 +45,8 @@ class Payment extends React.Component {
             .send({
                 custom: this.state.custom,
                 pay_list: this.state.pay_list,
-                password: this.state.password
+                password: this.state.password,
+                id_user: this.state.id_user
             })
             .end((err, res) => {
                 if (err) {
@@ -78,6 +80,9 @@ class Payment extends React.Component {
             </div>);
         return (
             <div>
+                <div>
+                    <Address/>
+                </div>
                 顾客:{this.state.custom}
                 {bookList}
                 <br/>

@@ -1,4 +1,4 @@
-    'use strict';
+'use strict';
 import express from 'express';
 import {Cart, Book} from '../mongodb/schema';
 import {getUsernameFromToken, findUser} from './cookies';
@@ -19,26 +19,20 @@ router.post('/', function (req, res, next) {
         if (err) next(err);
         if (user) {
             id_user = user._id;
-            console.log("用户的id :" + id_user);
             Cart.findOne({id_user: id_user}, function (err, cart) {
                 if (err) next(err);
-                // console.log("usercart: " + cart);
                 if (cart) {
-                    //console.log("该用户存在进入更新: " + id_user);
                     Cart.update({id_user: id_user}, {$push: {id_books: id_book}}, function (err, updatecart) {
                         if (err) next(err);
                         return res.status(201).send("已经加入购物车!");
-                        //console.log(updatecart);
                     })
                 }
                 else {
-                    //console.log(id_book + " 书没有,现在存入数据库");
                     new Cart({
                         id_user: id_user, id_books: id_book
-                    }).save(function (err, savacart) {
+                    }).save(function (err) {
                         if (err) next(err);
                         return res.status(201).send("已经加入购物车");
-                        //console.log("Cart: " + savacart);
                     });
                 }
 
@@ -49,27 +43,22 @@ router.post('/', function (req, res, next) {
 
 
 });
-router.post('/delete',function (req,res,next) {
-   console.log("into car delete");
-   let id=req.body._id;
-   let id_user=req.body.id_user;
-   Cart.findOne({id_user:id_user},function (err,car) {
-       if(err) next(err);
-       if(car) {
-           let id_books = car.id_books;
-           let _id = [id];
-           let new_books = _.difference(id_books, _id);
-           console.log('car:  ' + car);
-           console.log(new_books);
-           Cart.update({id_user: id_user}, {$set: {id_books: new_books}}, function (err, newcar) {
-               if (err) next(err);
-               console.log("new car " + newcar);
-               return res.status(201);
-           });
-       }
-       else   return res.status(401);
-   });
-   console.log("/delete id: "+id_user);
+router.post('/delete', function (req, res, next) {
+    let id = req.body._id;
+    let id_user = req.body.id_user;
+    Cart.findOne({id_user: id_user}, function (err, car) {
+        if (err) next(err);
+        if (car) {
+            let id_books = car.id_books;
+            let _id = [id];
+            let new_books = _.difference(id_books, _id);
+            Cart.update({id_user: id_user}, {$set: {id_books: new_books}}, function (err, newcar) {
+                if (err) next(err);
+                return res.status(201);
+            });
+        }
+        else   return res.status(401);
+    });
 });
 router.post('/get_message', function (req, res, next) {
     let id_Cart = [];
@@ -82,15 +71,13 @@ router.post('/get_message', function (req, res, next) {
     }
     var id_user = '';
     let username = getUsernameFromToken(token);
-    //   console.log("username" + username);
     findUser(username, function (err, user) {
         if (err) next(err);
         if (user) {
             id_user = user._id;
             Cart.findOne({id_user: id_user}, function (err, cart) {
                 if (err) next(err);
-                if (cart) {
-                    console.log("cart : " + cart);
+                if (cart && (cart.id_books.length != 0)) {
                     _.map(cart.id_books, function (id_book) {
                         if (id_book) {
                             id_Cart.push(id_book);
@@ -102,9 +89,12 @@ router.post('/get_message', function (req, res, next) {
                     getBook(id_Cart, function (book_message, err) {
                         if (err) next(err);
                         if (book_message.length === id_Cart.length) {
-                           let deletebook=deleteRepeat(book_message);
-                            console.log("publisher:  "+deletebook[0].publisher);
-                            return res.status(201).json({book_message:deletebook,id_user:id_user,username:username});
+                            let deletebook = deleteRepeat(book_message);
+                            return res.status(201).json({
+                                book_message: deletebook,
+                                id_user: id_user,
+                                username: username
+                            });
                         }
                     });
                 }
@@ -118,7 +108,6 @@ router.post('/get_message', function (req, res, next) {
 });
 function getMessage(id, callback) {
     Book.findOne({_id: id}, function (err, book) {
-        console.log("book~~~~~~~~~"+book);
         callback(book, null);
     });
 }
@@ -128,11 +117,12 @@ function getBook(id_Cart, callback) {
         getMessage(id, function (book_message, err) {
             if (err) next(err);
             message.push({
-                publisher:book_message.publisher,
+                publisher: book_message.publisher,
                 name: book_message.name,
                 images: book_message.images[0],
                 price: book_message.price,
-                id: book_message._id
+                id: book_message._id,
+                book_count: book_message.count
             });
             callback(message, null);
         })
@@ -141,38 +131,36 @@ function getBook(id_Cart, callback) {
 }
 function deleteRepeat(book_message) {
 
-    let book=[{
-        publisher:book_message[0].publisher,
-        name:book_message[0].name,
-        images:book_message[0].images,
+    let book = [{
+        publisher: book_message[0].publisher,
+        name: book_message[0].name,
+        images: book_message[0].images,
         price: book_message[0].price,
         id: book_message[0].id,
-        count:1
+        book_count: book_message[0].book_count,
+        count: 1
     }];
-    console.log("publisher:  "+book_message[0].publisher);
-    let k=1;
-    for(let i=1;i<book_message.length;i++)
-    {
-        let flage=true;
-       for(let j=0;j<book.length;j++)
-       {
-           if(_.isEqual(book[j].id,book_message[i].id)===true)
-           {
-               flage=false;
-               book[j].count+=1;break;
-           }
-       }
-       if(flage===true)
-       {
-           book[k++]={
-               publisher:book_message[i].publisher,
-               name:book_message[i].name,
-               images:book_message[i].images,
-               price: book_message[i].price,
-               id: book_message[i].id,
-               count:1
-           };
-       }
+    let k = 1;
+    for (let i = 1; i < book_message.length; i++) {
+        let flage = true;
+        for (let j = 0; j < book.length; j++) {
+            if (_.isEqual(book[j].id, book_message[i].id) === true) {
+                flage = false;
+                book[j].count += 1;
+                break;
+            }
+        }
+        if (flage === true) {
+            book[k++] = {
+                publisher: book_message[i].publisher,
+                name: book_message[i].name,
+                images: book_message[i].images,
+                price: book_message[i].price,
+                id: book_message[i].id,
+                book_count: book_message[i].book_count,
+                count: 1
+            };
+        }
     }
     return book;
 }

@@ -3,11 +3,11 @@ import {render} from 'react-dom';
 import {Link, hashHistory} from 'react-router';
 import request from 'superagent';
 import _ from 'lodash';
-import Nav from './navigation.jsx';
 require('../css/cart.css');
 let id_user = '';
 let all_price = 0;
 let element_id = [];
+let pay_count = [];
 class Book_cart extends React.Component {
     constructor(props) {
         super(props);
@@ -18,13 +18,14 @@ class Book_cart extends React.Component {
                 images: '',
                 price: '',
                 _id: '',
+                book_count: '',
                 count: 1,
 
             }],
             all_price: 0,
             status: true,
             message: '',
-            username:''
+            username: ''
         };
     }
 
@@ -53,10 +54,6 @@ class Book_cart extends React.Component {
                                 status: false,
                                 message: res.text
                             });
-                            console.log("是否为空:" + (this.state.status === true));
-                            console.log("message: " + this.state.message);
-                            //alert(res.text);
-                            // hashHistory.push('/index');
                         }
                         if (res.statusCode === 201) {
 
@@ -64,7 +61,7 @@ class Book_cart extends React.Component {
                             console.log(res.body.id_user);
                             id_user = res.body.id_user;
                             _.map(res.body.book_message, function ({
-                                name, images, price, id, count, publisher
+                                name, images, price, id, count, publisher, book_count
                             }) {
                                 Book_list.push({
                                     publisher: publisher,
@@ -72,12 +69,12 @@ class Book_cart extends React.Component {
                                     images: images,
                                     price: price,
                                     _id: id,
-                                    count: count
+                                    count: count,
+                                    book_count: book_count
                                 });
                                 element_id.push(id);
                             });
-                            console.log(res.body.username);
-                            return (this.setState({cart_book: Book_list,username:res.body.username}));
+                            return (this.setState({cart_book: Book_list, username: res.body.username}));
                         }
                     });
             });
@@ -89,12 +86,23 @@ class Book_cart extends React.Component {
 
     intoPayFor() {
         let pay_list = [];
-        _.map(this.state.cart_book, ({name, images, price, _id, count, publisher}) => {
+        _.map(this.state.cart_book, ({name, images, price, _id, publisher, book_count}) => {
             if (_.isEqual(isCheck(_id), 'false')) {
-                pay_list.push({
-                    name: name, images: images, price: price, _id: _id, count: count, publisher: publisher
-                })
+                _.map(pay_count, ({ID, count}) => {
+                    if (ID == _id) {
+                        pay_list.push({
+                            name: name,
+                            images: images,
+                            price: price,
+                            _id: _id,
+                            count: count,
+                            publisher: publisher,
+                            book_count: book_count
+                        })
+                    }
+                });
             }
+
         });
         const {history} =this.props;
         history.push({
@@ -102,14 +110,16 @@ class Book_cart extends React.Component {
             state: {
                 pay_list: pay_list,
                 payPrice: all_price,
-                custom:this.state.username
+                custom: this.state.username,
+                id_user: id_user
             }
         });
+        pay_count = [];
     }
 
     render() {
         let i = 0;
-        const bookList = _.map(this.state.cart_book, ({name, images, price, _id, count, publisher}) =>
+        const bookList = _.map(this.state.cart_book, ({name, images, price, _id, count, publisher, book_count}) =>
             <div key={_id + i++}>
                 <Book_list list={
                     {
@@ -119,20 +129,22 @@ class Book_cart extends React.Component {
                         price: price,
                         _id: _id,
                         count: count,
+                        book_count: book_count,
                         all_price: this.state.all_price
-                    }} ref={"book_list"}/>
+                    }}/>
             </div>);
         let isEmpty =
             <div>
                 <h3><Link to="/index">{this.state.message}</Link></h3>
             </div>;
+
         return <div>
             {this.state.status === true ?
                 <div className="books">
                     {bookList}
                     <br/>
                     <div className="total">
-                        合计:<h3 id="count_price">{this.state.all_price}</h3>
+                        合计:<h3 id="count_price" ref="wq">{this.state.all_price}</h3>
                     </div>
                     <div>
                         <br/>
@@ -154,16 +166,18 @@ class Book_list extends React.Component {
             price: this.props.list.price,
             count: this.props.list.count,
             all_price: this.props.list.price * this.props.list.count,
+            book_count: this.props.list.book_count
         };
-
     }
 
     _addCount() {
         let element = document.getElementById(this.state._id + 'add');
         if (_.isEqual(element.getAttribute('is_Press'), 'true') || (element.getAttribute('is_Press') === null)) {
-            this.setState({
-                count: this.state.count + 1
-            });
+            if (this.state.count + 1 > this.state.book_count) alert("不好意思,数量超出库存了");
+            else
+                this.setState({
+                    count: this.state.count + 1
+                });
         }
     }
 
@@ -195,7 +209,6 @@ class Book_list extends React.Component {
                     }
                     if (res.statusCode === 201)
                         alert("删除成功");
-                    console.log("success /delete");
                 })
         }
     }
@@ -204,11 +217,15 @@ class Book_list extends React.Component {
         if (_.isEqual(isCheck(id), 'false')) {
             changeIs_True(id);
             all_price -= parseInt(this.state.price * this.state.count);
+            pay_count = _.filter(pay_count, ({ID}) => {
+                return id != ID
+            });
             document.getElementById('count_price').innerHTML = parseInt(all_price);
         }
         else {
             changeIs_False(id);
             all_price += parseInt(this.state.price * this.state.count);
+            pay_count.push({ID: id, count: this.state.count});
             document.getElementById('count_price').innerHTML = parseInt(all_price);
         }
 
@@ -233,7 +250,7 @@ class Book_list extends React.Component {
                 </div>
                 <label>数目:</label>
                 <img src="../pictures/add.png" id={this.state._id + 'add'} onClick={this._addCount.bind(this)}/>
-                <label className="book-count">{this.state.count}</label>
+                <label>{this.state.count}</label>
                 <img src="../pictures/reduce.png" id={this.state._id + 'reduce'}
                      onClick={this._reduceCount.bind(this)}/>
                 <button type="button" id={this.state._id + 'deleting'} onClick={this._onClickDelete.bind(this) }>

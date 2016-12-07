@@ -16,15 +16,11 @@ router.post('/', function (req, res, next) {
                     password: userData.password,
                     email: userData.email,
                     phone: userData.phone,
-                    province:'noExist',
-                    city:'noExist',
-                    county:'noExist',
-                    specificAddress:'noExist'
+                    province: 'noExist',
+                    city: 'noExist',
+                    county: 'noExist',
+                    specificAddress: 'noExist'
                 });
-                // User.remove({},function (user,err) {
-                // if(err) next(err);
-                //     console.log("re"+user);
-                // });
                 user.save(function (err) {
                     if (err) return next(err);
                     res.status(201).send('register success');
