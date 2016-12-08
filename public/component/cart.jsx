@@ -135,23 +135,24 @@ class Book_cart extends React.Component {
             </div>);
         let isEmpty =
             <div>
+                <img src="../../pictures/cart.png" width='100px' height="100px"/>
                 <h3><Link to="/index">{this.state.message}</Link></h3>
             </div>;
 
-        return <div>
+        return <div id="cont">
             {this.state.status === true ?
-                <div className="books">
-                    {bookList}
-                    <br/>
-                    <div className="total">
-                        合计:<h3 id="count_price" ref="wq">{this.state.all_price}</h3>
-                    </div>
-                    <div>
-                        <br/>
-                        <button onClick={this.intoPayFor.bind(this)}>结算</button>
+                <div >
+                    <div id="cart"><h1>购物车</h1></div>
+                    <div>{bookList}</div>
+                    <div id="all">
+                        <div>
+                            <div className="price">合计:</div>
+                            <div id="count_price" className="price">{this.state.all_price}元</div>
+                        </div>
+                        <button onClick={this.intoPayFor.bind(this)} className="button1">结算</button>
                     </div>
                 </div> : isEmpty}
-        </div>
+        </div>;
     }
 }
 
@@ -220,13 +221,13 @@ class Book_list extends React.Component {
             pay_count = _.filter(pay_count, ({ID}) => {
                 return id != ID
             });
-            document.getElementById('count_price').innerHTML = parseInt(all_price);
+            document.getElementById('count_price').innerHTML = parseInt(all_price) + '元';
         }
         else {
             changeIs_False(id);
             all_price += parseInt(this.state.price * this.state.count);
             pay_count.push({ID: id, count: this.state.count});
-            document.getElementById('count_price').innerHTML = parseInt(all_price);
+            document.getElementById('count_price').innerHTML = parseInt(all_price) + '元';
         }
 
     }
@@ -237,27 +238,29 @@ class Book_list extends React.Component {
 
     render() {
         let price = this.state.price * this.state.count;
-        return <div id={this.state._id + 'deleted'}>
-            <input type="checkbox" id={this.state._id} onClick={this.getPrice.bind(this)}/><br/>
-            卖家:{this.state.publisher}<br/>
-            <div className="pic">
-                <Link to={"/share/" + this.state._id}><img src={this.state.images} width="180px" height="160px"/></Link>
+        return <div className="book-list" id={this.state._id + 'deleted'}>
+            <div className="custom">
+                <input type="checkbox" className="check" id={this.state._id} onClick={this.getPrice.bind(this)}/>
+                卖&nbsp;家&nbsp;:&nbsp;{this.state.publisher}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" className="button2" id={this.state._id + 'deleting'}
+                        onClick={this._onClickDelete.bind(this) }>
+                    删除
+                </button>
             </div>
-            <div className="book-item">
-                <div className="book-name">
-                    书名:{this.state.name}<br/>
-                    单价:{this.state.price}<br/>
-                </div>
+            <div className="photo">
+                <Link to={"/share/" + this.state._id}><img src={this.state.images}/></Link>
+            </div>
+            <div className="book-name">
+                书名:{this.state.name}<br/>
+                单价:{this.state.price}元<br/>
                 <label>数目:</label>
                 <img src="../pictures/add.png" id={this.state._id + 'add'} onClick={this._addCount.bind(this)}/>
                 <label>{this.state.count}</label>
                 <img src="../pictures/reduce.png" id={this.state._id + 'reduce'}
                      onClick={this._reduceCount.bind(this)}/>
-                <button type="button" id={this.state._id + 'deleting'} onClick={this._onClickDelete.bind(this) }>
-                    删除
-                </button>
-                <div id="all">小计:{price}
-                </div>
+                <br/>
+                小计:{price}元
             </div>
         </div>;
     }

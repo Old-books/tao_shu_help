@@ -55,6 +55,10 @@ class Address extends React.Component {
                 }
             }
             if (res.statusCode === 201) {
+                event.preventDefault();
+                this.setState({
+                    addressState: false
+                });
                 /* let thisURL =location.hash;
                  console.log("hash    :   "+thisURL);
                  console.log("host    :   "+location.host);
@@ -66,7 +70,7 @@ class Address extends React.Component {
                  console.log("window.location:" + startPos + "   " + endPos + "   " + thisURL.toString().substring(startPos+1, endPos));
                  // alert("添加成功!");
                  hashHistory.push(thisURL.toString().substring(startPos+1, endPos));*/
-                hashHistory.push('/')
+              //  hashHistory.push('/')
             }
         });
 

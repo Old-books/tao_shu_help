@@ -1,25 +1,135 @@
 
-.books{
-    height: 80px;
-    width: 70%;
+div#cart {
+    margin-left: 50%;
+    text-shadow: 5px 5px 5px #ff0;
+    position: relative;
+    animation: myfirst 0.1s;
+    -webkit-animation: myfirst 5s; /* Safari and Chrome */
 }
-.photo{
+
+@keyframes myfirst {
+    0% {
+        left: 0;
+    }
+    25% {
+        left: 25%;
+    }
+    50% {
+        left: 50%;
+    }
+    75% {
+        left: 75%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+    0% {
+        left: 0;
+    }
+    25% {
+        left: 25%;
+    }
+    50% {
+        left: 50%;
+    }
+    75% {
+        left: 75%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.photo img {
+    max-width: 100%;
     height: 200px;
-    width: 150px;
-}/*
-.book-item{
-    padding-top: 15px;
-    color: #2aabd2;
+    border-radius: 4px;
+}
+div.photo{
+    width: 200px;
     height: 200px;
-    font-size: 30px;
+    -webkit-transition: width 2s, height 2s, -webkit-transform 2s; /* For Safari 3.1 to 6.0 */
+    transition: width 2s, height 2s, transform 2s;
+    float: left;
 }
-.book-item button{
-    margin-left: 3%;
-    font-size: 15px;
-    border-radius: 15px;
-    color: #0000ed;
+
+div.photo:hover {
+    width: 100px;
+    height: 100px;
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
 }
- label{
-    font-size: 20px;
+div.book-name
+{
+    width: 200px;
+    height: 100px;
+    float:left;
+    margin: 0;
+    font-size: 23px;
 }
-*/
+#all
+{
+    font-size: 23px;
+}
+.book-list
+{
+    width: 400px;
+    height: 300px;
+}
+.custom
+{
+    font-size: 23px;
+    height: 50px;
+}
+.price
+{
+  width: 60px;
+    height: 30px;
+    float: left;
+}
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+}
+
+.button1:hover {
+    background-color: #008CBA;
+    color: white;
+}
+.button2 {
+    background-color: white;
+    color: black;
+    border: 2px solid #e7e7e7;
+}
+
+.button2:hover {background-color: #e7e7e7;}
+#cont
+{
+    background-color: #F5F5F5;
+    background-size:100% 100%;
+}
+.check
+{
+
+    width: 20px;height: 20px;
+}
