@@ -36,7 +36,7 @@ class Share extends React.Component {
     }
 
     _onClickCart() {
-        return ()=> {
+        return () => {
             console.log(this.state.index);
             request.post('/api/current/cart')
                 .send({
@@ -63,7 +63,7 @@ class Share extends React.Component {
             <Nav/>
             <h3 className="share-book-name">{this.state.name}</h3>
             <div>
-                {this.state.images.map(i => <img className="book-cover" key={i} src={i}/>)}
+                <img className="book-cover" key={this.state.images[0]} src={this.state.images[0]}/>
                 <ul className="share-book-details">
                     <li>定价：<img src="../pictures/yuan.png"/>{this.state.price}</li>
                     <li>作者：{this.state.author}</li>

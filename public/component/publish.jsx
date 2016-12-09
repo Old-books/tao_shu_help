@@ -111,6 +111,7 @@ class Publish extends React.Component {
         this.setState({
             selectedImage: event.target.files[0]
         });
+
     }
 
     _onImgUpload() {
