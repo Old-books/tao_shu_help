@@ -11,8 +11,8 @@
 }
 
 .book{
-    height: 400px;
-    width: 250px;
+    height: 100%;
+    width: 100%;
 }
 .caption{
     height: 120px;
