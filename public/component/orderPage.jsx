@@ -137,7 +137,7 @@ class Book_pay extends React.Component {
                 发布人：{this.state.publisher}<br/>
                 小计：{price}元<br/>
             </div>
-        </div>;
+        </div>
     }
 }
 export default Payment;

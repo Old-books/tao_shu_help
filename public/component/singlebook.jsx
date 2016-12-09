@@ -28,13 +28,7 @@ class Single extends React.Component {
                 <div className="thumbnail">
                     <div className="pic"><Link to={"/share/" + this.state._id}><img className="book"
                                                                                     src={this.state.uploadedImages}/></Link>
-                    </div>
-                    <div className="caption">
-                        <h5><Link to={"/share/" + this.state._id}>{this.state.book_name}</Link></h5>
-                        <p>...</p>
-                        <p><a href="#" className="btn btn-primary" role="button">Button</a>
-                            <a href="#" className="btn btn-default" role="button">Button</a>
-                        </p>
+                        <h3>{this.state.book_name}</h3>
                     </div>
                 </div>
             </div>

@@ -61,19 +61,19 @@ class Share extends React.Component {
     render() {
         return <div>
             <Nav/>
-            <h3 className="book-name">{this.state.name}</h3>
+            <h3 className="share-book-name">{this.state.name}</h3>
             <div>
                 {this.state.images.map(i => <img className="book-cover" key={i} src={i}/>)}
-                <ul className="book-details">
+                <ul className="share-book-details">
                     <li>定价：<img src="../pictures/yuan.png"/>{this.state.price}</li>
                     <li>作者：{this.state.author}</li>
                     <li>出版社：{this.state.press}</li>
                     <li>数量：{this.state.count}</li>
                 </ul>
-                <button type="button" onClick={this._onClickCart()} className="add-cart">加入购物车
+                <button type="button" onClick={this._onClickCart()} className="share-add-cart">加入购物车
                 </button>
                 <Link to={'/connect/' + this.props.params.id}>
-                    <button className="connect-owner">联系卖家</button>
+                    <button className="share-connect-owner">联系卖家</button>
                 </Link>
             </div>
         </div>;
