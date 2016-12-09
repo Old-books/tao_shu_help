@@ -4,7 +4,7 @@ import AddressItem from './selectAddress.jsx';
 import My_address from './myAddress.jsx';
 import {hashHistory, Link} from 'react-router';
 require('../css/personAddress.css');
-
+import Nav from './navigation.jsx';
 class Address extends React.Component {
     constructor(props) {
         super(props);
@@ -56,6 +56,9 @@ class Address extends React.Component {
             </button>;
         return (
             <div>
+                <div>
+                    <Nav/>
+                </div>
                 <h3>管理地址</h3>
                 {(this.state.province != 'noExist' && this.state.city != 'noExist' && this.state.specificAddress != 'noExist') ?
                     <div>
