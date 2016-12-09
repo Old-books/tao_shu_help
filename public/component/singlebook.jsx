@@ -24,18 +24,22 @@ class Single extends React.Component {
 
     render() {
         return <div>
-            <div className="col-sm-6 col-md-3">
-                <div className="thumbnail">
-                    <div className="pic"><Link to={"/share/" + this.state._id}><img className="book"
-                                                                                    src={this.state.uploadedImages}/></Link>
-                        <ul className="singlebook-list">
-                            <li><Link to={"/share/" + this.state._id}
-                                  className="singlebook-detail">{this.state.book_name}</Link></li>
-                            <li className="singlebook-price"><img src="../pictures/yuan.png"/>{this.state.price}</li>
-                        </ul>
+            {this.state.author === '' ?
+                <div></div> :
+                <div className="col-sm-6 col-md-3">
+                    <div className="thumbnail">
+                        <div className="pic"><Link to={"/share/" + this.state._id}><img className="book"
+                                                                                        src={this.state.uploadedImages}/></Link>
+                            <ul className="singlebook-list">
+                                <li><Link to={"/share/" + this.state._id}
+                                          className="singlebook-detail">{this.state.book_name}</Link></li>
+                                <li className="singlebook-price"><img src="../pictures/yuan.png"/>{this.state.price}
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         </div>
     }
 }
