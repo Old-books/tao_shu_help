@@ -1,28 +1,36 @@
 import React, {Component} from 'react';
-import {render} from 'react-dom';
-import {Link} from 'react-router';
+
 import '../css/picturewall.css';
-class Picture extends React.Component {
+class Slider extends React.Component {
     render() {
         return (
-            <div id="container">
-                <div id="list" style={{left:-600 + 'px'}}>
-                    <img src="../pictures/three.jpg"/>
-                    <img src="../pictures/one.jpg"/>
-                    <img src="../pictures/two.jpg"/>
-                    <img src="../pictures/three.jpg"/>
-                    <img src="../pictures/one.jpg"/>
+            <div id="myCarousel" className="carousel slide">
+                <ol className="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+                <div className="carousel-inner">
+                    <div className="item active">
+                        <img src="../pictures/one.jpg" alt="First slide" className="slider-image"/>
+                    </div>
+                    <div className="item">
+                        <img src="../pictures/two.jpg" alt="Second slide" className="slider-image"/>
+                    </div>
+                    <div className="item">
+                        <img src="../pictures/bk.jpg" alt="Third slide" className="slider-image"/>
+                    </div>
                 </div>
-                <div id="buttons">
-                    <span tabindex="1" class="on"></span>
-                    <span tabindex="2"></span>
-                    <span tabindex="3"></span>
-                </div>
-                <a href="javascript:;" id="prev" className="arrow">&lt;</a>
-                <a href="javascript:;" id="next" className="arrow">&gt;</a>
+
+                <a className="carousel-control left" href="#myCarousel"
+                   data-slide="prev">&lsaquo;
+                </a>
+                <a className="carousel-control right" href="#myCarousel"
+                   data-slide="next">&rsaquo;
+                </a>
             </div>
-        );
+        )
     }
 }
 
-export default Picture;
+export default Slider;

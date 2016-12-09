@@ -9,7 +9,6 @@ import Book_cart from './component/cart.jsx';
 import PersonalCenter from './component/personal-page.jsx';
 import Connect from './component/connect.jsx';
 import TowCollections from './component/doublelinebooks.jsx';
-import Brief from './component/briefnav.jsx';
 import orderPage from './component/orderPage.jsx';
 import SearchPage from './component/search.jsx';
 import Address from './component/personalAddress.jsx';
@@ -33,7 +32,6 @@ const router = <Router history={hashHistory}>
         <Route path='/personal' component={PersonalCenter}/>
         <Route path='/connect/:id' component={Connect}/>
         <Route path='/TowCollections' component={TowCollections}/>
-        <Route path='/Brief' component={Brief}/>
         <Route path='/cart' component={Book_cart}/>
         <Route path='/order' component={orderPage}/>
         <Route path='/search/:content' component={SearchPage}/>
