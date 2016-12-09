@@ -1,24 +1,24 @@
-.thumbnail{
+.thumbnail {
     height: 300px;
     width: 250px;
     margin-left: 10px;
     margin-top: 10px;
-    /*background-color: #0000ed;*/
-}
-.pic{
-    padding-left: 20px;
-    /*background-color: #419641;*/
 }
 
-.book{
+.pic {
+    padding-left: 20px;
+}
+
+.book {
     height: 100%;
     width: 100%;
 }
-.caption{
+
+.caption {
     height: 120px;
     margin-left: 50px;
-    /*background-color: #dca7a7;*/
 }
+
 .singlebook-list {
     list-style: none;
 }
