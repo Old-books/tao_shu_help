@@ -28,7 +28,11 @@ class Single extends React.Component {
                 <div className="thumbnail">
                     <div className="pic"><Link to={"/share/" + this.state._id}><img className="book"
                                                                                     src={this.state.uploadedImages}/></Link>
-                        <h3>{this.state.book_name}</h3>
+                        <ul className="singlebook-list">
+                            <li><Link to={"/share/" + this.state._id}
+                                  className="singlebook-detail">{this.state.book_name}</Link></li>
+                            <li className="singlebook-price"><img src="../pictures/yuan.png"/>{this.state.price}</li>
+                        </ul>
                     </div>
                 </div>
             </div>
