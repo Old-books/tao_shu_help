@@ -15,8 +15,18 @@ router.get('/', function (req, res, next) {
         validateToken(token, function (err, isValidateToken, user) {
             if (err) return next(err);
             if (isValidateToken) {
-                const {username, email, phone, password, _id, province, city, county, specificAddress} = user;
-                return res.json({username, email, phone, password, _id, province, city, county, specificAddress});
+                let {username, email, phone, password, _id, province, city, county, specificAddress} = user;
+                return res.status(201).json({
+                    username,
+                    email,
+                    phone,
+                    password,
+                    _id,
+                    province,
+                    city,
+                    county,
+                    specificAddress
+                });
             }
             return res.sendStatus(401);
         });

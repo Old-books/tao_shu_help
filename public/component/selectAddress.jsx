@@ -50,25 +50,7 @@ class AddressItem extends React.Component {
                         this.setState({
                             addressState: false
                         });
-                        /* hash	返回一个URL的锚部分
-                         host	返回一个URL的主机名和端口
-                         hostname	返回URL的主机名
-                         href	返回完整的URL
-                         pathname	返回的URL路径名。
-                         port	返回一个URL服务器使用的端口号
-                         protocol	返回一个URL协议
-                         search*/
-                       /* let thisURL = location.hash;
-                        console.log("hash    :   " + thisURL);
-                        console.log("host    :   " + location.host);
-                        console.log("pathname    :   " + location.pathname);
-                        console.log("search    :   " + location.search);
-                        console.log("href:" + location.href);
-                        let startPos = thisURL.toString().indexOf("#");
-                        let endPos = thisURL.toString().indexOf("?");
-                        console.log("window.location:" + startPos + "   " + endPos + "   " + thisURL.toString().substring(startPos+1, endPos));
-                         alert("添加成功!");*/
-                       // hashHistory.push('/');
+                        hashHistory.push('/My_address');
                     }
                 });
         }
@@ -94,12 +76,6 @@ class AddressItem extends React.Component {
             county: event.target.value,
         });
     }
-
-    // componentDidUpdate(){
-    //     console.log(this.state.options.province);
-    //     console.log(this.state.options.city);
-    //     console.log(this.state.options.county);
-    // }
 
     render() {
         var data = this.state.data, options = $.extend({
@@ -161,14 +137,8 @@ class AddressItem extends React.Component {
 
                     <button type="submit" className="btn btn-primary"
                             onClick={this._onSubmit.bind(this)}>
-                        提交
+                        保存
                     </button>
-
-                    {/*  <Link to = '/personal'>
-                     <button type="submit" className="btn btn-primary">
-                     返回
-                     </button>
-                     </Link>*/}
                 </div>
             </form>
         </div>
