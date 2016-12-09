@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
-import {render} from 'react-dom';
-import bk from '../pictures/bk.jpg'
-import bw from '../pictures/bw.jpg'
-import pb from '../pictures/pb.jpg'
-import {Link} from 'react-router';
-require('../css/picturewall.css');
-class Picture extends React.Component{
-    render(){
+
+import '../css/picturewall.css';
+class Slider extends React.Component {
+    render() {
         return (
             <div id="myCarousel" className="carousel slide">
                 <ol className="carousel-indicators">
@@ -16,20 +12,25 @@ class Picture extends React.Component{
                 </ol>
                 <div className="carousel-inner">
                     <div className="item active">
-                        <img src={bk} alt="First slide"/>
+                        <img src="../pictures/one.jpg" alt="First slide" className="slider-image"/>
                     </div>
                     <div className="item">
-                        <img src={bw} alt="Second slide"/>
+                        <img src="../pictures/two.jpg" alt="Second slide" className="slider-image"/>
                     </div>
                     <div className="item">
-                        <img src={pb} alt="Third slide"/>
+                        <img src="../pictures/bk.jpg" alt="Third slide" className="slider-image"/>
                     </div>
                 </div>
-                <a className="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-                <a className="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+
+                <a className="carousel-control left" href="#myCarousel"
+                   data-slide="prev">&lsaquo;
+                </a>
+                <a className="carousel-control right" href="#myCarousel"
+                   data-slide="next">&rsaquo;
+                </a>
             </div>
-        );
+        )
     }
 }
 
-export default Picture;
+export default Slider;

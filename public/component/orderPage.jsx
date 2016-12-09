@@ -128,9 +128,9 @@ class Book_pay extends React.Component {
                 <Link to={"/share/" + this.state._id}><img src={this.state.images} width="180px" height="160px"/></Link>
             </div>
             <ul>
-                <li>商品名称：<a >{this.state.name}</a></li>
+                <li>商品名称：<a>{this.state.name}</a></li>
                 <li>商品数量：<a>{this.state.count}</a></li>
-                <li>发布人：<a >{this.state.publisher}</a></li>
+                <li>发布人：<a>{this.state.publisher}</a></li>
                 <li>小计：<a>{price}</a>元</li>
             </ul>
         </div>;

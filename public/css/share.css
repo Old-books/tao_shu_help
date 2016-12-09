@@ -1,16 +1,16 @@
-.book-name {
+.share-book-name {
     color: #214c90;
     margin-top: 100px;
     margin-left: 50px;
 }
 
 .book-cover {
-    width: 250px;
-    height: 350px;
+    width: 320px;
+    height: 320px;
     margin-left: 210px;
 }
 
-.book-details {
+.share-book-details {
     list-style: none;
     font-size: 18px;
     line-height: 2;
@@ -18,7 +18,7 @@
     margin-top: -300px;
 }
 
-.add-cart {
+.share-add-cart {
     margin-left: 630px;
     margin-top: 25px;
     background-color: #214c90;
@@ -27,7 +27,7 @@
     border-radius: 5px;
 }
 
-.connect-owner {
+.share-connect-owner {
     margin-left: 50px;
     background-color: #214c90;
     color: #ffffff;

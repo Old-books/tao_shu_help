@@ -9,11 +9,13 @@
     padding-left: 20px;
     /*background-color: #419641;*/
 }
+
 .book{
-    height: 150px;
-    width: 130px;
+    height: 330px;
+    width: 273px;
 }
 .caption{
     height: 120px;
+    margin-left: 50px;
     /*background-color: #dca7a7;*/
 }
