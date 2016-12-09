@@ -146,8 +146,8 @@ class Book_cart extends React.Component {
                     <div>{bookList}</div>
                     <div id="all">
                         <div>
-                            <div className="price">合计:</div>
-                            <div id="count_price" className="price">{this.state.all_price}元</div>
+                            <div className="price">合计:<img src="../../pictures/yuan.png" className="yuan"/></div>
+                            <div id="count_price" className="price">{this.state.all_price}</div>
                         </div>
                         <button onClick={this.intoPayFor.bind(this)} className="button1">结算</button>
                     </div>
@@ -221,13 +221,13 @@ class Book_list extends React.Component {
             pay_count = _.filter(pay_count, ({ID}) => {
                 return id != ID
             });
-            document.getElementById('count_price').innerHTML = parseInt(all_price) + '元';
+            document.getElementById('count_price').innerHTML = parseInt(all_price);
         }
         else {
             changeIs_False(id);
             all_price += parseInt(this.state.price * this.state.count);
             pay_count.push({ID: id, count: this.state.count});
-            document.getElementById('count_price').innerHTML = parseInt(all_price) + '元';
+            document.getElementById('count_price').innerHTML = parseInt(all_price);
         }
 
     }
@@ -253,14 +253,14 @@ class Book_list extends React.Component {
             </div>
             <div className="book-name">
                 书名:{this.state.name}<br/>
-                单价:{this.state.price}元<br/>
+                单价:<img src="../../pictures/yuan.png" className="yuan"/>{this.state.price}<br/>
                 <label>数目:</label>
                 <img src="../pictures/add.png" id={this.state._id + 'add'} onClick={this._addCount.bind(this)}/>
                 <label>{this.state.count}</label>
                 <img src="../pictures/reduce.png" id={this.state._id + 'reduce'}
                      onClick={this._reduceCount.bind(this)}/>
                 <br/>
-                小计:{price}元
+                小计:<img src="../../pictures/yuan.png" className="yuan"/>{price}
             </div>
         </div>;
     }

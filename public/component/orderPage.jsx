@@ -79,18 +79,20 @@ class Payment extends React.Component {
                     }} ref={"book_list"}/>
             </div>);
         return (
-            <div>
+            <div id="order">
                 <div>
                     <Address/>
                 </div>
-                <div id="custom">顾客:{this.state.custom}</div>
+                <div id="custom">顾&nbsp;客:&nbsp;{this.state.custom}</div>
                 <div>
                     <div>
                         {bookList}
                     </div>
                     <div className="pay-for">
-                        合计:{this.state.payPrice}
-                        <button typeof="button" className="button1" onClick={this._overlay.bind(this)} id="account">提交订单
+                        合&nbsp;计:<img src="../../pictures/yuan.png"
+                                      className="yuan"/>{this.state.payPrice}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button typeof="button" className="button3" onClick={this._overlay.bind(this)} id="account">提交订单
                         </button>
                     </div>
                     <div id="modal-overlay" ref="overlay">
@@ -129,13 +131,13 @@ class Book_pay extends React.Component {
         let price = this.state.price * this.state.count;
         return <div className="goods">
             <div className="photo">
-                <Link to={"/share/" + this.state._id}><img src={this.state.images} width="180px" height="160px"/></Link>
+                <Link to={"/share/" + this.state._id}><img src={this.state.images}/></Link>
             </div>
             <div className="good-list">
                 商品名称：{this.state.name}<br/>
-                商品数量：{this.state.count}本<br/>
+                商品数量：{this.state.count}&nbsp;本<br/>
                 发布人：{this.state.publisher}<br/>
-                小计：{price}元<br/>
+                小计：<img src="../../pictures/yuan.png" className="yuan"/>{price}<br/>
             </div>
         </div>
     }
