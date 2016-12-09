@@ -15,6 +15,7 @@ class AddressItem extends React.Component {
             },
             data: areaData,
             specificAddress: '',
+            addressState: true
         };
     }
 
@@ -46,6 +47,9 @@ class AddressItem extends React.Component {
                         }
                     }
                     if (res.statusCode === 201 && res.text === '地址已存入数据库') {
+                        this.setState({
+                            addressState: false
+                        });
                         /* hash	返回一个URL的锚部分
                          host	返回一个URL的主机名和端口
                          hostname	返回URL的主机名
@@ -64,7 +68,7 @@ class AddressItem extends React.Component {
                         let endPos = thisURL.toString().indexOf("?");
                         console.log("window.location:" + startPos + "   " + endPos + "   " + thisURL.toString().substring(startPos+1, endPos));
                          alert("添加成功!");*/
-                        hashHistory.push('/');
+                       // hashHistory.push('/');
                     }
                 });
         }

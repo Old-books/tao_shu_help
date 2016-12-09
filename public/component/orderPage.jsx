@@ -79,27 +79,33 @@ class Payment extends React.Component {
                     }} ref={"book_list"}/>
             </div>);
         return (
-            <div>
+            <div id="order">
                 <div>
                     <Address/>
                 </div>
-                顾客:{this.state.custom}
-                {bookList}
-                <br/>
+                <div id="custom">顾&nbsp;客:&nbsp;{this.state.custom}</div>
                 <div>
-                    <button typeof="button" onClick={this._overlay.bind(this)} id="account">结算:</button>
-                    {this.state.payPrice}
-                </div>
-                <div id="modal-overlay" ref="overlay">
-                    <div id="popup">
-                        <a><img src="../pictures/false.png" id="close" onClick={this._closeWindow.bind(this)}/></a>
-                        <h1 className="logo-payment">淘书帮</h1>
-                        <label className="text-mark">请输入支付密码: <input type="password" id="pay"
-                                                                     value={this.state.password}
-                                                                     onChange={this._getPassword.bind(this)}
-                                                                     autoFocus="autoFocus" maxLength="6"/>
-                        </label>
-                        <button type="button" id="verify" onClick={this._verify.bind(this)}>确认支付</button>
+                    <div>
+                        {bookList}
+                    </div>
+                    <div className="pay-for">
+                        合&nbsp;计:<img src="../../pictures/yuan.png"
+                                      className="yuan"/>{this.state.payPrice}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button typeof="button" className="button3" onClick={this._overlay.bind(this)} id="account">提交订单
+                        </button>
+                    </div>
+                    <div id="modal-overlay" ref="overlay">
+                        <div id="popup">
+                            <a><img src="../pictures/false.png" id="close" onClick={this._closeWindow.bind(this)}/></a>
+                            <h1 className="logo-payment">淘书帮</h1>
+                            <label className="text-mark">请输入支付密码: <input type="password" id="pay"
+                                                                         value={this.state.password}
+                                                                         onChange={this._getPassword.bind(this)}
+                                                                         autoFocus="autoFocus" maxLength="6"/>
+                            </label>
+                            <button type="button" id="verify" onClick={this._verify.bind(this)}>确认支付</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,17 +129,17 @@ class Book_pay extends React.Component {
 
     render() {
         let price = this.state.price * this.state.count;
-        return <div>
-            <div className="pic">
-                <Link to={"/share/" + this.state._id}><img src={this.state.images} width="180px" height="160px"/></Link>
+        return <div className="goods">
+            <div className="photo">
+                <Link to={"/share/" + this.state._id}><img src={this.state.images}/></Link>
             </div>
-            <ul>
-                <li>商品名称：<a>{this.state.name}</a></li>
-                <li>商品数量：<a>{this.state.count}</a></li>
-                <li>发布人：<a>{this.state.publisher}</a></li>
-                <li>小计：<a>{price}</a>元</li>
-            </ul>
-        </div>;
+            <div className="good-list">
+                商品名称：{this.state.name}<br/>
+                商品数量：{this.state.count}&nbsp;本<br/>
+                发布人：{this.state.publisher}<br/>
+                小计：<img src="../../pictures/yuan.png" className="yuan"/>{price}<br/>
+            </div>
+        </div>
     }
 }
 export default Payment;
