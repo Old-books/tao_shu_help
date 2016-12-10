@@ -8,7 +8,7 @@ router.post('/', function (req, res, next) {
     const bookAttribute = {publisher, author, name, press, images, count, price, state};
     if (isEmpty(bookAttribute)) {
         var book = new Book({
-            publisher:publisher,
+            publisher: publisher,
             author: author,
             name: name,
             press: press,

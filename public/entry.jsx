@@ -14,6 +14,7 @@ import SearchPage from './component/search.jsx';
 import Address from './component/personalAddress.jsx';
 import TestAddress from  './component/selectAddress.jsx';
 import My_address from  './component/myAddress.jsx';
+/*import Remind_Sell from  './component/remind_Sell.jsx';*/
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
