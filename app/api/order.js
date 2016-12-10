@@ -73,6 +73,41 @@ router.post('/remind', function (req, res, next) {
             }
         }
         return res.status(201).json({user_order: user_order});
+
+    });
+});
+router.post('/personal', function (req, res, next) {
+    const {custom} = req.body;
+    console.log(custom);
+    Order.find({custom: custom}, (err, doc) => {
+        let buyedbooks = [];
+        if (doc.length === 0) {
+            return res.status(403).send('没有订单');
+        }
+        for (let i = 0; i < doc.length; i++) {
+            buyedbooks.push(doc[i].buyedBook);
+        }
+
+        let booksDetail = [];
+        for (let i = 0; i < buyedbooks.length; i++) {
+            for (let j = 0; j < buyedbooks[i].length; j++) {
+                findBooks(buyedbooks[i][j], (err, detail) => {
+                    if (err) return next(err);
+                    booksDetail.push(detail);
+                    if (i === buyedbooks.length - 1 && j === buyedbooks[i].length - 1) {
+                        res.status(201).send(booksDetail);
+                    }
+                });
+            }
+        }
+
+        function findBooks(id, callback) {
+            Book.find({_id: id}, (err, doc) => {
+                if (err) callback(err);
+                callback(null, doc);
+            });
+        }
+
     });
 });
 

@@ -19,4 +19,5 @@ router.use('/userBook', userBookApi);
 router.use('/current/people-books', peopele_books);
 router.use('/current/cart', bookcart);
 router.use('/order', orderApi);
+router.use('/order/personal',orderApi);
 export default router;
