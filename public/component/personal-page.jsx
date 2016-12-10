@@ -269,7 +269,7 @@ class PersonalCenter extends React.Component {
                                             <h4>书名：{order[0].name}</h4>
                                             <h4>卖家：{order[0].publisher}</h4>
                                             <button className="btn">确认收货</button>
-                                            <button className="btn" value={order[0]._id} onClick={this.connectSeller.bind(this) }>联系卖家</button>
+                                            <button className="btn">联系卖家</button>
                                         </div>)}
                                     </div>}
                                 </div>
