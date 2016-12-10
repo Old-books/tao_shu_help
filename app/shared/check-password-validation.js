@@ -1,4 +1,4 @@
-import {User} from '../mongodb/schema';
+import {User,Book} from '../mongodb/schema';
 
 function checkPassword(data, callback) {
     User.findOne({username: data.custom}, function (err, user) {
@@ -6,4 +6,5 @@ function checkPassword(data, callback) {
         callback(null, user);
     });
 }
+
 export{checkPassword};

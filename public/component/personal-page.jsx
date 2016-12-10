@@ -16,7 +16,11 @@ class PersonalCenter extends React.Component {
             phone: '',
             email: '',
             _id: '',
-            status: false
+            status: false,
+            province: 'aa',
+            city: 'bb',
+            specificAddress: 'cc',
+            order: []
         };
     }
 
@@ -49,6 +53,10 @@ class PersonalCenter extends React.Component {
          specificAddress: this.state.specificAddress
          }*!/
          });*/
+        const {history} =this.props;
+        history.push({
+            pathname: "/address"
+        });
     }
 
     _onClickModify() {
@@ -135,6 +143,28 @@ class PersonalCenter extends React.Component {
         });
     }
 
+    displayOrder(event) {
+        event.preventDefault();
+        request
+            .post('/api/order/personal')
+            .send({custom: this.state.username})
+            .end((err, res) => {
+                if (err) {
+                    console.log(err);
+                }
+                if (res.statusCode === 201) {
+                    this.setState(
+                        {
+                            order: res.body
+                        }
+                    );
+                    console.log(this.state.order);
+                }
+            })
+    }
+
+
+
     render() {
         return (
             <div>
@@ -145,6 +175,10 @@ class PersonalCenter extends React.Component {
                                                                       data-toggle="tab">个人信息</a>
                         </li>
                         <li role="presentation"><a href="#tab-three" role="tab" data-toggle="tab">提醒卖家发货</a></li>
+                        <li role="presentation"><a href="#tab-three" role="tab" data-toggle="tab">发布</a></li>
+                        <li role="presentation"><a href="#tab-two" role="tab" data-toggle="tab"
+                                                   onClick={this.displayOrder.bind(this)}>我的订单</a></li>
+
                     </ul>
                     <div className="tab-content">
                         <div className="tab-pane active" id="tab-one">
@@ -221,6 +255,23 @@ class PersonalCenter extends React.Component {
 
                                 <div>
                                     <Remind/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="tab-pane" id="tab-two">
+                            <div className="row feature-two">
+                                <div>
+                                    {this.state.order.length === 0 ? <div>
+                                        没有相关订单
+                                    </div> : <div>
+                                        {this.state.order.map(order => <div>
+                                            <h4>书名：{order[0].name}</h4>
+                                            <h4>卖家：{order[0].publisher}</h4>
+                                            <button className="btn">确认收货</button>
+                                            <button className="btn" value={order[0]._id} onClick={this.connectSeller.bind(this) }>联系卖家</button>
+                                        </div>)}
+                                    </div>}
                                 </div>
                             </div>
                         </div>
