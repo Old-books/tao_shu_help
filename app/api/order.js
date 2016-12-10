@@ -51,4 +51,29 @@ router.post('/', function (req, res, next) {
     });
 });
 
+router.post('/remind', function (req, res, next) {
+    let name = req.body.name;
+    Order.find({seller: {$in: [name]}}, function (err, order) {
+        if (err) next(err);
+        let custome_orders = order;
+        var user_order = [];
+        for (let j = 0; j < custome_orders.length; j++) {
+            var custom = custome_orders[j].custom;
+            if (_.includes(custome_orders[j].seller, name) === true) {
+                for (var i = 0; i < custome_orders[j].seller.length; i++) {
+                    if (custome_orders[j].seller[i] == name) {
+                        user_order.push({
+                            custom: custom,
+                            seller: custome_orders[j].seller[i],
+                            buyedBook: custome_orders[j].buyedBook[i],
+                            buyedCount: custome_orders[j].buyedCount[i]
+                        });
+                    }
+                }
+            }
+        }
+        return res.status(201).json({user_order: user_order});
+    });
+});
+
 export default router;

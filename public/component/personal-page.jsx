@@ -2,6 +2,7 @@ import React from 'react';
 import request from 'superagent';
 import {hashHistory, Link} from 'react-router';
 import Nav from './navigation.jsx';
+import Remind from './remind_Sell.jsx';
 require('../css/personal-page.css');
 
 class PersonalCenter extends React.Component {
@@ -38,16 +39,16 @@ class PersonalCenter extends React.Component {
     _myAddress() {
         hashHistory.push('/address');
         /*const {history} =this.props;
-        history.push({
-            pathname: "/address",
-           /!* state: {
-                _id: this.state._id,
-                province: this.state.province,
-                city: this.state.city,
-                county: this.state.county,
-                specificAddress: this.state.specificAddress
-            }*!/
-        });*/
+         history.push({
+         pathname: "/address",
+         /!* state: {
+         _id: this.state._id,
+         province: this.state.province,
+         city: this.state.city,
+         county: this.state.county,
+         specificAddress: this.state.specificAddress
+         }*!/
+         });*/
     }
 
     _onClickModify() {
@@ -143,7 +144,7 @@ class PersonalCenter extends React.Component {
                         <li role="presentation" className="active"><a href="#tab-one" role="tab"
                                                                       data-toggle="tab">个人信息</a>
                         </li>
-                        <li role="presentation"><a href="#tab-three" role="tab" data-toggle="tab">发布</a></li>
+                        <li role="presentation"><a href="#tab-three" role="tab" data-toggle="tab">提醒卖家发货</a></li>
                     </ul>
                     <div className="tab-content">
                         <div className="tab-pane active" id="tab-one">
@@ -207,8 +208,6 @@ class PersonalCenter extends React.Component {
                                 </form>
                             </div>
                         </div>
-
-
                         <div className="tab-pane" id="tab-tow">
                             <div className="row feature-tow">
                             </div>
@@ -216,14 +215,16 @@ class PersonalCenter extends React.Component {
 
                         <div className="tab-pane" id="tab-three">
                             <div className="row feature-three">
-                                <Link to='/publish'>
-                                    <button type="publish" className="btn">我要发布</button>
-                                </Link>
+                                {/*<Link to='/publish'>
+                                 <button type="publish" className="btn">我要发布</button>
+                                 </Link>*/}
+
+                                <div>
+                                    <Remind/>
+                                </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         )

@@ -32,7 +32,13 @@ router.get('/', function (req, res, next) {
         });
     }
 });
-
+router.post('/address', function (req, res, next) {
+    let custom = req.body.custom;
+    User.findOne({username: custom}, function (err, user) {
+        if (err) next(err);
+        return res.status(201).json(user);
+    })
+});
 router.post('/:_id', function (req, res, next) {
     const id = req.params._id;
     const userData = req.body;
