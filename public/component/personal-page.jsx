@@ -164,7 +164,6 @@ class PersonalCenter extends React.Component {
     }
 
 
-
     render() {
         return (
             <div>
@@ -174,9 +173,9 @@ class PersonalCenter extends React.Component {
                         <li role="presentation" className="active"><a href="#tab-one" role="tab"
                                                                       data-toggle="tab">个人信息</a>
                         </li>
-                        <li role="presentation"><a href="#tab-three" role="tab" data-toggle="tab">提醒卖家发货</a></li>
+                        <li role="presentation"><a href="#tab-two" role="tab" data-toggle="tab">提醒卖家发货</a></li>
                         <li role="presentation"><a href="#tab-three" role="tab" data-toggle="tab">发布</a></li>
-                        <li role="presentation"><a href="#tab-two" role="tab" data-toggle="tab"
+                        <li role="presentation"><a href="#tab-four" role="tab" data-toggle="tab"
                                                    onClick={this.displayOrder.bind(this)}>我的订单</a></li>
 
                     </ul>
@@ -242,25 +241,25 @@ class PersonalCenter extends React.Component {
                                 </form>
                             </div>
                         </div>
-                        <div className="tab-pane" id="tab-tow">
-                            <div className="row feature-tow">
-                            </div>
-                        </div>
-
                         <div className="tab-pane" id="tab-three">
                             <div className="row feature-three">
                                 <Link to='/publish'>
-                                 <button type="publish" className="btn">我要发布</button>
-                                 </Link>
+                                    <button type="publish" className="btn">我要发布</button>
+                                </Link>
+                            </div>
+                        </div>
 
+
+                        <div className="tab-pane" id="tab-two">
+                            <div className="row feature-two">
                                 <div>
                                     <Remind/>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="tab-pane" id="tab-two">
-                            <div className="row feature-two">
+                        <div className="tab-pane" id="tab-four">
+                            <div className="row feature-four">
                                 <div>
                                     {this.state.order.length === 0 ? <div>
                                         没有相关订单
@@ -269,7 +268,7 @@ class PersonalCenter extends React.Component {
                                             <h4>书名：{order[0].name}</h4>
                                             <h4>卖家：{order[0].publisher}</h4>
                                             <button className="btn">确认收货</button>
-                                            <button className="btn">联系卖家</button>
+                                            <button className="btn" onClick={this.connectSeller.bind(this)} value={order[0].publisher}>联系卖家</button>
                                         </div>)}
                                     </div>}
                                 </div>
@@ -279,6 +278,14 @@ class PersonalCenter extends React.Component {
                 </div>
             </div>
         )
+    }
+
+    connectSeller(event) {
+        let publisher = event.target.value;
+        request
+            .post('')
+            .send()
+            .end()
     }
 }
 export default PersonalCenter;

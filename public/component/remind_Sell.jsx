@@ -132,8 +132,8 @@ class Book_list extends React.Component {
 
     render() {
         return <div>
-            <button onClick={this._onClik_More.bind(this)}>点我查看</button>
-            {this.state.states ? <div>被订购的书名{this.state.name}<br/>
+            <button onClick={this._onClik_More.bind(this)} className="btn">点我查看</button>
+            {this.state.states ? <div>书名:{this.state.name}<br/>
                 买书人:{this.state.custom}<br/>
                 <img src={this.state.images} width="50px" height="50px"/>
                 <div>

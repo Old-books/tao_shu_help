@@ -1,14 +1,17 @@
+*{margin:0;padding:0;}
+
 #modal-overlay {
     visibility: hidden;
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
+    right:0;
+    bottom:0;
     width: 100%;
     height: 100%;
     text-align: center;
     z-index: 1000;
-    background-color: #333;
-    opacity: 0.8;
+    background:rgba(03,03,03,.8);
 }
 
 .logo-payment {
