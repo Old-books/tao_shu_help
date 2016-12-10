@@ -249,9 +249,9 @@ class PersonalCenter extends React.Component {
 
                         <div className="tab-pane" id="tab-three">
                             <div className="row feature-three">
-                                {/*<Link to='/publish'>
+                                <Link to='/publish'>
                                  <button type="publish" className="btn">我要发布</button>
-                                 </Link>*/}
+                                 </Link>
 
                                 <div>
                                     <Remind/>
