@@ -3,6 +3,8 @@ import request from 'superagent';
 import {hashHistory, Link} from 'react-router';
 import Nav from './navigation.jsx';
 import Remind from './remind_Sell.jsx';
+import Publish from './publish.jsx';
+import Customorder from './customOrder.jsx';
 require('../css/personal-page.css');
 
 class PersonalCenter extends React.Component {
@@ -144,7 +146,7 @@ class PersonalCenter extends React.Component {
     }
 
     displayOrder(event) {
-        event.preventDefault();
+       /* event.preventDefault();
         request
             .post('/api/order/personal')
             .send({custom: this.state.username})
@@ -160,7 +162,7 @@ class PersonalCenter extends React.Component {
                     );
                     console.log(this.state.order);
                 }
-            })
+            })*/
     }
 
 
@@ -174,9 +176,8 @@ class PersonalCenter extends React.Component {
                                                                       data-toggle="tab">个人信息</a>
                         </li>
                         <li role="presentation"><a href="#tab-two" role="tab" data-toggle="tab">提醒卖家发货</a></li>
-                        <li role="presentation"><a href="#tab-three" role="tab" data-toggle="tab">发布</a></li>
-                        <li role="presentation"><a href="#tab-four" role="tab" data-toggle="tab"
-                                                   onClick={this.displayOrder.bind(this)}>我的订单</a></li>
+                        <li role="presentation"><a href="#tab-three" role="tab" data-toggle="tab">我要发布</a></li>
+                        <li role="presentation"><a href="#tab-four" role="tab" data-toggle="tab">我的订单</a></li>
 
                     </ul>
                     <div className="tab-content">
@@ -243,9 +244,7 @@ class PersonalCenter extends React.Component {
                         </div>
                         <div className="tab-pane" id="tab-three">
                             <div className="row feature-three">
-                                <Link to='/publish'>
-                                    <button type="publish" className="btn">我要发布</button>
-                                </Link>
+                                <Publish/>
                             </div>
                         </div>
 
@@ -261,31 +260,34 @@ class PersonalCenter extends React.Component {
                         <div className="tab-pane" id="tab-four">
                             <div className="row feature-four">
                                 <div>
-                                    {this.state.order.length === 0 ? <div>
-                                        没有相关订单
-                                    </div> : <div>
-                                        {this.state.order.map(order => <div>
-                                            <h4>书名：{order[0].name}</h4>
-                                            <h4>卖家：{order[0].publisher}</h4>
-                                            <button className="btn">确认收货</button>
-                                            <button className="btn" onClick={this.connectSeller.bind(this)} value={order[0].publisher}>联系卖家</button>
-                                        </div>)}
-                                    </div>}
+                                <Customorder/>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 
-    connectSeller(event) {
+ /*   connectSeller(event) {
         let publisher = event.target.value;
         request
             .post('')
             .send()
             .end()
-    }
+    }*/
 }
 export default PersonalCenter;
+/*
+ {this.state.order.length === 0 ? <div>
+ 没有相关订单
+ </div> : <div>
+ {this.state.order.map(order => <div>
+ <h4>书名：{order[0].name}</h4>
+ <h4>卖家：{order[0].publisher}</h4>
+ <button className="btn">确认收货</button>
+ <button className="btn" onClick={this.connectSeller.bind(this)} value={order[0].publisher}>联系卖家</button>
+ </div>)}
+ </div>}
+ */

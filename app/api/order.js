@@ -13,7 +13,9 @@ router.post('/', function (req, res, next) {
         seller.push(publisher);
         Book.findOne({_id: _id}, function (err, book_id) {
             let book_Count = book_id.count;
-            Book.update({_id: _id}, {$set: {count: book_Count - count}}, function (err) {
+            book_Count -= count;
+            if (book_Count <= 0) book_Count = 0;
+            Book.update({_id: _id}, {$set: {count: book_Count}}, function (err) {
                 if (err) next(err);
             })
 
@@ -79,36 +81,59 @@ router.post('/remind', function (req, res, next) {
 router.post('/personal', function (req, res, next) {
     const {custom} = req.body;
     console.log(custom);
+    let order_id;
     Order.find({custom: custom}, (err, doc) => {
-        let buyedbooks = [];
+        let buyedbooks = [], buyedCount = [];
         if (doc.length === 0) {
             return res.status(403).send('没有订单');
         }
+        order_id = [];
         for (let i = 0; i < doc.length; i++) {
             buyedbooks.push(doc[i].buyedBook);
+            let length = doc[i].buyedBook.length;
+            for (let j = 0; j < length; j++) order_id.push(doc[i]._id);
+            buyedCount.push(doc[i].buyedCount)
         }
-
-        let booksDetail = [];
-        for (let i = 0; i < buyedbooks.length; i++) {
-            for (let j = 0; j < buyedbooks[i].length; j++) {
-                findBooks(buyedbooks[i][j], (err, detail) => {
-                    if (err) return next(err);
-                    booksDetail.push(detail);
-                    if (i === buyedbooks.length - 1 && j === buyedbooks[i].length - 1) {
-                        res.status(201).send(booksDetail);
-                    }
-                });
-            }
-        }
-
-        function findBooks(id, callback) {
-            Book.find({_id: id}, (err, doc) => {
-                if (err) callback(err);
-                callback(null, doc);
-            });
-        }
-
+        buyedbooks = _.flattenDeep(buyedbooks);
+        buyedCount = _.flattenDeep(buyedCount);
+        findBooks(buyedbooks, buyedCount, order_id, (err, book) => {
+            res.status(201).json({book: book});
+        });
     });
 });
+function findBooks(buyedbooks, buyedCount, order_id, callback) {
+    let i = 0, books = [];
+    _.map(buyedbooks, (id) => {
+        Book.find({_id: id}, (err, docs) => {
+            if (err) callback(err);
+            let doc = docs;
+            books.push({
+                _id: doc[0]._id,
+                order_id: order_id[i],
+                publisher: doc[0].publisher,
+                author: doc[0].author,
+                name: doc[0].name,
+                press: doc[0].press,
+                count: buyedCount[i],
+                price: doc[0].price,
+                images: doc[0].images,
+            });
+            i++;
+            if (i == buyedbooks.length) {
+                callback(null, books)
+            }
+        });
+    });
+}
 
+router.post('/remove', function (req, res, next) {
+    const {book_id, order_id,count,seller} = req.body;
+    console.log("into remove " + book_id + " " + seller);
+   /* Order.update({_id: order_id}, {$pull: {"buyedBook":book_id,"buyedCount":count,"seller":seller}}, function (err,order) {
+        if (err) {
+            console.log(err);
+        }
+        console.log("QQQQQQQQQQQQQQ: "+order);
+    });*/
+});
 export default router;

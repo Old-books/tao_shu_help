@@ -36,7 +36,7 @@ class Payment extends React.Component {
         e.style.visibility = "hidden";
     }
 
-    _verify() {
+        _verify() {
         event.preventDefault();
         let e = this.refs.overlay;
         e.style.visibility = "hidden";

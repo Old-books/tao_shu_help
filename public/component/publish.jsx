@@ -2,7 +2,6 @@ import React from 'react';
 import {render} from 'react-dom';
 import {hashHistory} from 'react-router';
 import request from 'superagent';
-import Nav from './navigation.jsx';
 import _ from 'lodash';
 import '../css/publish.css';
 import Buttom from './buttom.jsx';
@@ -40,7 +39,6 @@ class Publish extends React.Component {
 
     render() {
         return <div>
-            <Nav/>
             <div className="publish-page">
                 <form onSubmit={this._onSubmit.bind(this)}>
                     <label>发布者</label>
