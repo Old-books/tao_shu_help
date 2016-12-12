@@ -11,6 +11,7 @@ class Myaddress extends React.Component {
             city: '',
             county: '',
             specificAddress: '',
+            addressPhone: ''
         };
     }
 
@@ -25,8 +26,8 @@ class Myaddress extends React.Component {
                         return alert(err);
                     }
                 }
-                const {_id, province, city, county, specificAddress} = res.body;
-                this.setState({_id, province, city, county, specificAddress});
+                const {_id, province, city, county, specificAddress, addressPhone} = res.body;
+                this.setState({_id, province, city, county, specificAddress, addressPhone});
             });
     }
 
@@ -55,7 +56,8 @@ class Myaddress extends React.Component {
                     省&nbsp;份：{this.state.province}<br/>
                     城&nbsp;市：{this.state.city}<br/>
                     地&nbsp;区：{this.state.county}<br/>
-                    详&nbsp;情&nbsp;地&nbsp;址:{this.state.specificAddress}
+                    详&nbsp;情&nbsp;地&nbsp;址:{this.state.specificAddress}<br/>
+                    联系电话：{this.state.addressPhone}
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button type="delete" className="button4" onClick={this._onDelete.bind(this)}>
                         删&nbsp;除

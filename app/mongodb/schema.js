@@ -8,7 +8,8 @@ const UserModel = new Schema({
     province:String,
     city:String,
     county:String,
-    specificAddress:String
+    specificAddress:String,
+    addressPhone:String
 });
 
 const publishBookModel = new Schema({

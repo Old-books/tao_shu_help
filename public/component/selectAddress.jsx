@@ -15,7 +15,8 @@ class AddressItem extends React.Component {
             },
             data: areaData,
             specificAddress: '',
-            addressState: true
+            addressState: true,
+            addressPhone:''
         };
     }
 
@@ -29,7 +30,7 @@ class AddressItem extends React.Component {
 
     _onSubmit(event) {
         event.preventDefault();
-        if (this.state.province === '' && this.state.city === '' && this.state.county === '' && this.state.specificAddress === '') {
+        if (this.state.province === '' && this.state.city === '' && this.state.county === '' && this.state.specificAddress === '' && this.state.phone) {
             alert('请您完善信息!');
         }
         else {
@@ -38,7 +39,8 @@ class AddressItem extends React.Component {
                     province: this.state.data.provinces[this.state.province].name,
                     city: this.state.data.provinces[this.state.province].citys[this.state.city].name,
                     county: this.state.data.provinces[this.state.province].citys[this.state.city].countys[this.state.county].name,
-                    specificAddress: this.state.specificAddress
+                    specificAddress: this.state.specificAddress,
+                    addressPhone:this.state.addressPhone
                 })
                 .end((err, res) => {
                     if (err) {
@@ -73,9 +75,16 @@ class AddressItem extends React.Component {
 
     selectCounty(event) {
         this.setState({
-            county: event.target.value,
+            county: event.target.value
         });
     }
+
+    onPhoneChange(event) {
+        this.setState({
+           addressPhone: event.target.value
+        });
+    }
+
 
     render() {
         var data = this.state.data, options = $.extend({
@@ -131,7 +140,9 @@ class AddressItem extends React.Component {
                     <label htmlFor="inputSpecificAddres">具体地址</label>
                     <input type="specificAddress" className="form-control"
                            required="required"
-                           value={this.state.specificAddress} onChange={this._onSpecificAddressChange.bind(this)}/>
+                           value={this.state.specificAddress} onChange={this._onSpecificAddressChange.bind(this)}/><br/>
+                    <label>联系电话：</label>
+                    <input type="text" className="form-control" value={this.state.addressPhone} onChange={this.onPhoneChange.bind(this)}/>
                 </div>
                 <div className="change">
 

@@ -15,7 +15,7 @@ router.get('/', function (req, res, next) {
         validateToken(token, function (err, isValidateToken, user) {
             if (err) return next(err);
             if (isValidateToken) {
-                let {username, email, phone, password, _id, province, city, county, specificAddress} = user;
+                let {username, email, phone, password, _id, province, city, county, specificAddress, addressPhone} = user;
                 return res.status(201).json({
                     username,
                     email,
@@ -25,7 +25,8 @@ router.get('/', function (req, res, next) {
                     province,
                     city,
                     county,
-                    specificAddress
+                    specificAddress,
+                    addressPhone
                 });
             }
             return res.sendStatus(401);
@@ -36,6 +37,7 @@ router.post('/address', function (req, res, next) {
     let custom = req.body.custom;
     User.findOne({username: custom}, function (err, user) {
         if (err) next(err);
+
         return res.status(201).json(user);
     })
 });
@@ -70,6 +72,7 @@ router.post('/address/:_id', function (req, res, next) {
             city: userAddress.city,
             county: userAddress.county,
             specificAddress: userAddress.specificAddress,
+            addressPhone: userAddress.addressPhone
         }
     }, function (err) {
         if (err) return next(err);
@@ -84,7 +87,8 @@ router.post('/deleteAddress/:_id', function (req, res, next) {
             province: 'noExist',
             city: 'noExist',
             county: 'noExist',
-            specificAddress: 'noExist'
+            specificAddress: 'noExist',
+            addressPhone: 'noExist'
         }
     }, function (err) {
         if (err) return next(err);
