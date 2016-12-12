@@ -87,6 +87,7 @@ class Book_list extends React.Component {
                 if (err) alert("页面错误");
                 if (res.statusCode === 201) {
                     this.setState({isremove: true});
+                    document.getElementById(this.state.book_id).style.display = "none";
                     alert(res.text);
                 }
                 hashHistory.push('/index');
@@ -94,13 +95,14 @@ class Book_list extends React.Component {
     }
 
     render() {
-        return <div>
+        return <div id={this.state.book_id}>
             <div>
                 <h4>书名：{this.state.name}</h4>
                 <h4>卖家：{this.state.publisher}</h4>
                 <h4>数量:{this.state.count}</h4>
-                <img src={this.state.images} width="90px" height="90px"/>
-                <button onClick={this.get_Goods.bind(this)} className="btn">确认收货</button>
+                <img src={this.state.images} width="200px" height="200px"/><br/><br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onClick={this.get_Goods.bind(this)} className="btn btn btn-success">确认收货</button>
+
             </div>
         </div>;
     }
