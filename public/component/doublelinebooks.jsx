@@ -24,20 +24,19 @@ class TowCollections extends React.Component {
 
     componentWillMount() {
         request.post('/api/current/people-books')
-            .end((err, res)=> {
+            .end((err, res) => {
                 if (err) return alert('页面错误');
                 if (res.statusCode === 201) {
-                    // console.log(res.body.people_books);
                     let Booklist = [];
                     _.map(res.body.people_books, function ({
-                        author, name, press, images, count, price, state, _id}) {
+                        author, name, press, images, count, price, state, _id
+                    }) {
                         Booklist.push({
                             author: author, book_name: name, press: press, uploadedImages: images[0], price: price,
                             count: count, states: state, _id: _id
                         });
                     });
-                    (this.setState({booklist: Booklist}));
-                     console.log("fsddf"+this.state.booklist)
+                  return  (this.setState({booklist: Booklist}));
                 }
 
             });
@@ -48,10 +47,10 @@ class TowCollections extends React.Component {
             <div key={_id}>
                 <div>
                     <Single booklist={
-                    {
-                        book_name: book_name, uploadedImages: uploadedImages, price: price, _id: _id,
-                        states: states, author: author
-                    }}/>
+                        {
+                            book_name: book_name, uploadedImages: uploadedImages, price: price, _id: _id,
+                            states: states, author: author
+                        }}/>
                 </div>
             </div>
         );

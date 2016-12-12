@@ -34,7 +34,6 @@ router.get('/current', function (req, res, next) {
         if (err) return next(err);
         if (validToken) {
             const username = getUsernameFromToken(token);
-            console.log("username in to "+username);
             return res.status(201).send(username);
         }
         return res.sendStatus(403);

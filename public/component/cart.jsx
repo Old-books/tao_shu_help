@@ -58,7 +58,6 @@ class Book_cart extends React.Component {
                         if (res.statusCode === 201) {
 
                             let Book_list = [];
-                            console.log(res.body.id_user);
                             id_user = res.body.id_user;
                             _.map(res.body.book_message, function ({
                                 name, images, price, id, count, publisher, book_count

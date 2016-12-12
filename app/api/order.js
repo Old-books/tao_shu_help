@@ -91,13 +91,12 @@ router.post('/personal', function (req, res, next) {
         let order_personal = [];
         let length = doc.length;
         for (let j = 0; j < length; j++) {
-            let sum=_.reduce(doc[j].buyedBook,function (total,n) {
-                return total+n;
+            let sum = _.reduce(doc[j].buyedBook, function (total, n) {
+                return total + n;
             });
-            if(sum==0)
-            {
-                Order.remove({_id:doc[j]._id},function (err,doc) {
-                    if(err) next(err);
+            if (sum == 0) {
+                Order.remove({_id: doc[j]._id}, function (err, doc) {
+                    if (err) next(err);
                 })
             }
             order_personal.push({
@@ -118,60 +117,46 @@ function findBooks(order_personal, callback) {
     _.map(order_personal, ({buyedbooks, buyedCount, order_id}) => {
         get_Book(buyedbooks, order_id, buyedCount, function (err, book, i) {
             j++;
-            if ((i == (buyedbooks.length-1))&&(book!=undefined)) {
-                for(let personal_book of book)
-                {
+            if ((i == (buyedbooks.length - 1)) && (book != undefined)) {
+                for (let personal_book of book) {
                     books.push(personal_book);
                 }
             }
-             if (j == order_personal.length) {
-             callback(null, books, j);
-             }
+            if (j == order_personal.length) {
+                callback(null, books, j);
+            }
         });
 
     });
 }
 function get_Book(buyedbooks, order_id, buyedCount, callback) {
-    let books = [],i=0;
-   _.map(buyedbooks,(book_id)=>{
-       Book.find({_id:book_id}, (err, docs) => {
-           let doc = docs;
-           if(docs!=undefined) {
-               books.push({
-                   _id: doc[0]._id,
-                   order_id: order_id,
-                   publisher: doc[0].publisher,
-                   author: doc[0].author,
-                   name: doc[0].name,
-                   press: doc[0].press,
-                   count: buyedCount[i],
-                   price: doc[0].price,
-                   images: doc[0].images,
-               });
-               if (i == (buyedbooks.length - 1)) {
-                   callback(null, books, i);
-               }
-           }
-       i++;
-       });
-   });
+    let books = [], i = 0;
+    _.map(buyedbooks, (book_id) => {
+        Book.find({_id: book_id}, (err, docs) => {
+            let doc = docs;
+            if (docs != undefined) {
+                books.push({
+                    _id: doc[0]._id,
+                    order_id: order_id,
+                    publisher: doc[0].publisher,
+                    author: doc[0].author,
+                    name: doc[0].name,
+                    press: doc[0].press,
+                    count: buyedCount[i],
+                    price: doc[0].price,
+                    images: doc[0].images,
+                });
+                if (i == (buyedbooks.length - 1)) {
+                    callback(null, books, i);
+                }
+            }
+            i++;
+        });
+    });
 }
 
 router.post('/remove', function (req, res, next) {
     const {book_id, order_id, count, seller} = req.body;
-    console.log("into remove " + book_id + " " + seller);
-   /* Order.findOne({_id:order_id}, (err, doc) => {
-        let sum=_.reduce(doc.buyedBook,function (total,n) {
-            return total+n;
-        });
-        if(sum==0)
-        {
-            Order.remove({_id:order_id},function (err,doc) {
-                if(err) next(err);
-                console.log('remove : '+doc);
-            })
-        }
-    });*/
     Order.update({_id: order_id, buyedBook: book_id}, {$set: {"buyedBook.$": 0}}, function (err, order) {
         if (err) next(err);
         return res.status(201).send("确认收货成功")

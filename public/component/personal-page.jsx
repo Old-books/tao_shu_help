@@ -44,17 +44,6 @@ class PersonalCenter extends React.Component {
 
     _myAddress() {
         hashHistory.push('/address');
-        /*const {history} =this.props;
-         history.push({
-         pathname: "/address",
-         /!* state: {
-         _id: this.state._id,
-         province: this.state.province,
-         city: this.state.city,
-         county: this.state.county,
-         specificAddress: this.state.specificAddress
-         }*!/
-         });*/
         const {history} =this.props;
         history.push({
             pathname: "/address"
@@ -144,27 +133,6 @@ class PersonalCenter extends React.Component {
             email: event.target.value
         });
     }
-
-    displayOrder(event) {
-       /* event.preventDefault();
-        request
-            .post('/api/order/personal')
-            .send({custom: this.state.username})
-            .end((err, res) => {
-                if (err) {
-                    console.log(err);
-                }
-                if (res.statusCode === 201) {
-                    this.setState(
-                        {
-                            order: res.body
-                        }
-                    );
-                    console.log(this.state.order);
-                }
-            })*/
-    }
-
 
     render() {
         return (
@@ -260,7 +228,7 @@ class PersonalCenter extends React.Component {
                         <div className="tab-pane" id="tab-four">
                             <div className="row feature-four">
                                 <div>
-                                <Customorder/>
+                                    <Customorder/>
                                 </div>
                             </div>
                         </div>
@@ -269,25 +237,5 @@ class PersonalCenter extends React.Component {
             </div>
         );
     }
-
- /*   connectSeller(event) {
-        let publisher = event.target.value;
-        request
-            .post('')
-            .send()
-            .end()
-    }*/
 }
 export default PersonalCenter;
-/*
- {this.state.order.length === 0 ? <div>
- 没有相关订单
- </div> : <div>
- {this.state.order.map(order => <div>
- <h4>书名：{order[0].name}</h4>
- <h4>卖家：{order[0].publisher}</h4>
- <button className="btn">确认收货</button>
- <button className="btn" onClick={this.connectSeller.bind(this)} value={order[0].publisher}>联系卖家</button>
- </div>)}
- </div>}
- */
