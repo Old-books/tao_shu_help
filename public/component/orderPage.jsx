@@ -18,11 +18,27 @@ class Payment extends React.Component {
     }
 
     _overlay() {
-        let e = this.refs.overlay;
-        e.style.visibility = "visible";
-        this.setState({
-            password: ""
-        });
+        request
+            .post('/api/personal/address')
+            .send({custom:this.state.custom})
+            .end((err, res) => {
+                if (err) {
+                    return alert(err);
+                }
+                if (res.statusCode === 201) {
+                    if (res.body.province !== "noExist" && res.body.city !== "noExist" && res.body.county !== "noExist" && res.body.specificAddress !== "noExist") {
+                        let e = this.refs.overlay;
+                        e.style.visibility = "visible";
+                        this.setState({
+                            password: ""
+                        });
+                    } else {
+                        return alert('请填写收货地址');
+                    }
+                }
+
+            });
+
     }
 
     _getPassword(event) {
@@ -36,7 +52,7 @@ class Payment extends React.Component {
         e.style.visibility = "hidden";
     }
 
-        _verify() {
+    _verify() {
         event.preventDefault();
         let e = this.refs.overlay;
         e.style.visibility = "hidden";

@@ -86,7 +86,8 @@ class Book_list extends React.Component {
             province: '',
             city: '',
             county: '',
-            specificAddress: ''
+            specificAddress: '',
+            addressPhone: ''
         };
     }
 
@@ -124,7 +125,20 @@ class Book_list extends React.Component {
                                 ))
                             }
                         })
+                }
+            });
 
+        request
+            .post(`/api/personal/address`)
+            .send({custom: this.state.custom})
+            .end((err, res) => {
+                if (err) {
+                    alert('页面错误');
+                }
+                if (res.statusCode === 201) {
+                    this.setState({
+                        addressPhone: res.body.addressPhone
+                    })
                 }
             });
 
@@ -133,13 +147,12 @@ class Book_list extends React.Component {
     render() {
         return <div>
             <button onClick={this._onClik_More.bind(this)} className="btn">点我查看</button>
-            {this.state.states ? <div>书名:{this.state.name}<br/>
-                买书人:{this.state.custom}<br/>
-                <img src={this.state.images} width="50px" height="50px"/>
-                <div>
-                    发货地址:{this.state.province}{this.state.city}{this.state.county}{this.state.specificAddress}
-                </div>
-            </div> : <div></div>}
+            {this.state.states ? <h4>书名:{this.state.name}
+                <h4>买家:{this.state.custom}</h4>
+                <img src={this.state.images} width="100px" height="100px"/>
+                <h4>发货地址:{this.state.province}{this.state.city}{this.state.county}{this.state.specificAddress}</h4>
+                <h4>电话：{this.state.addressPhone}</h4>
+            </h4> : <div></div>}
         </div>;
     }
 }

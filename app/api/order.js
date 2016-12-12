@@ -159,19 +159,6 @@ function get_Book(buyedbooks, order_id, buyedCount, callback) {
 
 router.post('/remove', function (req, res, next) {
     const {book_id, order_id, count, seller} = req.body;
-    console.log("into remove " + book_id + " " + seller);
-   /* Order.findOne({_id:order_id}, (err, doc) => {
-        let sum=_.reduce(doc.buyedBook,function (total,n) {
-            return total+n;
-        });
-        if(sum==0)
-        {
-            Order.remove({_id:order_id},function (err,doc) {
-                if(err) next(err);
-                console.log('remove : '+doc);
-            })
-        }
-    });*/
     Order.update({_id: order_id, buyedBook: book_id}, {$set: {"buyedBook.$": 0}}, function (err, order) {
         if (err) next(err);
         return res.status(201).send("确认收货成功")

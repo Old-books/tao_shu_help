@@ -4,7 +4,7 @@ import '../css/picturewall.css';
 class Slider extends React.Component {
     render() {
         return (
-            <div id="myCarousel" className="carousel slide" data-ride="carousel"  data-interval="5000">
+            <div id="myCarousel" className="carousel slide" data-ride="carousel"  data-interval="4000">
                 <ol className="carousel-indicators">
                     <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
                     <li data-target="#myCarousel" data-slide-to="1"></li>

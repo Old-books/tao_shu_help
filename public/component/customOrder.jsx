@@ -1,10 +1,8 @@
-/**
- * Created by anfen on 16-12-9.
- */
 import React from 'react';
 import request from 'superagent';
-import {hashHistory, Link} from 'react-router';
+import {hashHistory} from 'react-router';
 import _ from "lodash";
+
 class Customorder extends React.Component {
     constructor(props) {
         super(props);
@@ -102,7 +100,7 @@ class Book_list extends React.Component {
                 <h4>卖家：{this.state.publisher}</h4>
                 <h4>数量:{this.state.count}</h4>
                 <img src={this.state.images} width="90px" height="90px"/>
-                <button onClick={this.get_Goods.bind(this)}>确认收货</button>
+                <button onClick={this.get_Goods.bind(this)} className="btn">确认收货</button>
             </div>
         </div>;
     }

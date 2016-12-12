@@ -234,7 +234,7 @@ class PersonalCenter extends React.Component {
                                                 onClick={this._onSubmit.bind(this)}>
                                             提交
                                         </button>
-                                        <button type="button" className="btn btn-primary"
+                                        <button type="button" className="btn btn-primary address-button"
                                                 onClick={this._myAddress.bind(this)}>
                                             我的地址
                                         </button>
@@ -269,25 +269,5 @@ class PersonalCenter extends React.Component {
             </div>
         );
     }
-
- /*   connectSeller(event) {
-        let publisher = event.target.value;
-        request
-            .post('')
-            .send()
-            .end()
-    }*/
 }
 export default PersonalCenter;
-/*
- {this.state.order.length === 0 ? <div>
- 没有相关订单
- </div> : <div>
- {this.state.order.map(order => <div>
- <h4>书名：{order[0].name}</h4>
- <h4>卖家：{order[0].publisher}</h4>
- <button className="btn">确认收货</button>
- <button className="btn" onClick={this.connectSeller.bind(this)} value={order[0].publisher}>联系卖家</button>
- </div>)}
- </div>}
- */
