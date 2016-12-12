@@ -40,8 +40,6 @@ class Customorder extends React.Component {
                                         order: res.body.book,
                                     }
                                 );
-                                console.log("order:" + res.body);
-                                console.log("order:" + this.state.order[0].order_id);
                             }
                         })
                 }
@@ -52,7 +50,6 @@ class Customorder extends React.Component {
         var i = 0;
         const bookList = _.map(this.state.order, ({_id, name, publisher, images, count, order_id}) =>
             <div key={i++}>
-                {console.log("))))))))))))))): " + publisher)}
                 <Book_list list={
                     {
                         book_id: _id, name: name, publisher: publisher, images: images, count: count, order_id: order_id
@@ -73,19 +70,28 @@ class Book_list extends React.Component {
             name: this.props.list.name,
             publisher: this.props.list.publisher,
             images: this.props.list.images[0],
-            count: this.props.list.count
+            count: this.props.list.count,
+            isremove: false
 
         };
-        console.log("this.state.publisher: " + this.state.name);
-        console.log("this.state.publisher: " + this.state.publisher)
     }
 
     get_Goods() {
         request
             .post('/api/order/remove')
-            .send({book_id:this.state.book_id,order_id:this.state.order_id,count:this.state.count,seller:this.state.publisher})
+            .send({
+                book_id: this.state.book_id,
+                order_id: this.state.order_id,
+                count: this.state.count,
+                seller: this.state.publisher
+            })
             .end((err, res) => {
-
+                if (err) alert("页面错误");
+                if (res.statusCode === 201) {
+                    this.setState({isremove: true});
+                    alert(res.text);
+                }
+                hashHistory.push('/index');
             });
     }
 
