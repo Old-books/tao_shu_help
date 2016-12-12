@@ -29,7 +29,6 @@ class Login extends React.Component {
                     return console.error(err);
                 }
                 if (res.statusCode === 201) {
-                    console.log("success");
                     alert(res.text);
                     hashHistory.push('/index');
                 }

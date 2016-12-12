@@ -44,17 +44,6 @@ class PersonalCenter extends React.Component {
 
     _myAddress() {
         hashHistory.push('/address');
-        /*const {history} =this.props;
-         history.push({
-         pathname: "/address",
-         /!* state: {
-         _id: this.state._id,
-         province: this.state.province,
-         city: this.state.city,
-         county: this.state.county,
-         specificAddress: this.state.specificAddress
-         }*!/
-         });*/
         const {history} =this.props;
         history.push({
             pathname: "/address"
@@ -144,27 +133,6 @@ class PersonalCenter extends React.Component {
             email: event.target.value
         });
     }
-
-    displayOrder(event) {
-       /* event.preventDefault();
-        request
-            .post('/api/order/personal')
-            .send({custom: this.state.username})
-            .end((err, res) => {
-                if (err) {
-                    console.log(err);
-                }
-                if (res.statusCode === 201) {
-                    this.setState(
-                        {
-                            order: res.body
-                        }
-                    );
-                    console.log(this.state.order);
-                }
-            })*/
-    }
-
 
     render() {
         return (
@@ -260,7 +228,7 @@ class PersonalCenter extends React.Component {
                         <div className="tab-pane" id="tab-four">
                             <div className="row feature-four">
                                 <div>
-                                <Customorder/>
+                                    <Customorder/>
                                 </div>
                             </div>
                         </div>

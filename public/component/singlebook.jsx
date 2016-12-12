@@ -17,7 +17,6 @@ class Single extends React.Component {
             states: this.props.booklist.states,
             _id: this.props.booklist._id
         };
-        console.log("fds" + this.state._id);
 
     };
 

@@ -8,7 +8,6 @@ router.post('/', function (req, res) {
     const targetName = generateTargetName(imageFile.name);
     imageFile.mv('./public/uploaded-images/' + targetName, function (err) {
         if (err) {
-            console.log("into shang chuan zhao pian"+imageFile[1]);
             return res.status(500).send('上传过程中失败');
         }
         res.status(201).send('./uploaded-images/' + targetName);
