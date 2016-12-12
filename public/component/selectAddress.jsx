@@ -142,7 +142,7 @@ class AddressItem extends React.Component {
                            required="required"
                            value={this.state.specificAddress} onChange={this._onSpecificAddressChange.bind(this)}/><br/>
                     <label>联系电话：</label>
-                    <input type="text" value={this.state.addressPhone} onChange={this.onPhoneChange.bind(this)}/>
+                    <input type="text" className="form-control" value={this.state.addressPhone} onChange={this.onPhoneChange.bind(this)}/>
                 </div>
                 <div className="change">
 
